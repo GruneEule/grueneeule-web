@@ -7,6 +7,17 @@
     <link rel="icon" href="gruneeule.png" type="image/png">
     <link rel="shortcut icon" href="gruneeule.png" type="image/png">
     <style>
+
+        .bot-card::before,
+        .bot-card::after {
+            pointer-events: none;
+        }
+
+        .bot-card a.btn {
+            position: relative;
+            z-index: 2;
+        }
+
         :root {
             --primary: #2e8b57;
             --primary-light: #3cb371;
@@ -644,9 +655,10 @@
         </a>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#bots">Unsere Bots</a></li>
-                <li><a href="#features">Features</a></li>
+                <li><a href="index.html#bots">Home</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="index.html#about">Über Mich</a></li>
+                <li><a href="index.html#projects">Projekte</a></li>
                 <li><a href="https://discord.gg/TwFbPQU4by" target="_blank">Discord Server</a></li>
             </ul>
         </nav>
@@ -682,7 +694,7 @@
                         <li>Logging-System</li>
                     </ul>
                 </div>
-                <a href="https://discord.com/oauth2/authorize?client_id=1356185970063708212" class="btn btn-primary" target="_blank">Bot einladen</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1356185970063708212&permissions=8&scope=bot%20applications.commands" class="btn btn-primary" target="_blank">Bot einladen</a>
             </div>
 
             <div class="bot-card evil-card">
@@ -698,7 +710,7 @@
                         <li>Blacklist für bestimmte Nutzer</li>
                     </ul>
                 </div>
-                <a href="https://discord.com/oauth2/authorize?client_id=1356698522686324818" class="btn btn-primary" target="_blank">Bot einladen</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1356698522686324818&permissions=274877910080&scope=bot%20applications.commands" class="btn btn-primary" target="_blank">Bot einladen</a>
             </div>
 
             <div class="bot-card storm-card">
@@ -714,7 +726,7 @@
                         <li>Mehrsprachige Unterstützung</li>
                     </ul>
                 </div>
-                <a href="https://discord.com/oauth2/authorize?client_id=1357402315987882135" class="btn btn-primary" target="_blank">Bot einladen</a>
+                <a href="https://discord.com/oauth2/authorize?client_id=1357402315987882135&permissions=274877910080&scope=bot%20applications.commands" class="btn btn-primary" target="_blank">Bot einladen</a>
             </div>
         </div>
     </div>
@@ -748,38 +760,41 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-column">
-                <h3>GrüneEule Bots</h3>
+                <h3>GrüneEule</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="#bots">Unsere Bots</a></li>
-                    <li><a href="#features">Features</a></li>
+                    <li><a href="#projects">Unsere Projekte</a></li>
+                    <li><a href="#about">Über Mich</a></li>
+                    <li><a href="https://discord.gg/TwFbPQU4by" target="_blank">Discord Server</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Unsere Bots</h3>
+                <h3>Projekte</h3>
                 <ul>
-                    <li><a href="https://discord.com/oauth2/authorize?client_id=1356185970063708212" target="_blank">EagleOwl</a></li>
-                    <li><a href="https://discord.com/oauth2/authorize?client_id=1356698522686324818" target="_blank">EvilOwl</a></li>
-                    <li><a href="https://discord.com/oauth2/authorize?client_id=1357402315987882135" target="_blank">StormOwl</a></li>
+                    <li><a href="bots.html">DiscordBots</a></li>
+                    <li><a href="owlgorithm.html">Owlgorithm</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Support</h3>
+                <h3>Kontakt</h3>
                 <ul>
-                    <li><a href="https://discord.gg/TwFbPQU4by" target="_blank">Discord-Server</a></li>
-                    <li><a href="mailto:support@gruneeule.de">E-Mail Support</a></li>
+                    <li><a href="https://discord.gg/TwFbPQU4by" target="_blank">Discord-Server beitreten</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Rechtliches</h3>
+                <h3>Andere Projekte</h3>
                 <ul>
-                    <li><a href="#">Datenschutz</a></li>
-                    <li><a href="#">Nutzungsbedingungen</a></li>
+                    <li><a href="https://dmh-network.de" target="_blank">DMH Network</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Admin</h3>
+                <ul>
+                    <li><a href="https://pt.hmt-network.de" target="_blank">Panel</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2023 GrüneEule Services. Alle Rechte vorbehalten.</p>
+            <p>&copy; 2023 GrüneEule Bots. Alle Rechte vorbehalten. | <a href="#">Impressum</a> | <a href="#">Datenschutz</a></p>
         </div>
     </div>
 </footer>

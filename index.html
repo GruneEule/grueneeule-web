@@ -364,6 +364,10 @@
             border-top-color: var(--accent-orange);
         }
 
+        .cookie-card {
+            border-top-color: #f7d06b; /* Keks-Farbe für CookieAI */
+        }
+
         .project-card h3 {
             margin-bottom: 15px;
             font-size: 1.8rem;
@@ -377,6 +381,10 @@
 
         .algorithm-card h3 {
             color: var(--accent-orange);
+        }
+
+        .cookie-card h3 {
+            color: #f7d06b; /* Keks-Farbe für CookieAI */
         }
 
         .project-card-content {
@@ -398,6 +406,34 @@
         .project-card .btn {
             align-self: center;
             z-index: 1;
+        }
+
+        /* Cool Section */
+        .cool-section {
+            padding: 80px 0;
+            background: #0a0a0a;
+            border-top: 3px solid var(--accent-purple);
+            border-bottom: 3px solid var(--accent-purple);
+            position: relative;
+        }
+
+        .cool-section::before,
+        .cool-section::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 5%;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-purple-light), var(--accent-purple-dark));
+            opacity: 0.2;
+        }
+
+        .cool-section::before {
+            left: 0;
+        }
+
+        .cool-section::after {
+            right: 0;
         }
 
         /* About Section */
@@ -748,9 +784,9 @@
         </a>
         <nav>
             <ul>
-                <li><a href="#projects">Projekte</a></li>
                 <li><a href="team.html">Team</a></li>
                 <li><a href="#about">Über Mich</a></li>
+                <li><a href="#projects">Projekte</a></li>
                 <li><a href="https://discord.gg/TwFbPQU4by" target="_blank">Discord Server</a></li>
             </ul>
         </nav>
@@ -792,13 +828,34 @@
                 <div class="project-card-content">
                     <p>Unser Algorithmus-Projekt mit spannenden Funktionen:</p>
                     <ul>
-                        <li>Innovative Algorithmen</li>
-                        <li>Effiziente Lösungen</li>
-                        <li>Lernressourcen</li>
-                        <li>Interaktive Beispiele</li>
+                        <li>Smarte AIs</li>
+                        <li>[Coming soon]</li>
+                        <li>[Coming soon]</li>
+                        <li>[Coming soon]</li>
                     </ul>
                 </div>
                 <a href="owlgorithm.html" class="btn btn-secondary">Mehr erfahren</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="cool" class="cool-section">
+    <div class="container">
+        <h2 class="section-title">Auch Cool</h2>
+        <div class="projects-grid">
+            <div class="project-card cookie-card">
+                <h3>CookieAI</h3>
+                <div class="project-card-content">
+                    <p>Entdecke die KI lösung von Clix:</p>
+                    <ul>
+                        <li>Schnelle Antworten auf deine Fragen</li>
+                        <li>Intelligente Textverarbeitung</li>
+                        <li>Benutzerfreundliche Oberfläche</li>
+                        <li>Fortschrittliche KI-Technologie</li>
+                    </ul>
+                </div>
+                <a href="https://cookieai.vercel.app" class="btn btn-secondary" target="_blank">CookieAI entdecken</a>
             </div>
         </div>
     </div>
