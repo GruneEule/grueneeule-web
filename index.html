@@ -15,6 +15,9 @@
             --accent-purple: #8a2be2;       /* Verbesserte Lila-Farbe: Royal Purple */
             --accent-purple-light: #9f3de3; /* Helleres Lila für Hover-Effekte */
             --accent-purple-dark: #6a1fb3;  /* Dunkleres Lila für Kontraste */
+            --discord-blue: #5865F2;
+            --discord-blue-light: #7289DA;
+            --discord-blue-dark: #4E5D94;
             --bg-dark: #121212;
             --bg-light: #f5f5f5;
             --text-light: #ffffff;
@@ -240,8 +243,20 @@
             transform: translateY(-3px);
         }
 
-        /* Bots Section */
-        .bots-section {
+        .btn-discord {
+            background: linear-gradient(90deg, var(--discord-blue), var(--discord-blue-dark));
+            color: var(--text-light);
+            border: none;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .btn-discord:hover {
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* Projects Section */
+        .projects-section {
             padding: 80px 0;
             background-color: #141414;
             border-top: 3px solid var(--accent-purple);
@@ -249,8 +264,8 @@
             position: relative;
         }
 
-        .bots-section::before,
-        .bots-section::after {
+        .projects-section::before,
+        .projects-section::after {
             content: "";
             position: absolute;
             top: 0;
@@ -260,11 +275,11 @@
             opacity: 0.2;
         }
 
-        .bots-section::before {
+        .projects-section::before {
             left: 0;
         }
 
-        .bots-section::after {
+        .projects-section::after {
             right: 0;
         }
 
@@ -288,14 +303,14 @@
             border-radius: 2px;
         }
 
-        .bots-grid {
+        .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
 
-        .bot-card {
+        .project-card {
             background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
             border-radius: 15px;
             padding: 30px;
@@ -308,7 +323,7 @@
             overflow: hidden;
         }
 
-        .bot-card::before {
+        .project-card::before {
             content: "";
             position: absolute;
             top: 0;
@@ -320,7 +335,7 @@
             z-index: 0;
         }
 
-        .bot-card::after {
+        .project-card::after {
             content: "";
             position: absolute;
             top: 0;
@@ -331,64 +346,56 @@
             opacity: 0.7;
         }
 
-        .bot-card:hover {
+        .project-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
         }
 
-        .bot-card:hover::after {
+        .project-card:hover::after {
             opacity: 1;
             width: 7px;
         }
 
-        .eagle-card {
-            border-top-color: var(--primary);
+        .discord-card {
+            border-top-color: var(--discord-blue);
         }
 
-        .evil-card {
+        .algorithm-card {
             border-top-color: var(--accent-orange);
         }
 
-        .storm-card {
-            border-top-color: var(--accent-purple);
-        }
-
-        .bot-card h3 {
+        .project-card h3 {
             margin-bottom: 15px;
             font-size: 1.8rem;
             position: relative;
             z-index: 1;
         }
 
-        .eagle-card h3 {
-            color: var(--primary-light);
+        .discord-card h3 {
+            color: var(--discord-blue-light);
         }
 
-        .evil-card h3 {
+        .algorithm-card h3 {
             color: var(--accent-orange);
         }
 
-        .storm-card h3 {
-            color: var(--accent-purple-light);
-        }
-
-        .bot-card-content {
+        .project-card-content {
             margin-bottom: 25px;
             position: relative;
             z-index: 1;
             flex: 1;
         }
 
-        .bot-card-content ul {
+        .project-card-content ul {
             margin-top: 15px;
             margin-left: 20px;
         }
 
-        .bot-card-content li {
+        .project-card-content li {
             margin-bottom: 8px;
         }
 
-        .bot-card .btn {
+        .project-card .btn {
             align-self: center;
             z-index: 1;
         }
@@ -703,7 +710,7 @@
                 top: 90px; /* Adjusted for mobile */
             }
 
-            .bots-grid {
+            .projects-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -741,7 +748,7 @@
         </a>
         <nav>
             <ul>
-                <li><a href="#bots">Bots</a></li>
+                <li><a href="#projects">Projekte</a></li>
                 <li><a href="team.html">Team</a></li>
                 <li><a href="#about">Über Mich</a></li>
                 <li><a href="https://discord.gg/TwFbPQU4by" target="_blank">Discord Server</a></li>
@@ -753,61 +760,45 @@
 <section class="hero">
     <img src="gruneeule.png" alt="GrüneEule Logo" class="hero-logo">
     <div class="container hero-content">
-        <h1>GrüneEule Discord Bots</h1>
-        <p>Entdecke unsere leistungsstarken Discord-Bots für dein Server-Management, Unterhaltung und mehr. Unsere Eulen-Bots werden deinen Discord-Server auf ein neues Level bringen!</p>
+        <h1>GrüneEule</h1>
+        <p>Entdecke unsere leistungsstarken Discord-Bots für dein Server-Management, Unterhaltung und mehr. Außerdem bieten wir verschieddenste AI lösungen an (BETA)!</p>
         <div>
-            <a href="#bots" class="btn btn-primary">Unsere Bots kennenlernen</a>
+            <a href="#projects" class="btn btn-primary">Unsere Projekte</a>
             <a href="https://discord.gg/TwFbPQU4by" class="btn btn-secondary" target="_blank">Discord beitreten</a>
         </div>
     </div>
 </section>
 
-<section id="bots" class="bots-section">
+<section id="projects" class="projects-section">
     <div class="container">
-        <h2 class="section-title">Unsere Discord-Bots</h2>
-        <div class="bots-grid">
-            <div class="bot-card eagle-card">
-                <h3>EagleOwl</h3>
-                <div class="bot-card-content">
-                    <p>Der essenzielle Discord-Bot für jedes Server-Management. EagleOwl bietet alles, was du für einen gut organisierten Server brauchst:</p>
+        <h2 class="section-title">Unsere Projekte</h2>
+        <div class="projects-grid">
+            <div class="project-card discord-card">
+                <h3>DiscordBots</h3>
+                <div class="project-card-content">
+                    <p>Alle unsere Discord-Bots auf einen Blick:</p>
                     <ul>
-                        <li>Ticket-System</li>
-                        <li>Moderation und Automod</li>
-                        <li>Join-Rollen</li>
-                        <li>Message Clear (/clear)</li>
-                        <li>Giveaways</li>
-                        <li>Tempvoice Stats</li>
-                        <li>Und vieles mehr mit /commandlist</li>
+                        <li>EagleOwl - Server Management</li>
+                        <li>EvilOwl - Unterhaltung</li>
+                        <li>StormOwl - Wetterinformationen</li>
+                        <li>Und weitere spannende Projekte</li>
                     </ul>
                 </div>
-                <a href="https://discord.com/oauth2/authorize?client_id=1356185970063708212" class="btn btn-primary" target="_blank">Bot einladen</a>
+                <a href="bots.html" class="btn btn-discord">Zu den Bots</a>
             </div>
 
-            <div class="bot-card evil-card">
-                <h3>EvilOwl</h3>
-                <div class="bot-card-content">
-                    <p>Für die Spaßvögel unter uns! EvilOwl bringt Humor in deinen Server mit:</p>
+            <div class="project-card algorithm-card">
+                <h3>Owlgorithm</h3>
+                <div class="project-card-content">
+                    <p>Unser Algorithmus-Projekt mit spannenden Funktionen:</p>
                     <ul>
-                        <li>Über 500 provokative Sprüche</li>
-                        <li>Einfache Nutzung mit /evil oder !evil</li>
-                        <li>Reagiert auch auf Pings</li>
-                        <li>Perfekt für Server mit Humor</li>
+                        <li>Innovative Algorithmen</li>
+                        <li>Effiziente Lösungen</li>
+                        <li>Lernressourcen</li>
+                        <li>Interaktive Beispiele</li>
                     </ul>
                 </div>
-                <a href="https://discord.com/oauth2/authorize?client_id=1356698522686324818" class="btn btn-secondary" target="_blank">Bot einladen</a>
-            </div>
-
-            <div class="bot-card storm-card">
-                <h3>StormOwl (Beta)</h3>
-                <div class="bot-card-content">
-                    <p>Unser neuester Bot noch in der Beta-Phase! StormOwl bietet:</p>
-                    <ul>
-                        <li>Wetter-Informationen mit /wetter [Ort]</li>
-                        <li>Viele kommende Features</li>
-                        <li>Komplette Übersicht mit /commandlist</li>
-                    </ul>
-                </div>
-                <a href="https://discord.com/oauth2/authorize?client_id=1357402315987882135" class="btn btn-secondary" target="_blank">Bot einladen</a>
+                <a href="owlgorithm.html" class="btn btn-secondary">Mehr erfahren</a>
             </div>
         </div>
     </div>
@@ -840,17 +831,16 @@
             <div class="footer-column">
                 <h3>GrüneEule</h3>
                 <ul>
-                    <li><a href="#bots">Unsere Bots</a></li>
+                    <li><a href="#projects">Unsere Projekte</a></li>
                     <li><a href="#about">Über Mich</a></li>
                     <li><a href="https://discord.gg/TwFbPQU4by" target="_blank">Discord Server</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Bots</h3>
+                <h3>Projekte</h3>
                 <ul>
-                    <li><a href="https://discord.com/oauth2/authorize?client_id=1356185970063708212" target="_blank">EagleOwl</a></li>
-                    <li><a href="https://discord.com/oauth2/authorize?client_id=1356698522686324818" target="_blank">EvilOwl</a></li>
-                    <li><a href="https://discord.com/oauth2/authorize?client_id=1357402315987882135" target="_blank">StormOwl</a></li>
+                    <li><a href="bots.html">DiscordBots</a></li>
+                    <li><a href="owlgorithm.html">Owlgorithm</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -862,4 +852,15 @@
             <div class="footer-column">
                 <h3>Andere Projekte</h3>
                 <ul>
-                    <li><a href="https://dmh-network.de" target
+                    <li><a href="https://dmh-network.de" target="_blank">DMH Network</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Admin</h3>
+                <ul>
+                    <li><a href="https://pt.hmt-network.de" target="_blank">Panel</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

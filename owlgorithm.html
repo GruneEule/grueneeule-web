@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OwlGorithm - Smarte KI-Lösung</title>
+  <style>
+    :root {
+      --primary-green: #2ecc71;
+      --dark-green: #27ae60;
+      --light-green: #1e8449;
+      --bg-color: #121212;
+      --text-color: #e0e0e0;
+      --accent-color: #bb86fc;
+      --light-gray: #1e1e1e;
+      --dark-gray: #0a0a0a;
+      --card-bg: #1e1e1e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+      color: white;
+      padding: 1rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      border-bottom: 2px solid white;
+    }
+
+    /* Button Styles */
+    .button {
+      padding: 12px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .chat-button {
+      background-color: #00afa1;
+      color: var(--primary-green);
+      border: none;
+      font-size: 1rem;
+      padding: 10px 24px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .chat-button:hover {
+      background-color: #004e6b;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .discord-server-button {
+      background-color: #5865F2;
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      font-size: 1rem;
+      margin-left: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .discord-server-button:hover {
+      background-color: #4752C4;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 100px 0;
+      text-align: center;
+      background: url('/api/placeholder/1200/600') center/cover;
+      position: relative;
+      color: white;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(20, 20, 20, 0.8), rgba(10, 10, 10, 0.9));
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      color: #ddd;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .primary-button {
+      background-color: var(--primary-green);
+      color: white;
+      border: none;
+      padding: 15px 30px;
+    }
+
+    .primary-button:hover {
+      background-color: var(--dark-green);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .secondary-button {
+      background-color: transparent;
+      color: white;
+      border: 2px solid white;
+      padding: 15px 30px;
+    }
+
+    .secondary-button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 80px 0;
+      background-color: var(--dark-gray);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary-green);
+      margin-bottom: 15px;
+    }
+
+    .section-title p {
+      color: #aaa;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      border: 1px solid #333;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      border-color: var(--primary-green);
+    }
+
+    .feature-icon {
+      background-color: var(--light-green);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .feature-icon i {
+      color: white;
+      font-size: 30px;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 15px;
+      color: var(--primary-green);
+    }
+
+    .feature-card p {
+      color: #bbb;
+    }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 80px 0;
+      background-color: var(--bg-color);
+    }
+
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .pricing-card {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      border: 1px solid #333;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+      border-color: var(--primary-green);
+    }
+
+    .pricing-header {
+      padding: 30px;
+      background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+      color: white;
+      text-align: center;
+    }
+
+    .pricing-header h3 {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .pricing-header .price {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .pricing-header .price-period {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .pricing-features {
+      padding: 30px;
+    }
+
+    .pricing-features ul {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .pricing-features li {
+      padding: 10px 0;
+      border-bottom: 1px solid #333;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ddd;
+    }
+
+    .pricing-features li::before {
+      content: "✓";
+      color: var(--primary-green);
+      font-weight: bold;
+    }
+
+    .pricing-features .button {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Join Discord Section */
+    .join-discord {
+      padding: 60px 0;
+      background-color: #5865F2;
+      color: white;
+      text-align: center;
+    }
+
+    .join-discord h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .join-discord p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      color: #ddd;
+    }
+
+    .discord-big-button {
+      background-color: white;
+      color: #5865F2;
+      border: none;
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .discord-big-button:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0f0f0f;
+      color: white;
+      padding: 50px 0 20px;
+      border-top: 1px solid #333;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-column h4 {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      color: var(--primary-green);
+    }
+
+    .footer-column ul {
+      list-style: none;
+    }
+
+    .footer-column ul li {
+      margin-bottom: 10px;
+    }
+
+    .footer-column a {
+      color: #bbb;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .footer-column a:hover {
+      color: var(--primary-green);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      color: white;
+    }
+
+    .social-links a:hover {
+      background-color: var(--primary-green);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #aaa;
+    }
+
+    /* Modal / Discord Login */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background-color: var(--card-bg);
+      border-radius: 10px;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      border: 1px solid #333;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content h3 {
+      margin-bottom: 20px;
+      color: var(--primary-green);
+    }
+
+    .modal-content p {
+      color: #bbb;
+      margin-bottom: 30px;
+    }
+
+    .discord-button {
+      background-color: #5865F2;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .discord-button:hover {
+      background-color: #4752C4;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #bbb;
+      transition: all 0.3s ease;
+    }
+
+    .close-modal:hover {
+      color: var(--primary-green);
+    }
+
+    /* Free Badge */
+    .free-badge {
+      background-color: var(--primary-green);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-left: 10px;
+      display: inline-block;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-button {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+  <div class="container header-content">
+    <div class="logo">
+      <span>🦉</span> OwlGorithm
+    </div>
+    <nav class="nav-links">
+      <a href="#">Startseite</a>
+      <a href="#">Funktionen</a>
+      <a href="#">Über uns</a>
+      <a href="/chat.html" class="button chat-button">Chat</a>
+      <a href="https://discord.gg/TwFbPQU4by" target="_blank" class="button discord-server-button">Discord Server</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container hero-content">
+    <h1>Willkommen bei OwlGorithm</h1>
+    <p>Die smarte KI-Lösung für alle deine Fragen und Aufgaben. <span class="free-badge">100% KOSTENLOS!</span></p>
+    <div class="cta-buttons">
+      <a href="#" class="button primary-button" onclick="openModal()">Mit Discord anmelden</a>
+      <a href="/chat.html" class="button secondary-button">Zum Chat</a>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+  <div class="container">
+    <div class="section-title">
+      <h2>Smarte Funktionen</h2>
+      <p>Entdecke die leistungsstarken Möglichkeiten von OwlGorithm - komplett kostenlos für alle Nutzer!</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Intelligente Suche</h3>
+        <p>OwlGorithm versteht deine Fragen und liefert präzise, relevante Antworten in Sekundenschnelle.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>Textgenerierung</h3>
+        <p>Lass dir bei Texten helfen, von einfachen E-Mails bis hin zu komplexen Projektberichten.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💻</div>
+        <h3>Code-Assistenz</h3>
+        <p>Bekomme Hilfe beim Programmieren, Debugging und Erklärungen zu Code-Snippets.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Integration mit Discord</h3>
+        <p>Nahtlose Verknüpfung mit deinen Discord-Servern und Vorteile für Pro-Nutzer.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>Maschinelles Lernen</h3>
+        <p>OwlGorithm lernt kontinuierlich dazu und passt sich deinen Bedürfnissen an.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Datenschutz</h3>
+        <p>Deine Daten sind bei uns sicher – wir legen großen Wert auf Datenschutz und Privatsphäre.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing Section -->
+<section class="pricing">
+  <div class="container">
+    <div class="section-title">
+      <h2>Komplett Kostenlos!</h2>
+      <p>OwlGorithm ist für alle Nutzer kostenlos verfügbar, mit besonderen Vorteilen für Discord Pro-Nutzer</p>
+    </div>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <h3>Standard</h3>
+          <div class="price">€0</div>
+          <div class="price-period">für immer</div>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li>Zugang zum Chat</li>
+            <li>Alle KI-Funktionen</li>
+            <li>Community-Support</li>
+            <li>Text- und Code-Generierung</li>
+          </ul>
+          <a href="#" class="button primary-button" onclick="openModal()">Mit Discord anmelden</a>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-header">
+          <h3>Discord Pro</h3>
+          <div class="price">€0</div>
+          <div class="price-period">mit Pro-Rolle auf Discord</div>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li>Unbegrenzte Nachrichten</li>
+            <li>Alle KI-Funktionen</li>
+            <li>Priorisierter Support</li>
+            <li>Erweiterte Textgenerierung</li>
+            <li>Benutzerdefinierte Antworten</li>
+          </ul>
+          <a href="#" class="button primary-button" onclick="openModal()">Mit Discord anmelden</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Join Discord Section -->
+<section class="join-discord">
+  <div class="container">
+    <h2>Tritt unserem Discord-Server bei!</h2>
+    <p>Werde Teil unserer wachsenden Community, erhalte Hilfe von anderen Nutzern und bleibe über alle Neuigkeiten zu OwlGorithm informiert.</p>
+    <a href="https://discord.gg/TwFbPQU4by" target="_blank" class="discord-big-button">
+      <span>🎮</span> Discord-Server beitreten
+    </a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-column">
+        <div class="logo">
+          <span>🦉</span> OwlGorithm
+        </div>
+        <p>Deine kostenlose smarte KI-Lösung für alle Fragen und Aufgaben.</p>
+        <div class="social-links">
+          <a href="#">📱</a>
+          <a href="#">📘</a>
+          <a href="#">📸</a>
+          <a href="#">🐦</a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <h4>Produkt</h4>
+        <ul>
+          <li><a href="#">Funktionen</a></li>
+          <li><a href="#">Discord-Integration</a></li>
+          <li><a href="#">API</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Hilfe-Center</a></li>
+          <li><a href="#">Dokumentation</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Kontakt</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="#">Datenschutz</a></li>
+          <li><a href="#">AGB</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Cookie-Richtlinien</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 OwlGorithm. Alle Rechte vorbehalten. <span class="free-badge">100% KOSTENLOS!</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- Modal for Discord Login -->
+<div class="modal" id="loginModal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">&times;</span>
+    <h3>Mit Discord anmelden</h3>
+    <p>Verbinde dein Discord-Konto, um OwlGorithm zu nutzen. Pro-Nutzer erhalten zusätzliche Vorteile!</p>
+    <button class="discord-button">
+      <span>🎮</span> Mit Discord fortfahren
+    </button>
+  </div>
+</div>
+
+<script>
+  // Simple modal functionality
+  function openModal() {
+    document.getElementById('loginModal').style.display = 'flex';
+  }
+
+  function closeModal() {
+    document.getElementById('loginModal').style.display = 'none';
+  }
+
+  // Close modal when clicking outside
+  window.onclick = function(event) {
+    const modal = document.getElementById('loginModal');
+    if (event.target == modal) {
+      closeModal();
+    }
+  }
+</script>
+</body>
+</html>
