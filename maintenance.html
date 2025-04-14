@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wartungsarbeiten | GrüneEule</title>
+  <title>GrüneEule Status</title>
   <link rel="icon" href="gruneeule.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,6 +19,8 @@
       --card-bg: #1a1a1a;
       --text-light: #ffffff;
       --text-muted: #aaaaaa;
+      --online: #55ff55;
+      --offline: #ff5555;
     }
 
     * {
@@ -41,16 +43,19 @@
       line-height: 1.6;
     }
 
-    .maintenance-container {
+    .container {
       max-width: 800px;
       width: 100%;
       background: var(--card-bg);
       border-radius: 15px;
       padding: 40px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      border-top: 5px solid var(--accent-purple);
       position: relative;
       overflow: hidden;
+    }
+
+    .maintenance-active {
+      border-top: 5px solid var(--accent-purple);
     }
 
     .logo {
@@ -59,6 +64,7 @@
       justify-content: center;
       gap: 15px;
       margin-bottom: 30px;
+      cursor: pointer;
     }
 
     .logo img {
@@ -67,6 +73,11 @@
       border-radius: 50%;
       border: 3px solid var(--accent-purple);
       box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover img {
+      transform: scale(1.05);
     }
 
     .logo h1 {
@@ -87,6 +98,14 @@
       color: var(--text-muted);
       margin-bottom: 25px;
       font-size: 1.1rem;
+    }
+
+    .status-active {
+      display: block;
+    }
+
+    .status-inactive {
+      display: none;
     }
 
     .progress-container {
@@ -189,12 +208,33 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background: #ff5555;
+      background: var(--offline);
     }
 
     .status-dot.connected {
-      background: #55ff55;
+      background: var(--online);
       animation: pulse 1.5s infinite;
+    }
+
+    .language-switcher {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+    }
+
+    .language-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .language-btn.active {
+      color: var(--primary-light);
+      background: rgba(46, 139, 87, 0.2);
     }
 
     @keyframes pulse {
@@ -204,7 +244,7 @@
     }
 
     @media (max-width: 768px) {
-      .maintenance-container {
+      .container {
         padding: 30px 20px;
       }
 
@@ -229,73 +269,166 @@
   </style>
 </head>
 <body>
-<div class="maintenance-container">
+<div class="container" id="mainContainer">
   <div class="connection-status">
     <div class="status-dot" id="statusDot"></div>
     <span id="statusText">Verbinde...</span>
   </div>
 
-  <div class="logo">
+  <div class="language-switcher">
+    <button class="language-btn active" id="langDE">DE</button>
+    <button class="language-btn" id="langEN">EN</button>
+  </div>
+
+  <a href="index.html" class="logo">
     <img src="gruneeule.png" alt="GrüneEule Logo">
     <h1>GrüneEule</h1>
+  </a>
+
+  <div id="activeStatus" class="status-inactive">
+    <h2 id="maintenanceTitle">Wartungsarbeiten im Gange</h2>
+    <p id="maintenanceText">Wir arbeiten an wichtigen Updates und Verbesserungen. Bitte habe etwas Geduld.</p>
+
+    <div id="adminMessage" class="admin-message">
+      <h3 id="adminMessageTitle">Nachricht vom Team:</h3>
+      <p id="adminMessageText"></p>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="countdown">
+      <div class="countdown-item">
+        <div class="countdown-number" id="days">--</div>
+        <div class="countdown-label" id="daysLabel">Tage</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="hours">--</div>
+        <div class="countdown-label" id="hoursLabel">Stunden</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="minutes">--</div>
+        <div class="countdown-label" id="minutesLabel">Minuten</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-number" id="seconds">--</div>
+        <div class="countdown-label" id="secondsLabel">Sekunden</div>
+      </div>
+    </div>
   </div>
 
-  <h2>Wartungsarbeiten im Gange</h2>
-  <p>Wir arbeiten an wichtigen Updates und Verbesserungen. Bitte habe etwas Geduld.</p>
-
-  <div id="adminMessage" class="admin-message">
-    <h3>Nachricht vom Team:</h3>
-    <p id="adminMessageText"></p>
+  <div id="inactiveStatus" class="status-active">
+    <h2 id="normalTitle">Systemstatus</h2>
+    <p id="normalText">Alle Systeme funktionieren normal. Keine Wartungsarbeiten geplant.</p>
   </div>
 
-  <div class="progress-container">
-    <div class="progress-bar" id="progressBar"></div>
-  </div>
-
-  <div class="countdown">
-    <div class="countdown-item">
-      <div class="countdown-number" id="days">--</div>
-      <div class="countdown-label">Tage</div>
-    </div>
-    <div class="countdown-item">
-      <div class="countdown-number" id="hours">--</div>
-      <div class="countdown-label">Stunden</div>
-    </div>
-    <div class="countdown-item">
-      <div class="countdown-number" id="minutes">--</div>
-      <div class="countdown-label">Minuten</div>
-    </div>
-    <div class="countdown-item">
-      <div class="countdown-number" id="seconds">--</div>
-      <div class="countdown-label">Sekunden</div>
-    </div>
-  </div>
-
-  <a href="https://discord.gg/TwFbPQU4by" class="btn" target="_blank" rel="noopener">Discord Server</a>
+  <a href="https://discord.gg/TwFbPQU4by" class="btn" target="_blank" rel="noopener" id="discordBtn">Discord Server</a>
 </div>
 
 <script>
-  // WebSocket Verbindung
-  const socket = new WebSocket('ws://89.144.25.137:20100');
+  // Sprachdaten
+  const translations = {
+    de: {
+      maintenanceTitle: "Wartungsarbeiten im Gange",
+      maintenanceText: "Wir arbeiten an wichtigen Updates und Verbesserungen. Bitte habe etwas Geduld.",
+      adminMessageTitle: "Nachricht vom Team:",
+      daysLabel: "Tage",
+      hoursLabel: "Stunden",
+      minutesLabel: "Minuten",
+      secondsLabel: "Sekunden",
+      discordBtn: "Discord Server",
+      normalTitle: "Systemstatus",
+      normalText: "Alle Systeme funktionieren normal. Keine Wartungsarbeiten geplant.",
+      connecting: "Verbinde...",
+      connected: "Live-Update aktiv",
+      disconnected: "Getrennt",
+      connectionError: "Verbindungsfehler"
+    },
+    en: {
+      maintenanceTitle: "Maintenance in Progress",
+      maintenanceText: "We're working on important updates and improvements. Please bear with us.",
+      adminMessageTitle: "Team Message:",
+      daysLabel: "Days",
+      hoursLabel: "Hours",
+      minutesLabel: "Minutes",
+      secondsLabel: "Seconds",
+      discordBtn: "Discord Server",
+      normalTitle: "System Status",
+      normalText: "All systems operational. No maintenance scheduled.",
+      connecting: "Connecting...",
+      connected: "Live updates active",
+      disconnected: "Disconnected",
+      connectionError: "Connection error"
+    }
+  };
+
+  // Aktuelle Sprache
+  let currentLanguage = 'de';
+
+  // Elemente
   const statusDot = document.getElementById('statusDot');
   const statusText = document.getElementById('statusText');
+  const langDE = document.getElementById('langDE');
+  const langEN = document.getElementById('langEN');
+  const activeStatus = document.getElementById('activeStatus');
+  const inactiveStatus = document.getElementById('inactiveStatus');
+  const mainContainer = document.getElementById('mainContainer');
+
+  // Sprache wechseln
+  function setLanguage(lang) {
+    currentLanguage = lang;
+    const t = translations[lang];
+
+    // Übersetzungen anwenden
+    document.getElementById('maintenanceTitle').textContent = t.maintenanceTitle;
+    document.getElementById('maintenanceText').textContent = t.maintenanceText;
+    document.getElementById('adminMessageTitle').textContent = t.adminMessageTitle;
+    document.getElementById('daysLabel').textContent = t.daysLabel;
+    document.getElementById('hoursLabel').textContent = t.hoursLabel;
+    document.getElementById('minutesLabel').textContent = t.minutesLabel;
+    document.getElementById('secondsLabel').textContent = t.secondsLabel;
+    document.getElementById('discordBtn').textContent = t.discordBtn;
+    document.getElementById('normalTitle').textContent = t.normalTitle;
+    document.getElementById('normalText').textContent = t.normalText;
+
+    // Sprachbuttons aktualisieren
+    langDE.classList.toggle('active', lang === 'de');
+    langEN.classList.toggle('active', lang === 'en');
+
+    // Statusmeldungen übersetzen
+    if (socket.readyState === WebSocket.CONNECTING) {
+      statusText.textContent = t.connecting;
+    } else if (socket.readyState === WebSocket.OPEN) {
+      statusText.textContent = t.connected;
+    } else {
+      statusText.textContent = t.disconnected;
+    }
+  }
+
+  // Sprachwechsel Event Listener
+  langDE.addEventListener('click', () => setLanguage('de'));
+  langEN.addEventListener('click', () => setLanguage('en'));
+
+  // WebSocket Verbindung
+  const socket = new WebSocket('ws://89.144.25.137:20100');
 
   // Verbindungsstatus anzeigen
   socket.onopen = function() {
     statusDot.classList.add('connected');
-    statusText.textContent = 'Live-Update aktiv';
+    statusText.textContent = translations[currentLanguage].connected;
     console.log('Verbunden mit WebSocket Server');
   };
 
   socket.onclose = function() {
     statusDot.classList.remove('connected');
-    statusText.textContent = 'Getrennt';
+    statusText.textContent = translations[currentLanguage].disconnected;
     console.log('Verbindung zum WebSocket Server getrennt');
   };
 
   socket.onerror = function(error) {
     console.error('WebSocket Fehler:', error);
-    statusText.textContent = 'Verbindungsfehler';
+    statusText.textContent = translations[currentLanguage].connectionError;
   };
 
   // Nachrichten verarbeiten
@@ -309,6 +442,13 @@
       localStorage.setItem('maintenanceEnd', endTime);
       localStorage.setItem('totalDuration', data.duration * 1000);
       localStorage.setItem('maintenanceMessage', data.message || '');
+
+      // UI aktualisieren
+      mainContainer.classList.add('maintenance-active');
+      activeStatus.classList.remove('status-inactive');
+      activeStatus.classList.add('status-active');
+      inactiveStatus.classList.remove('status-active');
+      inactiveStatus.classList.add('status-inactive');
 
       // Admin-Nachricht anzeigen
       if (data.message) {
@@ -324,10 +464,12 @@
       localStorage.removeItem('totalDuration');
       localStorage.removeItem('maintenanceMessage');
 
-      // Seite neu laden nach kurzer Verzögerung
-      setTimeout(() => {
-        window.location.reload();
-      }, 1500);
+      // UI aktualisieren
+      mainContainer.classList.remove('maintenance-active');
+      activeStatus.classList.remove('status-active');
+      activeStatus.classList.add('status-inactive');
+      inactiveStatus.classList.remove('status-inactive');
+      inactiveStatus.classList.add('status-active');
     }
   };
 
@@ -354,9 +496,16 @@
         updateDisplay(0, 0, 0, 0);
         document.getElementById('progressBar').style.width = '100%';
 
-        // Seite neu laden nach 5 Sekunden
+        // UI zurücksetzen
         setTimeout(() => {
-          window.location.reload();
+          mainContainer.classList.remove('maintenance-active');
+          activeStatus.classList.remove('status-active');
+          activeStatus.classList.add('status-inactive');
+          inactiveStatus.classList.remove('status-inactive');
+          inactiveStatus.classList.add('status-active');
+          localStorage.removeItem('maintenanceEnd');
+          localStorage.removeItem('totalDuration');
+          localStorage.removeItem('maintenanceMessage');
         }, 5000);
         return;
       }
@@ -388,10 +537,27 @@
     updateCountdown();
   }
 
-  // Beim Laden prüfen ob aktive Wartung
-  if (localStorage.getItem('maintenanceEnd')) {
-    startCountdown();
+  // Initialen Status setzen
+  function initialize() {
+    if (localStorage.getItem('maintenanceEnd')) {
+      mainContainer.classList.add('maintenance-active');
+      activeStatus.classList.remove('status-inactive');
+      activeStatus.classList.add('status-active');
+      inactiveStatus.classList.remove('status-active');
+      inactiveStatus.classList.add('status-inactive');
+      startCountdown();
+    } else {
+      mainContainer.classList.remove('maintenance-active');
+      activeStatus.classList.remove('status-active');
+      activeStatus.classList.add('status-inactive');
+      inactiveStatus.classList.remove('status-inactive');
+      inactiveStatus.classList.add('status-active');
+    }
   }
+
+  // Initialisierung
+  initialize();
+  setLanguage('de');
 </script>
 </body>
 </html>

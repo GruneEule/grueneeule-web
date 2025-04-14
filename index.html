@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="GrüneEule - Professionelle Discord-Bots und KI-Lösungen für Server-Management und Unterhaltung">
     <title>GrüneEule - Discord Bots & KI Lösungen</title>
     <link rel="icon" href="gruneeule.png" type="image/png">
     <link rel="shortcut icon" href="gruneeule.png" type="image/png">
@@ -397,6 +396,49 @@
             height: 20px;
         }
 
+        /* Maintenance Section */
+        .maintenance-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 60px 0;
+            color: white;
+        }
+
+        .maintenance-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .maintenance-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .maintenance-section p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .maintenance-btn {
+            background: white;
+            color: var(--primary-dark);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .maintenance-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
         /* Footer */
         footer {
             background: linear-gradient(to right, var(--primary-dark), #0a0a0a);
@@ -570,6 +612,10 @@
             .footer-content {
                 grid-template-columns: 1fr 1fr;
             }
+
+            .maintenance-section h2 {
+                font-size: 1.7rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -693,6 +739,17 @@
                         </svg>
                     </a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Neue Maintenance-Sektion -->
+    <section class="maintenance-section">
+        <div class="container">
+            <div class="maintenance-content">
+                <h2>Wartungsstatus</h2>
+                <p>Hier findest du aktuelle Informationen zu Wartungsarbeiten und Systemupdates</p>
+                <a href="maintenance.html" class="maintenance-btn">Zum Wartungsstatus</a>
             </div>
         </div>
     </section>
