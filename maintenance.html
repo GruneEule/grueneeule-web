@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wartungsarbeiten | GrüneEule</title>
+  <link rel="icon" href="gruneeule.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2e8b57;
+      --primary-light: #3cb371;
+      --primary-dark: #1e5631;
+      --accent-purple: #8a2be2;
+      --discord-blue: #5865F2;
+      --bg-dark: #121212;
+      --card-bg: #1a1a1a;
+      --text-light: #ffffff;
+      --text-muted: #aaaaaa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .maintenance-container {
+      max-width: 800px;
+      width: 100%;
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border-top: 5px solid var(--accent-purple);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid var(--accent-purple);
+      box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+    }
+
+    .logo h1 {
+      font-size: 2rem;
+      background: linear-gradient(90deg, var(--primary-light), var(--accent-purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: var(--primary-light);
+    }
+
+    p {
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      font-size: 1.1rem;
+    }
+
+    .progress-container {
+      height: 10px;
+      background: #333;
+      border-radius: 5px;
+      margin: 30px 0;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--accent-purple));
+      width: 0%;
+      transition: width 0.5s ease;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+    }
+
+    .countdown-item {
+      background: rgba(46, 139, 87, 0.15);
+      padding: 20px 15px;
+      border-radius: 10px;
+      min-width: 90px;
+      border: 1px solid var(--primary);
+    }
+
+    .countdown-number {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary-light);
+      margin-bottom: 5px;
+    }
+
+    .countdown-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--discord-blue);
+      color: white;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+    }
+
+    .admin-message {
+      background: rgba(138, 43, 226, 0.1);
+      border-left: 4px solid var(--accent-purple);
+      padding: 20px;
+      margin: 25px 0;
+      text-align: left;
+      border-radius: 0 8px 8px 0;
+      display: none;
+    }
+
+    .admin-message h3 {
+      color: var(--accent-purple);
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .admin-message p {
+      color: var(--text-light);
+      margin-bottom: 0;
+    }
+
+    .connection-status {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ff5555;
+    }
+
+    .status-dot.connected {
+      background: #55ff55;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .maintenance-container {
+        padding: 30px 20px;
+      }
+
+      .logo img {
+        width: 60px;
+        height: 60px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .countdown-item {
+        min-width: 70px;
+        padding: 15px 10px;
+      }
+
+      .countdown-number {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="maintenance-container">
+  <div class="connection-status">
+    <div class="status-dot" id="statusDot"></div>
+    <span id="statusText">Verbinde...</span>
+  </div>
+
+  <div class="logo">
+    <img src="gruneeule.png" alt="GrüneEule Logo">
+    <h1>GrüneEule</h1>
+  </div>
+
+  <h2>Wartungsarbeiten im Gange</h2>
+  <p>Wir arbeiten an wichtigen Updates und Verbesserungen. Bitte habe etwas Geduld.</p>
+
+  <div id="adminMessage" class="admin-message">
+    <h3>Nachricht vom Team:</h3>
+    <p id="adminMessageText"></p>
+  </div>
+
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="countdown">
+    <div class="countdown-item">
+      <div class="countdown-number" id="days">--</div>
+      <div class="countdown-label">Tage</div>
+    </div>
+    <div class="countdown-item">
+      <div class="countdown-number" id="hours">--</div>
+      <div class="countdown-label">Stunden</div>
+    </div>
+    <div class="countdown-item">
+      <div class="countdown-number" id="minutes">--</div>
+      <div class="countdown-label">Minuten</div>
+    </div>
+    <div class="countdown-item">
+      <div class="countdown-number" id="seconds">--</div>
+      <div class="countdown-label">Sekunden</div>
+    </div>
+  </div>
+
+  <a href="https://discord.gg/TwFbPQU4by" class="btn" target="_blank" rel="noopener">Discord Server</a>
+</div>
+
+<script>
+  // WebSocket Verbindung
+  const socket = new WebSocket('ws://89.144.25.137:20100');
+  const statusDot = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+
+  // Verbindungsstatus anzeigen
+  socket.onopen = function() {
+    statusDot.classList.add('connected');
+    statusText.textContent = 'Live-Update aktiv';
+    console.log('Verbunden mit WebSocket Server');
+  };
+
+  socket.onclose = function() {
+    statusDot.classList.remove('connected');
+    statusText.textContent = 'Getrennt';
+    console.log('Verbindung zum WebSocket Server getrennt');
+  };
+
+  socket.onerror = function(error) {
+    console.error('WebSocket Fehler:', error);
+    statusText.textContent = 'Verbindungsfehler';
+  };
+
+  // Nachrichten verarbeiten
+  socket.onmessage = function(event) {
+    const data = JSON.parse(event.data);
+    console.log('Nachricht empfangen:', data);
+
+    if (data.action === 'set_maintenance') {
+      // Wartungsmodus aktivieren
+      const endTime = Date.now() + (data.duration * 1000);
+      localStorage.setItem('maintenanceEnd', endTime);
+      localStorage.setItem('totalDuration', data.duration * 1000);
+      localStorage.setItem('maintenanceMessage', data.message || '');
+
+      // Admin-Nachricht anzeigen
+      if (data.message) {
+        document.getElementById('adminMessageText').textContent = data.message;
+        document.getElementById('adminMessage').style.display = 'block';
+      }
+
+      startCountdown();
+    }
+    else if (data.action === 'end_maintenance') {
+      // Wartungsmodus beenden
+      localStorage.removeItem('maintenanceEnd');
+      localStorage.removeItem('totalDuration');
+      localStorage.removeItem('maintenanceMessage');
+
+      // Seite neu laden nach kurzer Verzögerung
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    }
+  };
+
+  // Countdown starten
+  function startCountdown() {
+    const endTime = parseInt(localStorage.getItem('maintenanceEnd'));
+    const totalDuration = parseInt(localStorage.getItem('totalDuration'));
+    const message = localStorage.getItem('maintenanceMessage');
+
+    if (!endTime) return;
+
+    // Admin-Nachricht anzeigen falls vorhanden
+    if (message) {
+      document.getElementById('adminMessageText').textContent = message;
+      document.getElementById('adminMessage').style.display = 'block';
+    }
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = endTime - now;
+
+      if (diff <= 0) {
+        // Wartung beendet
+        updateDisplay(0, 0, 0, 0);
+        document.getElementById('progressBar').style.width = '100%';
+
+        // Seite neu laden nach 5 Sekunden
+        setTimeout(() => {
+          window.location.reload();
+        }, 5000);
+        return;
+      }
+
+      // Countdown berechnen
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      // Fortschrittsbalken berechnen
+      const progress = Math.min(100, 100 - (diff / totalDuration * 100));
+
+      // Anzeigen aktualisieren
+      updateDisplay(days, hours, minutes, seconds);
+      document.getElementById('progressBar').style.width = `${progress}%`;
+
+      // Nächste Aktualisierung in 1 Sekunde
+      setTimeout(updateCountdown, 1000);
+    }
+
+    function updateDisplay(d, h, m, s) {
+      document.getElementById('days').textContent = d.toString().padStart(2, '0');
+      document.getElementById('hours').textContent = h.toString().padStart(2, '0');
+      document.getElementById('minutes').textContent = m.toString().padStart(2, '0');
+      document.getElementById('seconds').textContent = s.toString().padStart(2, '0');
+    }
+
+    updateCountdown();
+  }
+
+  // Beim Laden prüfen ob aktive Wartung
+  if (localStorage.getItem('maintenanceEnd')) {
+    startCountdown();
+  }
+</script>
+</body>
+</html>
