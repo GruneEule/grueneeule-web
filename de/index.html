@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 Nicht gefunden | GrüneEule</title>
-    <link rel="icon" href="gruneeule.png" type="image/png">
-    <link rel="shortcut icon" href="gruneeule.png" type="image/png">
+    <title>GrüneEule - Discord Bots & KI Lösungen</title>
+    <link rel="icon" href="../gruneeule.png" type="image/png">
+    <link rel="shortcut icon" href="../gruneeule.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -25,7 +25,9 @@
             --bg-light: #f5f5f5;
             --text-light: #ffffff;
             --text-dark: #333333;
-            --error-color: #ff4d4d;
+            --accent-red: #e63946;
+            --accent-red-dark: #d62828;
+            --accent-red-light: #f28482;
         }
 
         * {
@@ -127,37 +129,75 @@
             box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
         }
 
-        /* 404 Section */
-        .error-section {
+        /* Language Switch Button */
+        .language-switch {
+            display: inline-block;
+            padding: 8px 16px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: white !important;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-dark)) !important;
+            border-radius: 8px;
+            text-decoration: none !important;
+            transition: all 0.3s ease;
+            margin-left: 15px;
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4) !important;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .language-switch:hover {
+            background: linear-gradient(135deg, var(--accent-red-dark), var(--accent-red)) !important;
+            transform: translateY(-3px) !important;
+            box-shadow: 0 6px 16px rgba(230, 57, 70, 0.6) !important;
+        }
+
+        /* Hero Section */
+        .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("/api/placeholder/1200/800") center/cover;
+            position: relative;
+            overflow: hidden;
             padding: 100px 20px 80px;
-            text-align: center;
         }
 
-        .error-content {
+        .hero-logo {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            border-radius: 50%;
+            border: 3px solid var(--accent-purple);
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.7);
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-in-out;
             max-width: 800px;
             margin: 0 auto;
-            animation: fadeIn 1s ease-in-out;
         }
 
-        .error-code {
-            font-size: clamp(5rem, 15vw, 8rem);
-            font-weight: 700;
-            color: var(--error-color);
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             margin-bottom: 20px;
-            line-height: 1;
+            background: linear-gradient(90deg, var(--primary-light), var(--accent-purple-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
         }
 
-        .error-title {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            margin-bottom: 20px;
-            color: var(--text-light);
-        }
-
-        .error-message {
+        .hero p {
             font-size: clamp(1rem, 2vw, 1.2rem);
             margin-bottom: 30px;
             opacity: 0.9;
@@ -216,27 +256,172 @@
             transform: translateY(-3px);
         }
 
-        /* Owl Animation */
-        .error-owl {
-            width: 150px;
-            height: 150px;
-            margin: 0 auto 30px;
+        /* Projects Section */
+        .section {
+            padding: 60px 0;
             position: relative;
         }
 
-        .error-owl img {
-            width: 100%;
-            height: auto;
-            animation: float 3s ease-in-out infinite;
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--primary-light);
+            position: relative;
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
+        .section-title::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-top: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .discord-card {
+            border-top-color: var(--discord-blue);
+        }
+
+        .discord-card h3 {
+            color: var(--discord-blue-light);
+        }
+
+        .algorithm-card {
+            border-top-color: var(--accent-orange);
+        }
+
+        .algorithm-card h3 {
+            color: var(--accent-orange);
+        }
+
+        .cookie-card {
+            border-top-color: #f7d06b;
+        }
+
+        .cookie-card h3 {
+            color: #f7d06b;
+        }
+
+        .project-card-content {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .project-card-content ul {
+            margin-top: 12px;
+            margin-left: 18px;
+        }
+
+        .project-card-content li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* About Button Section */
+        .about-button-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .about-button {
+            display: inline-block;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.4);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .about-button:hover {
+            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.6);
+            transform: translateY(-3px);
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+        }
+
+        /* Maintenance Section */
+        .maintenance-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 60px 0;
+            color: white;
+        }
+
+        .maintenance-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .maintenance-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .maintenance-section p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .maintenance-btn {
+            background: white;
+            color: var(--primary-dark);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .maintenance-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         /* Footer */
@@ -335,6 +520,30 @@
             }
         }
 
+        /* Border effects for sections */
+        .border-effect {
+            position: relative;
+        }
+
+        .border-effect::before,
+        .border-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-purple-light), var(--accent-purple-dark));
+            opacity: 0.1;
+        }
+
+        .border-effect::before {
+            left: 0;
+        }
+
+        .border-effect::after {
+            right: 0;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             header {
@@ -354,6 +563,20 @@
                 font-size: 0.9rem;
             }
 
+            .hero {
+                padding: 90px 15px 60px;
+            }
+
+            .hero-logo {
+                width: 120px;
+                height: 120px;
+                top: 90px;
+            }
+
+            .hero h1 {
+                margin-bottom: 15px;
+            }
+
             .btn-container {
                 gap: 10px;
             }
@@ -363,8 +586,23 @@
                 font-size: 0.9rem;
             }
 
+            .section {
+                padding: 50px 0;
+            }
+
             .footer-content {
                 grid-template-columns: 1fr 1fr;
+            }
+
+            .maintenance-section h2 {
+                font-size: 1.7rem;
+            }
+
+            .language-switch {
+                margin-left: 0;
+                margin-top: 10px;
+                width: 100%;
+                max-width: 80px;
             }
         }
 
@@ -382,40 +620,106 @@
                 width: 100%;
                 max-width: 250px;
             }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .language-switch {
+                align-self: center;
+                margin: 10px 0 0 0;
+            }
         }
     </style>
 </head>
 <body>
 <header id="header">
     <div class="container nav-container">
-        <a href="/" class="logo" aria-label="GrüneEule Home">
-            <img src="gruneeule.png" alt="GrüneEule Logo" class="logo-img">
+        <a href="#" class="logo" aria-label="GrüneEule Home">
+            <img src="../gruneeule.png" alt="GrüneEule Logo" class="logo-img">
             Grüne<span>Eule</span> <span>(Services)</span>
         </a>
         <nav aria-label="Hauptnavigation">
             <ul>
-                <li><a href="de/team.html">Team</a></li>
+                <li><a href="team.html">Team</a></li>
                 <li><a href="https://jumpow.de/">Über Mich</a></li>
                 <li><a href="#projects">Projekte</a></li>
                 <li><a href="https://discord.gg/TwFbPQU4by" target="_blank" rel="noopener noreferrer">Discord Server</a></li>
             </ul>
         </nav>
+        <a href="../en/index.html" class="language-switch">EN</a>
     </div>
 </header>
 
 <main>
-    <section class="error-section">
-        <div class="container error-content">
-            <div class="error-owl">
-                <img src="gruneeule.png" alt="GrüneEule Logo">
-            </div>
-            <h1 class="error-code">404</h1>
-            <h2 class="error-title">Huch! Diese Seite existiert nicht.</h2>
-            <p class="error-message">Die von Ihnen gesuchte Seite wurde nicht gefunden. Vielleicht wurde sie verschoben, umbenannt oder existiert nicht mehr.</p>
+    <section class="hero">
+        <img src="../gruneeule.png" alt="GrüneEule Logo" class="hero-logo">
+        <div class="container hero-content">
+            <h1>GrüneEule</h1>
+            <p>Entdecke unsere leistungsstarken Discord-Bots für dein Server-Management, Unterhaltung und mehr. Außerdem bieten wir verschiedenste KI-Lösungen an (BETA)!</p>
             <div class="btn-container">
-                <a href="/" class="btn btn-primary">Zur Startseite</a>
-                <a href="https://discord.gg/TwFbPQU4by" class="btn btn-discord" target="_blank" rel="noopener noreferrer">Discord Support</a>
-                <a href="mailto:kontakt@gruneeule.de" class="btn btn-secondary">Kontakt aufnehmen</a>
+                <a href="#projects" class="btn btn-primary">Unsere Projekte</a>
+                <a href="https://discord.gg/TwFbPQU4by" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Discord beitreten</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section border-effect">
+        <div class="container">
+            <h2 class="section-title">Unsere Projekte</h2>
+            <div class="projects-grid">
+                <article class="project-card discord-card">
+                    <h3>DiscordBots</h3>
+                    <div class="project-card-content">
+                        <p>Alle unsere Discord-Bots auf einen Blick:</p>
+                        <ul>
+                            <li>EagleOwl - Server Management</li>
+                            <li>EvilOwl - Unterhaltung</li>
+                            <li>StormOwl - Wetterinformationen</li>
+                            <li>Und weitere spannende Projekte</li>
+                        </ul>
+                    </div>
+                    <a href="bots.html" class="btn btn-discord">Zu den Bots</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="cool" class="section border-effect">
+        <div class="container">
+            <h2 class="section-title">Auch Cool</h2>
+            <div class="projects-grid">
+                <article class="project-card cookie-card">
+                    <h3>CookieAI</h3>
+                    <div class="project-card-content">
+                        <p>Entdecke die KI-Lösung von Clix:</p>
+                        <ul>
+                            <li>Schnelle Antworten auf deine Fragen</li>
+                            <li>Intelligente Textverarbeitung</li>
+                            <li>Benutzerfreundliche Oberfläche</li>
+                            <li>Fortschrittliche KI-Technologie</li>
+                        </ul>
+                    </div>
+                    <a href="https://cookieai.floxhost.de" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">CookieAI entdecken</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-button-section">
+        <div class="container">
+            <a href="https://jumpow.de/" class="about-button">Mehr über mich erfahren</a>
+        </div>
+    </section>
+
+    <!-- Neue Maintenance-Sektion -->
+    <section class="maintenance-section">
+        <div class="container">
+            <div class="maintenance-content">
+                <h2>Wartungsstatus</h2>
+                <p>Hier findest du aktuelle Informationen zu Wartungsarbeiten und Systemupdates</p>
+                <a href="../maintenance.html" class="maintenance-btn">Zum Wartungsstatus</a>
             </div>
         </div>
     </section>
@@ -435,8 +739,8 @@
             <div class="footer-column">
                 <h3>Projekte</h3>
                 <ul>
-                    <li><a href="de/bots.html">DiscordBots</a></li>
-                    <li><a href="de/owlgorithm.html">Owlgorithm</a></li>
+                    <li><a href="bots.html">DiscordBots</a></li>
+                    <li><a href="owlgorithm.html">Owlgorithm</a></li>
                 </ul>
             </div>
             <div class="footer-column">

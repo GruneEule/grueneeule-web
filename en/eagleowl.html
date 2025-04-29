@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EagleOwl Bot - The ultimate administration bot for Discord with ticket system, moderation tools and more">
+    <title>EagleOwl - Discord Bot</title>
+    <link rel="icon" href="../gruneeule.png" type="image/png">
+    <link rel="shortcut icon" href="../gruneeule.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2e8b57;
+            --primary-light: #3cb371;
+            --primary-dark: #1e5631;
+            --primary-extra-light: #4fd687;
+            --accent-green: #32cd32;
+            --accent-green-light: #4caf50;
+            --accent-green-dark: #006400;
+            --bg-dark: #0f1a12;
+            --text-light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-bottom: 3px solid var(--accent-green);
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-green);
+            box-shadow: 0 0 10px rgba(46, 139, 87, 0.6);
+        }
+
+        .logo span {
+            color: var(--accent-green-light);
+        }
+
+        .logo span:last-child {
+            color: var(--text-light);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-green);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(50, 205, 50, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("/api/placeholder/1200/800") center/cover;
+            position: relative;
+            overflow: hidden;
+            padding: 100px 20px 80px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-in-out;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-bot-icon {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 25px rgba(46, 139, 87, 0.8);
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-light), var(--accent-green-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.4);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-green-dark));
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(50, 205, 50, 0.4);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(50, 205, 50, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--primary-light);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--accent-green), var(--primary));
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #152018, #0a150d);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            height: 100%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-left: 3px solid var(--primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--accent-green);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: var(--primary-light);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--accent-green-light);
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Commands Section */
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: 25px;
+        }
+
+        .command-card {
+            background: linear-gradient(145deg, #152018, #0a150d);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--primary);
+        }
+
+        .command-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-left: 3px solid var(--accent-green);
+        }
+
+        .command-card h3 {
+            color: var(--primary-light);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .command-card code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            display: inline-block;
+            margin-bottom: 10px;
+            color: var(--accent-green-light);
+            font-size: 0.9rem;
+        }
+
+        .command-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Setup Section */
+        .setup-steps {
+            max-width: 800px;
+            margin: 40px auto 0;
+        }
+
+        .setup-step {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-right: 15px;
+            box-shadow: 0 0 10px rgba(46, 139, 87, 0.3);
+        }
+
+        .step-content {
+            flex-grow: 1;
+        }
+
+        .step-content h3 {
+            margin-bottom: 8px;
+            color: var(--accent-green-light);
+            font-size: 1.2rem;
+        }
+
+        .step-content p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Testimonials Section */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 25px;
+        }
+
+        .testimonial-card {
+            background: linear-gradient(145deg, #152018, #0a150d);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-top: 3px solid var(--primary);
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-top: 3px solid var(--accent-green);
+        }
+
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+            font-size: 0.95rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonial-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-info h4 {
+            margin-bottom: 3px;
+            color: var(--primary-light);
+            font-size: 1rem;
+        }
+
+        .testimonial-info small {
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+
+        /* Stats Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+            gap: 30px;
+        }
+
+        .stat-item h3 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 8px;
+            color: var(--accent-green-light);
+        }
+
+        .stat-item p {
+            font-size: 0.95rem;
+            color: #ddd;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--primary-dark), #0a1209);
+            padding: 40px 0 20px;
+            border-top: 3px solid var(--accent-green);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--accent-green-light);
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-green-light);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.5);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 99;
+            cursor: pointer;
+            border: none;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            background: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Border effects for sections */
+        .border-effect {
+            position: relative;
+        }
+
+        .border-effect::before,
+        .border-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-light), var(--primary-dark));
+            opacity: 0.1;
+        }
+
+        .border-effect::before {
+            left: 0;
+        }
+
+        .border-effect::after {
+            right: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 0;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav a {
+                padding: 5px 8px;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 90px 15px 60px;
+            }
+
+            .hero-bot-icon {
+                width: 120px;
+                height: 120px;
+            }
+
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+
+            .setup-step {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <div class="container nav-container">
+        <a href="index.html" class="logo" aria-label="GrüneEule Home">
+            <img src="../gruneeule.png" alt="GrüneEule Logo" class="logo-img">
+            Grüne<span>Eule</span> <span>(EagleOwl)</span>
+        </a>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#commands">Commands</a></li>
+                <li><a href="#setup">Setup</a></li>
+                <li><a href="https://discord.gg/TwFbPQU4by" target="_blank" rel="noopener noreferrer">Support</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container hero-content">
+            <img src="../dcbots-icons/eagleowl.png" alt="EagleOwl Logo" class="hero-bot-icon" loading="lazy">
+            <h1>EagleOwl Bot</h1>
+            <p>The ultimate administration bot for your Discord server with extensive features for moderation, tickets, giveaways, and more.</p>
+            <div class="btn-container">
+                <a href="https://discord.com/oauth2/authorize?client_id=1356185970063708212&permissions=8&scope=bot%20applications.commands" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Invite Bot</a>
+                <a href="https://discord.gg/TwFbPQU4by" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Support Server</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section border-effect">
+        <div class="container">
+            <h2 class="section-title">Powerful Features</h2>
+            <div class="features-grid">
+                <article class="feature-card">
+                    <div class="feature-icon">🎫</div>
+                    <h3>Ticket System</h3>
+                    <p>Create an advanced ticket system for your server with custom categories, automatic responses, and archiving functions.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Moderation</h3>
+                    <p>Extensive moderation tools such as kick, ban, mute, warn, and more - with logging function and configurable penalties.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">🎁</div>
+                    <h3>Giveaways</h3>
+                    <p>Easily organize giveaways with customizable settings, automatic winner selection, and reaction requirements.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">🔊</div>
+                    <h3>Voice Channels</h3>
+                    <p>Create temporary voice channels that are automatically created and deleted when they are no longer needed.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Logging System</h3>
+                    <p>Detailed logs for all important server events in separate channels for better overview and security.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">👋</div>
+                    <h3>Welcome System</h3>
+                    <p>Personalized welcome messages with automatic role assignment for new members of your server.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="commands" class="section">
+        <div class="container">
+            <h2 class="section-title">Most Important Commands</h2>
+            <div class="commands-grid">
+                <article class="command-card">
+                    <h3>Ticket System</h3>
+                    <code>/ticketpanel</code>
+                    <p>Sets up a very simple ticket system.</p>
+                </article>
+                <article class="command-card">
+                    <h3>Moderation</h3>
+                    <code>/ban, /kick</code>
+                    <p>Bans/Kicks a user from the server with optional reason and deletion of messages.</p>
+                </article>
+                <article class="command-card">
+                    <h3>Giveaways</h3>
+                    <code>/giveaway</code>
+                    <p>Starts a new giveaway with title, prize, duration, and number of winners.</p>
+                </article>
+                <article class="command-card">
+                    <h3>Voice Channels</h3>
+                    <code>/tempvoice</code>
+                    <p>Sets up the system for temporary voice channels.</p>
+                </article>
+                <article class="command-card">
+                    <h3>Logs</h3>
+                    <code>/setlog</code>
+                    <p>Configures the logging system for different event types.</p>
+                </article>
+                <article class="command-card">
+                    <h3>Welcome</h3>
+                    <code>/joinrole</code>
+                    <p>Sets up an automatic role for new members.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="setup" class="section border-effect">
+        <div class="container">
+            <h2 class="section-title">Quick Setup</h2>
+            <div class="setup-steps">
+                <article class="setup-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Invite the Bot</h3>
+                        <p>Click on "Invite Bot" and select your server. Make sure you grant the bot the appropriate permissions.</p>
+                    </div>
+                    <article class="setup-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Activate Modules</h3>
+                            <p>Enable the desired modules such as tickets, moderation, giveaways, etc. with the corresponding setup commands.</p>
+                        </div>
+                    </article>
+                    <article class="setup-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Customize and Enjoy</h3>
+                            <p>Customize the settings according to your wishes and enjoy the functionalities of the EagleOwl Bot!</p>
+                        </div>
+                    </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">What Server Owners Say</h2>
+            <div class="testimonials-grid">
+                <article class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Very good bot, excellent uptime and very helpful support team"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">D</div>
+                        <div class="testimonial-info">
+                            <h4>Daniel</h4>
+                            <small>DMH-Owner 1</small>
+                        </div>
+                    </div>
+                </article>
+                <article class="testimonial-card">
+                    <div class="testimonial-content">
+                        "very cool bot respect for this work must have taken a long time"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">S</div>
+                        <div class="testimonial-info">
+                            <h4>StrongerCape</h4>
+                            <small>Guild Owner</small>
+                        </div>
+                    </div>
+                </article>
+                <article class="testimonial-card">
+                    <div class="testimonial-content">
+                        "Very cool bot, really strong performance 💪"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">J</div>
+                        <div class="testimonial-info">
+                            <h4>Jay</h4>
+                            <small>Community Owner</small>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>GrüneEule</h3>
+                <ul>
+                    <li><a href="index.html#projects">Our Projects</a></li>
+                    <li><a href="index.html#about">About Me</a></li>
+                    <li><a href="https://discord.gg/TwFbPQU4by" target="_blank" rel="noopener noreferrer">Discord Server</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Projects</h3>
+                <ul>
+                    <li><a href="bots.html">DiscordBots</a></li>
+                    <li><a href="owlgorithm.html">Owlgorithm</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="https://discord.gg/TwFbPQU4by" target="_blank" rel="noopener noreferrer">Join Discord Server</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Other Projects</h3>
+                <ul>
+                    <li><a href="https://dmh-network.de" target="_blank" rel="noopener noreferrer">DMH Network</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Admin</h3>
+                <ul>
+                    <li><a href="https://pt.hmt-network.de" target="_blank" rel="noopener noreferrer">Panel</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 GrüneEule Bots. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<button class="scroll-top" aria-label="Scroll to top">↑</button>
+
+<script>
+    // Scroll to top button
+    const scrollTopBtn = document.querySelector('.scroll-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.classList.add('active');
+        } else {
+            scrollTopBtn.classList.remove('active');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Hide header on scroll down
+    let lastScroll = 0
