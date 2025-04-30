@@ -1,33 +1,27 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrüneEule</title>
-    <link rel="icon" href="../gruneeule.png" type="image/png">
-    <link rel="shortcut icon" href="../gruneeule.png" type="image/png">
+    <title>EuleX – The Slim Open-Source Search Engine | GrüneEule</title>
+    <link rel="icon" href="all.png" type="image/png">
+    <link rel="shortcut icon" href="all.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2e8b57;
-            --primary-light: #3cb371;
-            --primary-dark: #1e5631;
-            --accent-orange: #ff7f50;
-            --accent-purple: #8a2be2;
-            --accent-purple-light: #9f3de3;
-            --accent-purple-dark: #6a1fb3;
-            --discord-blue: #5865F2;
-            --discord-blue-light: #7289DA;
-            --discord-blue-dark: #4E5D94;
-            --bg-dark: #121212;
+            --primary: #4aa556;
+            --primary-light: #adce6b;
+            --primary-dark: #317d2e;
+            --accent-orange: #4dffea;
+            --accent-purple: #5b9bef;
+            --accent-purple-light: #74b5ff;
+            --accent-purple-dark: #424ed6;
+            --bg-dark: #0f1217;
             --bg-light: #f5f5f5;
             --text-light: #ffffff;
             --text-dark: #333333;
-            --accent-red: #e63946;
-            --accent-red-dark: #d62828;
-            --accent-red-light: #f28482;
         }
 
         * {
@@ -95,15 +89,11 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--accent-purple);
-            box-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
+            box-shadow: 0 0 10px rgba(126, 91, 239, 0.6);
         }
 
         .logo span {
             color: var(--accent-orange);
-        }
-
-        .logo span:last-child {
-            color: var(--accent-purple);
         }
 
         nav ul {
@@ -126,40 +116,16 @@
         nav a:hover {
             background-color: var(--accent-purple);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
-        }
-
-        /* Language Switch Button */
-        .language-switch {
-            display: inline-block;
-            padding: 8px 16px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: white !important;
-            background: linear-gradient(135deg, var(--accent-red), var(--accent-red-dark)) !important;
-            border-radius: 8px;
-            text-decoration: none !important;
-            transition: all 0.3s ease;
-            margin-left: 15px;
-            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.4) !important;
-            border: none;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-
-        .language-switch:hover {
-            background: linear-gradient(135deg, var(--accent-red-dark), var(--accent-red)) !important;
-            transform: translateY(-3px) !important;
-            box-shadow: 0 6px 16px rgba(230, 57, 70, 0.6) !important;
+            box-shadow: 0 5px 15px rgba(126, 91, 239, 0.4);
         }
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            min-height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("/api/placeholder/1200/800") center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("https://source.unsplash.com/random/1920x1080/?owl,night") center/cover;
             position: relative;
             overflow: hidden;
             padding: 100px 20px 80px;
@@ -174,8 +140,8 @@
             transform: translateX(-50%);
             z-index: 2;
             border-radius: 50%;
-            border: 3px solid var(--accent-purple);
-            box-shadow: 0 0 25px rgba(138, 43, 226, 0.7);
+            border: 3px solid var(--accent-orange);
+            box-shadow: 0 0 25px rgba(255, 145, 77, 0.7);
         }
 
         .hero-content {
@@ -190,7 +156,7 @@
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 3.5rem);
             margin-bottom: 20px;
-            background: linear-gradient(90deg, var(--primary-light), var(--accent-purple-light));
+            background: linear-gradient(90deg, var(--accent-orange), var(--primary-light));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -226,37 +192,37 @@
         .btn-primary {
             background: linear-gradient(90deg, var(--primary), var(--primary-dark));
             color: var(--text-light);
-            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.4);
+            box-shadow: 0 4px 15px rgba(74, 111, 165, 0.4);
         }
 
         .btn-primary:hover {
-            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.6);
+            box-shadow: 0 6px 20px rgba(74, 111, 165, 0.6);
             transform: translateY(-3px);
         }
 
         .btn-secondary {
             background: linear-gradient(90deg, var(--accent-purple-dark), var(--accent-purple));
             color: var(--text-light);
-            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.4);
+            box-shadow: 0 4px 15px rgba(126, 91, 239, 0.4);
         }
 
         .btn-secondary:hover {
-            box-shadow: 0 6px 20px rgba(138, 43, 226, 0.6);
+            box-shadow: 0 6px 20px rgba(126, 91, 239, 0.6);
             transform: translateY(-3px);
         }
 
-        .btn-discord {
-            background: linear-gradient(90deg, var(--discord-blue), var(--discord-blue-dark));
+        .btn-orange {
+            background: linear-gradient(90deg, var(--accent-orange), #ff7a3d);
             color: var(--text-light);
-            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 145, 77, 0.4);
         }
 
-        .btn-discord:hover {
-            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
+        .btn-orange:hover {
+            box-shadow: 0 6px 20px rgba(255, 145, 77, 0.6);
             transform: translateY(-3px);
         }
 
-        /* Projects Section */
+        /* Features Section */
         .section {
             padding: 60px 0;
             position: relative;
@@ -282,13 +248,13 @@
             border-radius: 2px;
         }
 
-        .projects-grid {
+        .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
             gap: 25px;
         }
 
-        .project-card {
+        .feature-card {
             background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
             border-radius: 12px;
             padding: 25px;
@@ -296,132 +262,101 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            border-top: 3px solid transparent;
+            border-top: 3px solid var(--accent-orange);
             position: relative;
             overflow: hidden;
         }
 
-        .project-card:hover {
+        .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .project-card h3 {
+        .feature-card h3 {
             margin-bottom: 15px;
             font-size: 1.5rem;
             position: relative;
             z-index: 1;
-        }
-
-        .discord-card {
-            border-top-color: var(--discord-blue);
-        }
-
-        .discord-card h3 {
-            color: var(--discord-blue-light);
-        }
-
-        .eulex-card {
-            border-top-color: var(--accent-orange);
-        }
-
-        .eulex-card h3 {
             color: var(--accent-orange);
         }
 
-        .cookie-card {
-            border-top-color: #f7d06b;
-        }
-
-        .cookie-card h3 {
-            color: #f7d06b;
-        }
-
-        .project-card-content {
+        .feature-card-content {
             margin-bottom: 20px;
             position: relative;
             z-index: 1;
             flex: 1;
         }
 
-        .project-card-content ul {
+        .feature-card-content ul {
             margin-top: 12px;
             margin-left: 18px;
         }
 
-        .project-card-content li {
+        .feature-card-content li {
             margin-bottom: 8px;
             font-size: 0.95rem;
         }
 
-        /* About Button Section */
-        .about-button-section {
-            text-align: center;
-            padding: 60px 0;
+        /* How It Works Section */
+        .steps-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
         }
 
-        .about-button {
-            display: inline-block;
-            padding: 15px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-            color: var(--text-light);
-            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.4);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
+        .step {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 80px;
         }
 
-        .about-button:hover {
-            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.6);
-            transform: translateY(-3px);
-            background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-orange), #ff7a3d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 145, 77, 0.4);
         }
 
-        /* Maintenance Section */
-        .maintenance-section {
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent-orange);
+        }
+
+        /* Demo Section */
+        .demo-section {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary));
             padding: 60px 0;
             color: white;
+            text-align: center;
         }
 
-        .maintenance-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+        .demo-content {
             max-width: 800px;
             margin: 0 auto;
         }
 
-        .maintenance-section h2 {
+        .demo-section h2 {
             font-size: 2rem;
             margin-bottom: 20px;
             color: white;
         }
 
-        .maintenance-section p {
+        .demo-section p {
             margin-bottom: 30px;
             font-size: 1.1rem;
             opacity: 0.9;
-        }
-
-        .maintenance-btn {
-            background: white;
-            color: var(--primary-dark);
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .maintenance-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
         /* Footer */
@@ -491,7 +426,7 @@
             justify-content: center;
             color: white;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.5);
+            box-shadow: 0 4px 15px rgba(126, 91, 239, 0.5);
             opacity: 0;
             transition: all 0.3s ease;
             z-index: 99;
@@ -520,30 +455,6 @@
             }
         }
 
-        /* Border effects for sections */
-        .border-effect {
-            position: relative;
-        }
-
-        .border-effect::before,
-        .border-effect::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 10px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--accent-purple-light), var(--accent-purple-dark));
-            opacity: 0.1;
-        }
-
-        .border-effect::before {
-            left: 0;
-        }
-
-        .border-effect::after {
-            right: 0;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             header {
@@ -565,6 +476,7 @@
 
             .hero {
                 padding: 90px 15px 60px;
+                min-height: 70vh;
             }
 
             .hero-logo {
@@ -594,15 +506,14 @@
                 grid-template-columns: 1fr 1fr;
             }
 
-            .maintenance-section h2 {
-                font-size: 1.7rem;
+            .step {
+                padding-left: 70px;
             }
 
-            .language-switch {
-                margin-left: 0;
-                margin-top: 10px;
-                width: 100%;
-                max-width: 80px;
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
             }
         }
 
@@ -626,9 +537,14 @@
                 align-items: flex-start;
             }
 
-            .language-switch {
-                align-self: center;
-                margin: 10px 0 0 0;
+            .step {
+                padding-left: 60px;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -637,101 +553,121 @@
 <header id="header">
     <div class="container nav-container">
         <a href="#" class="logo" aria-label="GrüneEule Home">
-            <img src="../gruneeule.png" alt="GrüneEule Logo" class="logo-img">
-            Grüne<span>Eule</span> <span>(Services)</span>
+            <img src="all.png" alt="GrüneEule Logo" class="logo-img">
+            Grüne<span>Eule</span> <span>(EuleX)</span>
         </a>
-        <nav aria-label="Hauptnavigation">
+        <nav aria-label="Main navigation">
             <ul>
-                <li><a href="team.html">Team</a></li>
-                <li><a href="https://jumpow.de/">About Me</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="https://discord.gg/TwFbPQU4by" target="_blank" rel="noopener noreferrer">Discord Server</a></li>
+                <li><a href="../index.html">GrüneEule - Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="https://github.com/Jumpstone/EuleX" target="_blank">GitHub</a></li>
+                <li><a href="https://eulex.grueneeule.de" target="_blank">EuleX Go</a></li>
             </ul>
         </nav>
-        <a href="../de/index.html" class="language-switch">DE</a>
     </div>
 </header>
 
 <main>
     <section class="hero">
-        <img src="../gruneeule.png" alt="GrüneEule Logo" class="hero-logo">
+        <img src="all.png" alt="EuleX Logo" class="hero-logo">
         <div class="container hero-content">
-            <h1>GrüneEule</h1>
-            <p>Discover our powerful Discord bots for server management, entertainment and more. We also offer various AI solutions (BETA)!</p>
+            <h1>EuleX</h1>
+            <p>The minimalist, data-saving and ad-free search engine</p>
             <div class="btn-container">
-                <a href="#projects" class="btn btn-primary">Our Projects</a>
-                <a href="https://discord.gg/TwFbPQU4by" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Join Discord</a>
+                <a href="https://eulex.grueneeule.de" class="btn btn-orange" target="_blank">EuleX Go</a>
+                <a href="https://github.com/Jumpstone/EuleX" class="btn btn-secondary" target="_blank">GitHub Repository</a>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="section border-effect">
+    <section id="features" class="section">
         <div class="container">
-            <h2 class="section-title">Our Projects</h2>
-            <div class="projects-grid">
-                <article class="project-card discord-card">
-                    <h3>DiscordBots</h3>
-                    <div class="project-card-content">
-                        <p>All our Discord bots at a glance:</p>
+            <h2 class="section-title">Why EuleX?</h2>
+            <div class="features-grid">
+                <article class="feature-card">
+                    <h3>Privacy first</h3>
+                    <div class="feature-card-content">
+                        <p>EuleX respects your privacy:</p>
                         <ul>
-                            <li>EagleOwl - Server Management</li>
-                            <li>EvilOwl - Entertainment</li>
-                            <li>StormOwl - Weather Information</li>
-                            <li>And other exciting projects</li>
+                            <li>No tracking cookies</li>
+                            <li>No personal data collection</li>
+                            <li>No advertising</li>
                         </ul>
                     </div>
-                    <a href="bots.html" class="btn btn-discord">View Bots</a>
                 </article>
-                <article class="project-card eulex-card">
-                    <h3>EuleX</h3>
-                    <div class="project-card-content">
-                        <p>The search engine you need:</p>
+                <article class="feature-card">
+                    <h3>Open Source</h3>
+                    <div class="feature-card-content">
+                        <p>Transparency and customizability:</p>
                         <ul>
-                            <li>Web search</li>
-                            <li>Image Search</li>
-                            <li>Google Search API</li>
+                            <li>Fully open source code</li>
+                            <li>Self-hosting possible</li>
+                            <li>CC BY-NC 4.0 license</li>
                         </ul>
                     </div>
-                    <a href="eulex/index.html" class="btn btn-discord">More</a>
                 </article>
-            </div>
-        </div>
-    </section>
-
-    <section id="cool" class="section border-effect">
-        <div class="container">
-            <h2 class="section-title">Also Cool</h2>
-            <div class="projects-grid">
-                <article class="project-card cookie-card">
-                    <h3>CookieAI</h3>
-                    <div class="project-card-content">
-                        <p>Discover Clix's AI solution:</p>
+                <article class="feature-card">
+                    <h3>Powerful</h3>
+                    <div class="feature-card-content">
+                        <p>All the benefits of Google without the drawbacks:</p>
                         <ul>
-                            <li>Quick answers to your questions</li>
-                            <li>Intelligent text processing</li>
-                            <li>User-friendly interface</li>
-                            <li>Advanced AI technology</li>
+                            <li>Google search results</li>
+                            <li>Image search included</li>
+                            <li>Quick answers</li>
                         </ul>
                     </div>
-                    <a href="https://cookieai.floxhost.de" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Discover CookieAI</a>
+                </article>
+                <article class="feature-card">
+                    <h3>Simple</h3>
+                    <div class="feature-card-content">
+                        <p>Simple. Clear. For everyone.</p>
+                        <ul>
+                            <li>No overloaded menus</li>
+                            <li>Made for children too</li>
+                            <li>Simple, large buttons</li>
+                        </ul>
+                    </div>
                 </article>
             </div>
         </div>
     </section>
 
-    <section class="about-button-section">
+    <section id="how-it-works" class="section">
         <div class="container">
-            <a href="https://jumpow.de/" class="about-button">Learn more about me</a>
+            <h2 class="section-title">How EuleX Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Submit your query</h3>
+                        <p>Enter your search term on the EuleX website. Your request is forwarded directly to the Google Custom Search API without being cached.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Receive results</h3>
+                        <p>EuleX processes the raw data from Google and removes all tracking elements and advertisements before displaying the results.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Browse safely</h3>
+                        <p>You can open search results without EuleX tracking your click behavior or storing personal data.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- New Maintenance Section -->
-    <section class="maintenance-section">
+    <section class="demo-section">
         <div class="container">
-            <div class="maintenance-content">
-                <h2>Maintenance Status</h2>
-                <p>Here you'll find current information about maintenance work and system updates</p>
-                <a href="../maintenance.html" class="maintenance-btn">View Maintenance Status</a>
+            <div class="demo-content">
+                <h2>Try EuleX now</h2>
+                <p>Experience a new way of web search - fast, simple and privacy-friendly</p>
+                <a href="https://eulex.grueneeule.de" class="btn btn-orange" target="_blank">EuleX Go</a>
             </div>
         </div>
     </section>
@@ -741,41 +677,30 @@
     <div class="container">
         <div class="footer-content">
             <div class="footer-column">
-                <h3>GrüneEule</h3>
+                <h3>EuleX</h3>
                 <ul>
-                    <li><a href="#projects">Our Projects</a></li>
-                    <li><a href="https://jumpow.de/">About Me</a></li>
-                    <li><a href="https://discord.gg/TwFbPQU4by" target="_blank" rel="noopener noreferrer">Discord Server</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="https://github.com/Jumpstone/EuleX" target="_blank">GitHub Repository</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Projects</h3>
+                <h3>About GrüneEule</h3>
                 <ul>
-                    <li><a href="bots.html">DiscordBots</a></li>
-                    <li><a href="owlgorithm.html">Owlgorithm</a></li>
+                    <li><a href="../index.html" target="_blank">Homepage</a></li>
+                    <li><a href="../../dc.html" target="_blank">Discord Server</a></li>
                 </ul>
             </div>
             <div class="footer-column">
-                <h3>Contact</h3>
+                <h3>Legal</h3>
                 <ul>
-                    <li><a href="https://discord.gg/TwFbPQU4by" target="_blank" rel="noopener noreferrer">Join Discord Server</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Other Projects</h3>
-                <ul>
-                    <li><a href="https://dmh-network.de" target="_blank" rel="noopener noreferrer">DMH Network</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Admin</h3>
-                <ul>
-                    <li><a href="https://pt.hmt-network.de" target="_blank" rel="noopener noreferrer">Panel</a></li>
+                    <li><a href="impressum.html">Imprint</a></li>
+                    <li><a href="datenschutz.html">Privacy Policy</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 GrüneEule Services. All rights reserved.</p>
+            <p>&copy; 2025 EuleX by GrüneEule.</p>
         </div>
     </div>
 </footer>

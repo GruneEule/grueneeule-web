@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum & Rechtliches – EuleX</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logos/logo.png') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2e8b57;
+            --primary-light: #3cb371;
+            --primary-dark: #1e5631;
+            --primary-darker: #0d2815;
+            --accent-light: #5dbe8a;
+            --accent-dark: #1a3b24;
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --bg-light: #1e1e1e;
+            --text-light: #ffffff;
+            --text-lighter: #f5f5f5;
+            --text-muted: #cccccc;
+            --text-dark: #333333;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 20px 0;
+            box-shadow: var(--box-shadow);
+            border-bottom: 2px solid var(--accent-light);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .header-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .header-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .header-link:hover {
+            color: var(--text-lighter);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: var(--accent-light);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: var(--primary-light);
+            margin: 25px 0 15px;
+        }
+
+        p, ul {
+            margin-bottom: 15px;
+            color: var(--text-muted);
+        }
+
+        a {
+            color: var(--accent-light);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--text-light);
+            text-decoration: underline;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: var(--primary-dark);
+            margin: 30px 0;
+        }
+
+        footer {
+            background: linear-gradient(to right, var(--primary-dark), var(--bg-darker));
+            padding: 30px 0;
+            border-top: 2px solid var(--primary);
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-copyright {
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .header-links {
+                gap: 15px;
+            }
+
+            main {
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <div class="header-top">
+            <div class="header-links">
+                <a href="https://grueneeule.de" class="header-link">GrüneEule</a>
+                <a href="https://grueneeule.de/dc" class="header-link">Discord</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main>
+    <h1>Impressum & Rechtliche Hinweise</h1>
+
+    <p><strong>EuleX</strong> ist ein rein privates Open-Source-Projekt und wird aus persönlichem Interesse entwickelt und betrieben.</p>
+
+    <p>Die Website <strong>https://eulex.grueneeule.de</strong> stellt eine vereinfachte Oberfläche für die Google-Suche bereit und verwendet dafür die offizielle Google Custom Search API. Es werden keine eigenen Suchergebnisse generiert oder gespeichert.</p>
+
+    <h2>Keine kommerzielle Nutzung</h2>
+    <p>Dieses Projekt verfolgt keinerlei kommerzielle Interessen. Es gibt keine Werbung, keine bezahlten Inhalte und keine finanzielle Gewinnerzielung.</p>
+
+    <h2>Haftungsausschluss</h2>
+    <p>Die Nutzung dieser Website erfolgt <strong>auf eigene Gefahr</strong>. Für Schäden, Datenverluste oder falsche Suchergebnisse wird keine Haftung übernommen.</p>
+    <p>Die Nutzung der Google-Suche unterliegt den Nutzungsbedingungen von Google.</p>
+
+    <h2>Open Source</h2>
+    <p>Der Quellcode von EuleX ist unter <strong>CC BY-NC 4.0</strong> lizenziert und auf GitHub öffentlich zugänglich:</p>
+    <p><a href="https://github.com/Jumpstone/EuleX" target="_blank">https://github.com/Jumpstone/EuleX</a></p>
+    <p>Die Nutzung des Codes ist erlaubt, sofern:</p>
+    <ul>
+        <li>keine kommerzielle Nutzung erfolgt,</li>
+        <li>die Credits zu "JumpStone4477 / GrüneEule" gut sichtbar erhalten bleiben,</li>
+        <li>und keine bezahlte Weiterverbreitung oder Monetarisierung erfolgt.</li>
+    </ul>
+
+    <h2>Angaben gemäß § 5 TMG</h2>
+    <p>Dieses Projekt ist ein nicht-kommerzielles Hobbyprojekt. Sollte dennoch eine Impressumspflicht gemäß § 5 TMG bestehen, wird ein Impressumsdienst hinzugezogen oder das Projekt auf Dritte übertragen, um rechtlichen Anforderungen gerecht zu werden.</p>
+
+    <h2>Kontakt</h2>
+    <p>Kontakt ist über den <a href="https://grueneeule.de/dc" target="_blank">offiziellen Discord-Server</a> möglich.</p>
+
+    <hr>
+    <p>Stand: April 2025</p>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-links">
+            <a href="#">Datenschutz</a>
+        </div>
+        <p class="footer-copyright">&copy; 2025 EuleX by GrüneEule.</p>
+    </div>
+</footer>
+</body>
+</html>
