@@ -19,9 +19,8 @@ $env = load_env(__DIR__ . '/.env');
 
 // Benutzerliste erstellen
 $users = [
-    "mama" => $env["MAMA_PASS"] ?? "",
-    "papa" => $env["PAPA_PASS"] ?? "",
-    "ich"   => $env["ICH_PASS"] ?? ""
+    "henry" => $env["henry_PASS"] ?? "",
+    "other" => $env["other_PASS"] ?? ""
 ];
 
 // Wenn das Formular abgeschickt wurde
@@ -51,18 +50,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <style>
         :root {
             /* Vier-Farben-Palette */
-            --blue: #3498db;
-            --blue-light: #5dade2;
-            --blue-dark: #2874a6;
-            --yellow: #f1c40f;
-            --yellow-light: #f7dc6f;
-            --yellow-dark: #d4ac0d;
-            --red: #e74c3c;
-            --red-light: #ec7063;
-            --red-dark: #cb4335;
-            --green: #2ecc71;
-            --green-light: #58d68d;
-            --green-dark: #28b463;
+            --blue: #58db34;
+            --blue-light: #89e25d;
+            --blue-dark: #28a689;
+            --yellow: #26f10f;
+            --yellow-light: #b1f76f;
+            --yellow-dark: #a9d40d;
+            --red: #e7c53c;
+            --red-light: #ecea63;
+            --red-dark: #cbc935;
+            --green: #095e2d;
+            --green-light: #0f9648;
+            --green-dark: #0e6230;
 
             /* Hintergrundfarben */
             --bg-dark: #121212;
@@ -296,8 +295,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
 <div class="login-container">
     <div class="logo">
-        <h1>Witte-Meyer</h1>
-        <p>Familienportal Login</p>
+        <h1>SunScreen</h1>
+        <p>Website Look Login</p>
     </div>
 
     <?php if (!empty($error)): ?>
