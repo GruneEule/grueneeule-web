@@ -1,4 +1,7 @@
-# ![Peridyte Logo](https://cdn.discordapp.com/attachments/1081208238441246801/1371094983305728010/Logo.png?ex=68248635&is=682334b5&hm=e843c9e597e3759ccd7982f8f43961b22ccb5e7eb0afa322ed0a3a97fe5ae0da&)
+<p align="center">
+  <img src="/dcbots-icons/peridyte.png" alt="Peridyte Logo" width="200"/>
+</p>
+
 # Peridyte Dokumentation
 
 Willkommen zur offiziellen Dokumentation von **Peridyte**, dem modularen, KI-gestützten Discord-Bot für Automatisierung, Entwicklungshilfe und Community-Funktionen.  

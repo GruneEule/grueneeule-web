@@ -1,0 +1,140 @@
+/* smart-search.css */
+
+#smart-search-input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: .5rem .8rem;
+    background: rgba(0, 0, 0, 0.3); /* Dunkler Hintergrund */
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid rgba(0, 204, 102, 0.3); /* Grüner Rand */
+    color: #fff;
+    font-family: inherit;
+    background-image: url("/_media/icons/search.png");
+    background-repeat: no-repeat;
+    background-position: 8px center;
+    background-size: 16px 16px;
+    padding-left: 2rem;
+    transition: all .2s ease;
+}
+#smart-search-input:focus {
+    border-color: rgba(0, 204, 102, 0.6); /* Helleres Grün beim Fokus */
+    box-shadow: 0 0 0 2px rgba(0, 204, 102, 0.2); /* Grüner Glow-Effekt */
+}
+
+.smart-search-modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-left: 272px;
+    background-color: rgba(0, 0, 0, 0.9); /* Dunklerer Hintergrund */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn .3s ease;
+}
+
+.smart-search-modal {
+    padding: 1rem;
+    width: calc(100% - 20px);
+    max-width: 500px;
+    background-color: #121212; /* Dunkler Hintergrund */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    animation: flyIn .3s ease;
+    overflow: hidden;
+    border: 1px solid rgba(0, 204, 102, 0.1); /* Dünner grüner Rand */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.smart-search-result:last-child {
+    border-bottom: none;
+}
+
+#smart-search-results {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    min-height: 300px;
+    max-height: 300px;
+    width: 100%;
+    overflow-y: auto;
+}
+
+#smart-search-results div.not-found {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+a.search-result-item {
+    text-decoration: none;
+    color: inherit;
+    padding: .3rem .5rem;
+    background: rgba(0, 0, 0, 0.3); /* Dunkler Hintergrund */
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    transition: all .2s ease;
+}
+a.search-result-item:hover {
+    background: rgba(0, 204, 102, 0.1); /* Grüner Hover-Effekt */
+    transform: translateX(2px);
+}
+
+a.search-result-item div.type {
+    font-size: .8em;
+    opacity: .8;
+    color: rgba(0, 204, 102, 0.8); /* Grüne Akzentfarbe für Typ */
+}
+
+a.search-result-item div.value {
+    font-size: 1.1em;
+    color: rgba(255, 255, 255, 0.95);
+}
+a.search-result-item:hover div.value {
+    text-decoration: underline;
+    color: #00cc66; /* Grüne Akzentfarbe beim Hover */
+}
+
+
+@media (max-width: 768px) {
+    .smart-search-modal-bg {
+        padding-left: 0;
+    }
+}
+
+@keyframes flyIn {
+    from {
+        opacity: 0;
+        transform: translateY(30%);
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

@@ -1,22 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Document</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
+    <meta name="type" property="og:type" content="website">
+    <meta property="og:type" content="website">
+    <meta name="description" content="Documentation for the Peridyte Discord bot">
+    <meta name="og:description" content="Documentation for the Peridyte Discord bot">
+    <meta name="theme-color" content="#0099FF">
+    <meta property="og:image" content="/dcbots-icons/peridyte.png">
+    <title>Peridyte | Documentation</title>
+    <link rel="icon" href="/dcbots-icons/peridyte.png">
+
+    <!-- Themes -->
+    <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: light)" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="_styles/fonts.css">
+    <link rel="stylesheet" href="_styles/global.css">
+    <link rel="stylesheet" href="_styles/blockquote.css">
+    <link rel="stylesheet" href="_styles/smart-search.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: light)" href="_styles/sidebar.css">
+    <link rel="stylesheet" media="(prefers-color-scheme: dark)" href="_styles/sidebar.css">
 </head>
 <body>
-  <div id="app"></div>
-  <script>
-    window.$docsify = {
-      name: '',
-      repo: ''
+<div id="app"></div>
+
+<script>
+    function helperTpl(className, content) {
+        return `<p class="${className}">${content.slice(5).trim()}</p>`;
     }
-  </script>
-  <!-- Docsify v4 -->
-  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+
+    window.$docsify = {
+        name: "Peridyte Documentation",
+        logo: "_media/logo_name.png",
+        loadSidebar: true,
+        coverpage: false,
+        subMaxLevel: 2,
+        auto2top: true,
+        executeScript: true,
+        pagination: {
+            previousText: "Previous",
+            nextText: "Next",
+            crossChapter: true,
+            crossChapterText: true
+        },
+        markdown: {
+            renderer: {
+                paragraph(text) {
+                    if (/^d&gt;/.test(text)) return helperTpl("warn danger", text);
+                    if (/^w&gt;/.test(text)) return helperTpl("warn", text);
+                    if (/^s&gt;/.test(text)) return helperTpl("success", text);
+                    if (/^i&gt;/.test(text)) return helperTpl("tip", text);
+                    return `<p>${text}</p>`;
+                },
+                image(href, title, text) {
+                    let config = title.split("|");
+                    let imgTag = `<img src="${href}" data-origin="${href}" alt="${text}" ${config.join(" ")}>`;
+                    if (config.includes("center")) {
+                        return `<p align="center">${imgTag}<br><em>${marked.parseInline(text)}</em></p>`;
+                    }
+                    return imgTag;
+                }
+            }
+        }
+    };
+</script>
+
+<!-- Plugins -->
+<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/js/docsify-themeable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/zoom-image.min.js"></script>
+<script src="//cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=String.prototype.normalize"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify-wikilink@1"></script>
+<script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<!-- Lokale Plugins -->
+<script src="_plugins/smart-search.js"></script>
+
+<!-- Optional: Cloudflare Beacon (entfernen, wenn nicht nötig) -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+        data-cf-beacon='{"rayId":"xxx","version":"2025.x.x","r":1,"token":"xxx"}' crossorigin="anonymous">
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+
 </body>
 </html>
