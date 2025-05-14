@@ -2,51 +2,41 @@
   <img src="/dcbots-icons/peridyte.png" alt="Peridyte Logo" width="200"/>
 </p>
 
-# Peridyte Dokumentation
-
-Willkommen zur offiziellen Dokumentation von **Peridyte**, dem modularen, KI-gestützten Discord-Bot für Automatisierung, Entwicklungshilfe und Community-Funktionen.  
-Diese Dokumentation bietet dir alles, was du brauchst, um Peridyte zu verwenden, zu erweitern oder sogar eigene gebrandete Bots darauf aufzubauen.
+# Peridyte Documentation
+**Shining bright. Running right – Peridyte**
 
 ---
 
-## 📌 Was ist Peridyte?
+## 📢 Welcome
 
-Peridyte ist ein vielseitiger Discord-Bot, der speziell dafür entwickelt wurde, einfache bis fortgeschrittene Aufgaben zu automatisieren und gleichzeitig neue Features per Slash-Commands, intelligenter Verarbeitung und individueller Anpassung bereitzustellen.
-
-Hauptfunktionen:
-
-- 🧠 Automatische Bot-Code-Generierung mit KI
-- ⚙️ Anpassbare Bot-Identität (Name, Status, Bio, etc.)
-- 🔒 Sichere .env-gestützte Konfiguration
-- 🧩 Erweiterbar durch Plugins oder Module
-- 🛠️ Slash-Command-Unterstützung mit Disnake
+Welcome to the official documentation for the **Peridyte** Discord Bot — the perfect, multi-purpose bot for your guild! Features include join roles, ticket systems, verification, and much more.  
+This documentation provides everything you need — from setup to usage and beyond!
 
 ---
 
-## 📚 Inhaltsverzeichnis
+## 📌 What is Peridyte?
 
-- [Installation](./docs/installation.md)
-- [Konfiguration](./docs/configuration.md)
-- [Verwendung der Slash-Commands](./docs/commands.md)
-- [Custom Bots](./docs/custom-bots.md)
-- [Entwickler-API](./docs/api.md)
-- [Troubleshooting & FAQ](./docs/faq.md)
-- [Mitwirken](./docs/contributing.md)
+Peridyte is a multi-purpose Discord bot developed by GrüneEule. It offers over 10 slash commands and is designed to handle both simple and complex tasks.
 
----
+#### Main Features:
 
-## 🚀 Schnellstart
-
-Wenn du schnell loslegen willst, gehe direkt zu [Installation](./docs/installation.md) und folge den Anweisungen. In weniger als 5 Minuten ist dein Bot bereit!
-
----
-
-## 🤝 Kontakt & Support
-
-Du brauchst Hilfe?  
-Besuche unseren Discord-Support-Server:  
-👉 https://discord.gg/dein-support-link-hier
+- Verification
+- Simple Ticket System
+- FAQ System
+- Moderation
+- Giveaways
+- Simple Role Management
+- Minigames
+- **...and much more!**
 
 ---
 
-© 2025 Peridyte by Henry Meyer. Alle Rechte vorbehalten.
+## 📜 Table of Contents
+
+- [Quick Start](quick-start.md)
+
+---
+
+## 💠 Contact and Support
+
+[Join our Discord Guild](https://grueneeule.de/dc)

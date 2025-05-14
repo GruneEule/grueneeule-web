@@ -1,166 +1,125 @@
-@media (min-width: 768px) {
-    button.sidebar-toggle {
-        display: none;
-    }
+/* ===== SIDEBAR GRUNDLAYOUT ===== */
+aside.sidebar {
+    padding: 20px 15px;
+    background: #121212;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    width: 280px;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+    transition: transform 0.3s ease;
 }
 
-aside.sidebar {
-    padding: 5px 15px;
-    background: #121212; /* Dunkler Hintergrund */
-    border-right: 1px solid rgba(255, 255, 255, .1);
-    user-select: none;
+/* ===== LOGO ===== */
+aside.sidebar a.app-name-link {
+    display: block;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 aside.sidebar a.app-name-link img {
-    width: 150px;
+    width: 180px;
+    height: auto;
+    transition: opacity 0.2s;
 }
 
-aside.sidebar #smart-search-button {
-    max-width: 100%;
-    border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.3); /* Dunkler Hintergrund */
-    color: rgba(255, 255, 255, .5);
-    margin-top: 1rem;
-    box-sizing: border-box;
-    padding: .5rem 1rem;
-    outline: none;
-    border: none;
-    border: 2px solid rgba(0, 204, 102, 0.3); /* Grüner Rand */
-    transition: all .2s ease;
-    background-image: url("/_media/icons/search.png");
-    background-repeat: no-repeat;
-    background-position: 8px center;
-    background-size: 16px 16px;
-    padding-left: 2rem;
-    text-align: start;
-    cursor: pointer;
-}
-
-aside.sidebar #smart-search-button:hover {
-    background-color: rgba(0, 204, 102, 0.1); /* Grüner Hover */
-    color: rgba(255, 255, 255, .8);
-    border-color: rgba(0, 204, 102, 0.5); /* Hellerer grüner Rand */
-}
-
-aside.sidebar #smart-search-button.hide {
-    opacity: 0;
-    pointer-events: none;
-    cursor: default;
-}
-
-aside.sidebar div.sidebar-nav ul {
+/* ===== NAVIGATION ===== */
+aside.sidebar .sidebar-nav ul {
+    padding-left: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
-    row-gap: 2px;
-    font-size: .9em;
+    gap: 3px;
 }
 
-aside.sidebar div.sidebar-nav ul li {
+aside.sidebar .sidebar-nav li {
     position: relative;
+    list-style: none;
     border-radius: 5px;
-    padding: 5px 8px;
-    width: 100%;
-    pointer-events: none;
+    transition: background 0.2s ease;
 }
 
-aside.sidebar div.sidebar-nav ul li:hover {
-    background: rgba(0, 204, 102, 0.05); /* Sehr leichtes Grün */
-}
-aside.sidebar div.sidebar-nav ul li:has(ul.app-sub-sidebar li.active):hover {
-    background: transparent;
-}
-aside.sidebar div.sidebar-nav ul li.active {
-    background: rgba(0, 204, 102, 0.1); /* Grüner Hintergrund für aktive Elemente */
+aside.sidebar .sidebar-nav li:hover {
+    background: rgba(0, 204, 102, 0.05);
 }
 
-aside.sidebar div.sidebar-nav ul li>a {
-    border: none;
-    padding: 0 !important;
-    background: none !important;
-    width: 100%;
-    pointer-events: auto;
+aside.sidebar .sidebar-nav li.active {
+    background: rgba(0, 204, 102, 0.1);
+}
+
+aside.sidebar .sidebar-nav li > a {
+    display: block;
+    padding: 8px 12px;
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    color: rgba(255, 255, 255, .8); /* Hellerer Text */
     font-weight: 500;
 }
 
-aside.sidebar div.sidebar-nav ul li.active>a {
-    font-weight: 700;
-    color: #00cc66; /* Grüne Akzentfarbe */
+aside.sidebar .sidebar-nav li.active > a {
+    color: #00cc66;
+    font-weight: 600;
 }
 
-aside.sidebar div.sidebar-nav ul li ul.app-sub-sidebar {
-    border-left: 2px solid rgba(0, 204, 102, 0.3); /* Grüne Akzentlinie */
-    margin-left: 0;
+/* ===== SUBMENÜS ===== */
+aside.sidebar .sidebar-nav ul ul {
+    border-left: 2px solid rgba(0, 204, 102, 0.3);
+    margin: 5px 0 5px 15px;
     padding-left: 10px;
 }
 
-aside.sidebar div.sidebar-nav ul li ul.app-sub-sidebar li {
-    font-size: 1.05em;
+aside.sidebar .sidebar-nav ul ul li {
+    font-size: 0.95em;
 }
 
-aside.sidebar div.sidebar-nav ul li>a[title="Back"] {
-    font-size: .8em;
-    font-weight: 600;
-}
-aside.sidebar div.sidebar-nav ul li>a[title="Back"]::before {
+/* ===== PFEILE ===== */
+aside.sidebar .sidebar-nav li.has-submenu > a::after {
     content: "";
-    background: url("/_media/icons/arrow.png") 0 0 no-repeat;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    width: 16px;
+    height: 16px;
+    background: url("_media/icons/arrow.png") no-repeat center;
     background-size: contain;
-    transform: rotate(180deg) translateY(-3.5px);
-    min-width: 15px;
-    min-height: 15px;
-    max-width: 15px;
-    max-height: 15px;
-    filter: invert(58%) sepia(64%) saturate(482%) hue-rotate(87deg) brightness(95%) contrast(101%); /* Grün für den Pfeil */
+    filter: invert(58%) sepia(64%) saturate(482%) hue-rotate(87deg) brightness(95%) contrast(101%);
+    transition: transform 0.2s;
 }
 
-/* All images without alt are heading images that do not need to be displayed in the sidebar */
-aside.sidebar img[alt=""] {
-    display: none;
+aside.sidebar .sidebar-nav li.active.has-submenu > a::after {
+    transform: translateY(-50%) rotate(180deg);
 }
 
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    aside.sidebar {
+        transform: translateX(-100%);
+        width: 85%;
+    }
+
+    aside.sidebar.show {
+        transform: translateX(0);
+    }
+
+    button.sidebar-toggle {
+        position: fixed;
+        left: 10px;
+        top: 10px;
+        z-index: 200;
+        background: #121212;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+}
+
+/* ===== VERSTECKTE ELEMENTE ===== */
+aside.sidebar img[alt=""],
 aside.sidebar img.step {
     display: none;
-}
-
-aside.sidebar span.number-replacement {
-    display: inline;
-}
-
-/** Arrows **/
-
-aside.sidebar div.sidebar-nav ul li>a[title="General Settings"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="Commands"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="Messages"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="Custom Branding"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="Auto Moderation"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="Moderation"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="appeal.gg"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="Social Notifications"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="Join Roles"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="Reaction Roles"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="Welcome Messages"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="Role Connections"]::after,
-aside.sidebar div.sidebar-nav ul li>a[title="Logging"]::after {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    content: "";
-    background: url("/_media/icons/arrow.png") 0 0 no-repeat;
-    background-size: contain;
-    min-width: 20px;
-    max-width: 20px;
-    filter: invert(58%) sepia(64%) saturate(482%) hue-rotate(87deg) brightness(95%) contrast(101%); /* Grün für alle Pfeile */
-}
-
-aside.sidebar div.sidebar-nav ul li >a:not(.section-link)::after,
-aside.sidebar div.sidebar-nav ul li.active>a:not(.section-link)::after {
-    transform: rotate(90deg);
-    top: 7px;
-}
-
-aside.sidebar div.sidebar-nav ul li>a.section-link::after {
-    content: unset;
 }

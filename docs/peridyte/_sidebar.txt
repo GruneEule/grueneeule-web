@@ -1,0 +1,41 @@
+🔧 Setup / Configuration
+Setup Guide
+
+Permissions
+
+Bot Status & Prefix
+
+💡 Core Features
+Verification
+
+Ticket System
+
+FAQ System
+
+Moderation
+
+Giveaways
+
+Role Management
+
+Minigames
+
+⚙️ Advanced
+Command List
+
+Customization
+
+Bot Settings
+
+🧩 Integrations
+Webhooks
+
+Third-party Services
+
+🆘 Support
+FAQ
+
+Contact & Support
+
+Changelog
+
