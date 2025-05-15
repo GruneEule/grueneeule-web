@@ -1,3 +1,5 @@
+- **[Discord](https://grueneeule.de/dc)**
+
 Getting started
 
 * [Home](/)
@@ -15,6 +17,10 @@ Extra Features
 * [Giveaways](extra-features/giveaways.md)
 * [Joinrole](extra-features/joinrole.md)
 * [Minigames (Beta)](extra-features/minigames.md)
+
+Custom branding
+
+* [Guide](custom-branded-bots/guide.md)
 
 Support
 
