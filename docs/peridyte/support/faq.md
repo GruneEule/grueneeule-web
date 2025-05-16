@@ -5,7 +5,7 @@
 <details>
   <summary>❓ Who is developing and maintaining Peridyte?</summary>
   <p>
-    Peridyte is developed and maintained by <strong>JumpStone</strong>.<br>
+    Peridyte is developed and maintained by JumpStone.<br>
     He is the sole developer behind all features and updates!
   </p>
 </details>
@@ -16,7 +16,7 @@
   <summary>❓ Can I join the team?</summary>
   <p>
     Maybe!<br>
-    We are currently looking for a <strong>documentation writer</strong>.<br>
+    We are currently looking for a documentation writer.<br>
     If you're interested, please open a ticket in our 
     <a href="https://grueneeule.de/dc">Discord</a>!
   </p>

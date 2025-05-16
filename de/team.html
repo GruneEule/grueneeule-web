@@ -26,7 +26,7 @@
       --owner-color: #fa0003;
       --admin-color: #fb0063;
       --developer-color: #d97600;
-      --manager-color: #9c00fb;
+      --moderator-color: #3498db;
     }
 
     * {
@@ -259,14 +259,14 @@
       background: var(--developer-color);
     }
 
-    .manager-card::after {
+    .moderator-card::after {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 5px;
-      background: var(--manager-color);
+      background: var(moderator-color);
     }
 
     .team-avatar {
@@ -294,9 +294,9 @@
       box-shadow: 0 0 15px rgba(217, 118, 0, 0.5);
     }
 
-    .manager-card .team-avatar {
-      border: 3px solid var(--manager-color);
-      box-shadow: 0 0 15px rgba(156, 0, 251, 0.5);
+    .moderator-card .team-avatar {
+      border: 3px solid var(--moderator-color);
+      box-shadow: 0 0 15px rgb(41, 122, 176);
     }
 
     .team-avatar img {
@@ -324,8 +324,8 @@
       color: var(--developer-color);
     }
 
-    .manager-card .team-name {
-      color: var(--manager-color);
+    .moderator-card .team-name {
+      color: var(--moderator-color);
     }
 
     .team-role {
@@ -358,9 +358,9 @@
     }
 
     .manager-role {
-      background-color: rgba(156, 0, 251, 0.3);
-      color: var(--manager-color);
-      border: 1px solid var(--manager-color);
+      background-color: rgb(21, 63, 91);
+      color: var(--moderator-color);
+      border: 1px solid var(--moderator-color);
     }
 
     .team-description {
@@ -405,8 +405,8 @@
       transform: translateY(-3px);
     }
 
-    .manager-card .team-social a:hover {
-      background: var(--manager-color);
+    .moderator-card .team-social a:hover {
+      background: var(--moderator-color);
       transform: translateY(-3px);
     }
 
@@ -619,7 +619,7 @@
             <img src="../team-icons/jumpstone4477.png" alt="JumpStone4477" loading="lazy">
           </div>
           <h3 class="team-name">JumpStone4477</h3>
-          <span class="team-role owner-role">OWNER</span>
+          <span class="team-role owner-role">Owner</span>
           <p class="team-description">Gründer und Kopf hinter GrüneEule Services. Verantwortlich für die Vision und Gesamtleitung des Projekts.</p>
           <div class="team-social">
             <a href="https://discord.com/users/1008346032230387752" target="_blank" rel="noopener noreferrer" aria-label="Discord">
@@ -633,11 +633,11 @@
         <!-- Admin -->
         <article class="team-card admin-card">
           <div class="team-avatar">
-            <img src="../team-icons/" alt="" loading="lazy">
+            <img src="../team-icons/clix.png" alt="" loading="lazy">
           </div>
-          <h3 class="team-name">Hier könntest du sein!</h3>
-          <span class="team-role admin-role">ADMIN</span>
-          <p class="team-description">Bewirb dich auf unserem Discord!</p>
+          <h3 class="team-name">Floxyy</h3>
+          <span class="team-role admin-role">Admin</span>
+          <p class="team-description">Haupt Manager der Community!</p>
           <div class="team-social">
             <a href="" target="_blank" rel="noopener noreferrer" aria-label="Discord">
               <svg width="24" height="24" viewBox="0 0 127.14 96.36" fill="#ffffff" aria-hidden="true">
@@ -650,11 +650,11 @@
         <!-- Developer -->
         <article class="team-card developer-card">
           <div class="team-avatar">
-            <img src="../team-icons/clix.png" alt="Clix" loading="lazy">
+            <img src="../team-icons/" alt="..." loading="lazy">
           </div>
-          <h3 class="team-name">Floxyy</h3>
-          <span class="team-role developer-role">lead DEV</span>
-          <p class="team-description">Hauptentwickler unserer Discord-Bots. Arbeitet an neuen Funktionen und Verbesserungen der bestehenden Systeme.</p>
+          <h3 class="team-name">Hier könntest du sein!</h3>
+          <span class="team-role developer-role">Maintenance Developer</span>
+          <p class="team-description">...</p>
           <div class="team-social">
             <a href="https://discord.com/users/1022484749161345146" target="_blank" rel="noopener noreferrer" aria-label="Discord">
               <svg width="24" height="24" viewBox="0 0 127.14 96.36" fill="#ffffff" aria-hidden="true">
@@ -670,7 +670,7 @@
             <img src="../team-icons/lunx.png" alt="Lunx" loading="lazy">
           </div>
           <h3 class="team-name">Lunx</h3>
-          <span class="team-role developer-role">DEV</span>
+          <span class="team-role developer-role">Developer</span>
           <p class="team-description">Entwickler bei GrüneEule Services. Unterstützt das Team bei der Entwicklung und Wartung unserer Discord-Bots.</p>
           <div class="team-social">
             <a href="https://discord.com/users/YOUR_DISCORD_ID_HERE" target="_blank" rel="noopener noreferrer" aria-label="Discord">
@@ -681,14 +681,14 @@
           </div>
         </article>
 
-        <!-- Manager -->
-        <article class="team-card manager-card">
+        <!-- Moderator -->
+        <article class="team-card moderator-card">
           <div class="team-avatar">
             <img src="../team-icons/rav3x.png" alt="Rav3x" loading="lazy">
           </div>
           <h3 class="team-name">Rav3x</h3>
-          <span class="team-role manager-role">MANAGER</span>
-          <p class="team-description">Verantwortlich für die Organisation und Koordination aller Benutzer.</p>
+          <span class="team-role manager-role">Moderator</span>
+          <p class="team-description">Verantwortlich für die Moderation aller Benutzer.</p>
           <div class="team-social">
             <a href="https://discord.com/users/1151495682457358417" target="_blank" rel="noopener noreferrer" aria-label="Discord">
               <svg width="24" height="24" viewBox="0 0 127.14 96.36" fill="#ffffff" aria-hidden="true">
