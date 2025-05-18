@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrüneEule Changelog</title>
+    <link rel="icon" href="../../gruneeule.png" type="image/png">
+    <link rel="shortcut icon" href="../../gruneeule.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2e8b57;
+            --primary-light: #3cb371;
+            --primary-dark: #1e5631;
+            --accent-orange: #ff7f50;
+            --accent-purple: #8a2be2;
+            --accent-purple-light: #9f3de3;
+            --accent-purple-dark: #6a1fb3;
+            --discord-blue: #5865F2;
+            --discord-blue-light: #7289DA;
+            --discord-blue-dark: #4E5D94;
+            --bg-dark: #121212;
+            --bg-light: #f5f5f5;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+            --accent-red: #e63946;
+            --accent-red-dark: #d62828;
+            --accent-red-light: #f28482;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-bottom: 3px solid var(--accent-purple);
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-purple);
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.6);
+        }
+
+        .logo span {
+            color: var(--accent-orange);
+        }
+
+        .logo span:last-child {
+            color: var(--accent-purple);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("/api/placeholder/1200/800") center/cover;
+            position: relative;
+            overflow: hidden;
+            padding: 100px 20px 80px;
+        }
+
+        .hero-logo {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            border-radius: 50%;
+            border: 3px solid var(--accent-purple);
+            box-shadow: 0 0 25px rgba(138, 43, 226, 0.7);
+            object-fit: contain;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-in-out;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 80px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--primary-light), var(--accent-purple-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* Release Notes Section */
+        .section {
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--primary-light);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        .release-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-top: 3px solid var(--accent-purple);
+        }
+
+        .release-version {
+            color: var(--primary-light);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #333;
+        }
+
+        .release-date {
+            color: var(--accent-orange);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .release-notes {
+            list-style-type: none;
+        }
+
+        .release-notes li {
+            padding: 8px 0;
+            position: relative;
+            padding-left: 25px;
+            font-size: 1.05rem;
+        }
+
+        .release-notes li:before {
+            content: "•";
+            color: var(--accent-purple);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+
+        .release-section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-purple), transparent);
+            margin: 30px 0;
+            border: none;
+        }
+
+        .loading {
+            text-align: center;
+            color: var(--accent-orange);
+            font-size: 1.2rem;
+            padding: 20px;
+        }
+
+        .error {
+            text-align: center;
+            color: var(--accent-red);
+            font-size: 1.2rem;
+            padding: 20px;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--primary-dark), #0a0a0a);
+            padding: 40px 0 20px;
+            border-top: 3px solid var(--accent-purple);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--accent-purple-light);
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-purple-light);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.5);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 99;
+            cursor: pointer;
+            border: none;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            background: var(--accent-purple-light);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 0;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav a {
+                padding: 5px 8px;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 90px 15px 60px;
+                min-height: 50vh;
+            }
+
+            .hero-logo {
+                width: 120px;
+                height: 120px;
+                top: 90px;
+            }
+
+            .release-container {
+                padding: 20px;
+            }
+
+            .release-version {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <div class="container nav-container">
+        <a href="#" class="logo" aria-label="GrüneEule Home">
+            <img src="../../gruneeule.png" alt="GrüneEule Logo" class="logo-img">
+            Grüne<span>Eule</span> <span>(Services)</span>
+        </a>
+        <nav aria-label="Hauptnavigation">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/dc.html" target="_blank" rel="noopener noreferrer">Discord Server</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <img src="../../gruneeule.png" alt="GrüneEule Logo" class="hero-logo">
+        <div class="container hero-content">
+            <h1>GrüneEule Changelog</h1>
+            <p>Stay updated with the latest changes and improvements to GrüneEule services</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Version Updates</h2>
+            <div class="release-container" id="changelog-content">
+                <div class="loading">Loading changelog...</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>GrüneEule</h3>
+                <ul>
+                    <li><a href="#projects">Our Projects</a></li>
+                    <li><a href="https://jumpow.de/">About Me</a></li>
+                    <li><a href="/dc.html" target="_blank" rel="noopener noreferrer">Discord Server</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Projects</h3>
+                <ul>
+                    <li><a href="bots.html">DiscordBots</a></li>
+                    <li><a href="owlgorithm.html">Owlgorithm</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="/dc.html" target="_blank" rel="noopener noreferrer">Join Discord Server</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Other Projects</h3>
+                <ul>
+                    <li><a href="https://dmh-network.de" target="_blank" rel="noopener noreferrer">DMH Network</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 GrüneEule Services. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<button class="scroll-top" aria-label="Scroll to top">↑</button>
+
+<script>
+    // Function to parse markdown content with support for section dividers and links
+    function parseMarkdown(markdown) {
+        // Split into sections by version headers or dividers
+        const sections = markdown.split(/(?=^##+\s)|(?=^---\s*$)/m);
+        let html = '';
+        let currentVersion = '';
+
+        // Helper function to process text and convert markdown links to HTML
+        function processText(text) {
+            // Convert markdown links [text](url) to <a> tags
+            return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+        }
+
+        sections.forEach(section => {
+            if (!section.trim()) return;
+
+            // Check if it's a divider
+            if (section.trim() === '---') {
+                html += `<hr class="release-section-divider">`;
+                return;
+            }
+
+            // Check if it's a version section (starts with ## or ###)
+            if (section.match(/^##+\s/)) {
+                const lines = section.split('\n');
+                const versionLine = lines[0];
+
+                // Extract version and date
+                const versionMatch = versionLine.match(/^##+\s+(.*?)\s*-\s*(\d{1,2}\.\s*\w+\s*\d{4})/i);
+                if (versionMatch) {
+                    currentVersion = processText(versionMatch[1].trim());
+                    const date = versionMatch[2].trim();
+
+                    html += `<h3 class="release-version">${currentVersion}</h3>`;
+                    html += `<span class="release-date">${date}</span>`;
+                    html += `<ul class="release-notes">`;
+
+                    // Process changelog items
+                    for (let i = 1; i < lines.length; i++) {
+                        const line = lines[i].trim();
+                        if (line.startsWith('- ') || line.startsWith('* ')) {
+                            const item = processText(line.substring(2).trim());
+                            html += `<li>${item}</li>`;
+                        }
+                    }
+
+                    html += `</ul>`;
+                } else {
+                    // Handle case where there's no date
+                    currentVersion = processText(versionLine.replace(/^##+\s+/, '').trim());
+                    html += `<h3 class="release-version">${currentVersion}</h3>`;
+                    html += `<ul class="release-notes">`;
+
+                    // Process changelog items
+                    for (let i = 1; i < lines.length; i++) {
+                        const line = lines[i].trim();
+                        if (line.startsWith('- ') || line.startsWith('* ')) {
+                            const item = processText(line.substring(2).trim());
+                            html += `<li>${item}</li>`;
+                        }
+                    }
+
+                    html += `</ul>`;
+                }
+            } else {
+                // Handle content that's not a version header or divider
+                const lines = section.split('\n');
+                if (currentVersion) {
+                    html += `<ul class="release-notes">`;
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i].trim();
+                        if (line.startsWith('- ') || line.startsWith('* ')) {
+                            const item = processText(line.substring(2).trim());
+                            html += `<li>${item}</li>`;
+                        }
+                    }
+                    html += `</ul>`;
+                }
+            }
+        });
+
+        return html || '<div class="error">No valid changelog data found</div>';
+    }
+
+    // Load CHANGELOG.md
+    function loadChangelog() {
+        const changelogContainer = document.getElementById('changelog-content');
+
+        fetch('CHANGELOG.md')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to load changelog');
+                }
+                return response.text();
+            })
+            .then(markdown => {
+                const html = parseMarkdown(markdown);
+                changelogContainer.innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error loading changelog:', error);
+                changelogContainer.innerHTML = `<div class="error">Error loading changelog: ${error.message}</div>`;
+            });
+    }
+
+    // Scroll to top button
+    const scrollTopBtn = document.querySelector('.scroll-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.classList.add('active');
+        } else {
+            scrollTopBtn.classList.remove('active');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Hide header on scroll down
+    let lastScroll = 0;
+    const header = document.getElementById('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll <= 0) {
+            header.classList.remove('header-hidden');
+            return;
+        }
+
+        if (currentScroll > lastScroll && !header.classList.contains('header-hidden')) {
+            header.classList.add('header-hidden');
+        } else if (currentScroll < lastScroll && header.classList.contains('header-hidden')) {
+            header.classList.remove('header-hidden');
+        }
+
+        lastScroll = currentScroll;
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Load changelog when page loads
+    document.addEventListener('DOMContentLoaded', loadChangelog);
+</script>
+</body>
+</html>
