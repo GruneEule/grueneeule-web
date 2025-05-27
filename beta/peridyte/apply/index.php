@@ -13,10 +13,11 @@ $user = $_SESSION['user'];
 // HTML Head
 echo '<!DOCTYPE html>
 <html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beta Tester Bewerbung - GrüneEule</title>
+    <title>Peridyte Beta Apply</title>
     <link rel="icon" href="/dcbots-icons/peridyte-full.png" type="image/png">
     <link rel="shortcut icon" href="/dcbots-icons/peridyte-full.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -111,6 +112,24 @@ echo '<!DOCTYPE html>
 
         .logo span:last-child {
             color: var(--accent-purple);
+        }
+
+        .logout-btn {
+            background: linear-gradient(90deg, var(--accent-red), var(--accent-red-dark));
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(230, 57, 70, 0.3);
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.5);
+            background: linear-gradient(90deg, var(--accent-red-dark), var(--accent-red));
         }
 
         /* Main Content */
@@ -422,10 +441,11 @@ echo '<!DOCTYPE html>
 <body>
     <header>
         <div class="header-container">
-            <a href="../../../index.html" class="logo" aria-label="GrüneEule Home">
-                <img src="/dcbots-icons/peridyte-full.png" alt="GrüneEule Logo" class="logo-img">
-                Grüne<span>Eule</span> <span>(Services)</span>
+            <a href="../../../index.html" class="logo" aria-label="GreenOwl Home">
+                <img src="/dcbots-icons/peridyte-full.png" alt="GreenOwl Logo" class="logo-img">
+                Peridyte<span>Beta</span> <span>Apply</span>
             </a>
+            <a href="logout.php" class="logout-btn">Logout</a>
         </div>
     </header>
 
@@ -433,22 +453,22 @@ echo '<!DOCTYPE html>
         <div class="main-container">
             <div class="user-info">
                 <img src="https://cdn.discordapp.com/avatars/'.$user['id'].'/'.$user['avatar'].'.png" alt="Avatar" class="avatar">
-                <h2>Willkommen, '.htmlspecialchars($user['username']).'</h2>
+                <h2>Welcome, '.htmlspecialchars($user['username']).'</h2>
             </div>';
 
-// Wenn das Formular abgeschickt wurde
+// If the form was submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reason = htmlspecialchars($_POST['reason']);
     $username = $user['username'] . '#' . $user['discriminator'];
     $userId = $user['id'];
     $avatar = "https://cdn.discordapp.com/avatars/{$user['id']}/{$user['avatar']}.png";
 
-    // Nachricht an Discord senden
+    // Send message to Discord
     $payload = json_encode([
         "embeds" => [[
-            "title" => "📩 Neue Beta Bewerbung",
-            "description" => "**Benutzer:** <@$userId>\n**Name:** $username\n\n**Begründung:**\n$reason",
-            "color" => 8153674, // Hex #7c664a zu Dezimal
+            "title" => "📩 New Beta Application",
+            "description" => "**User:** <@$userId>\n**Name:** $username\n\n**Reason:**\n$reason",
+            "color" => 8153674, // Hex #7c664a to decimal
             "thumbnail" => [
                 "url" => $avatar
             ],
@@ -456,7 +476,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "text" => "User ID: $userId • " . date("Y-m-d H:i:s")
             ]
         ]],
-        "content" => "<@&1356197148886306896>" // Ping für Admin-Rolle
+        "content" => "<@&1356197148886306896>" // Ping for admin role
     ]);
 
     $ch = curl_init(WEBHOOK_URL);
@@ -468,52 +488,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result === false) {
         echo '<div class="alert alert-error">
-            <h3>❌ Fehler</h3>
-            <p>Es gab einen Fehler beim Senden deiner Bewerbung. Bitte versuche es später erneut.</p>
+            <h3>❌ Error</h3>
+            <p>There was an error sending your application. Please try again later.</p>
         </div>';
     } else {
         echo '<div class="alert alert-success">
-            <h3>✅ Bewerbung erfolgreich eingereicht!</h3>
-            <p>Deine Beta-Tester Bewerbung wurde erfolgreich übermittelt.</p>
+            <h3>✅ Application successfully submitted!</h3>
+            <p>Your beta tester application has been successfully submitted.</p>
             
-            <h4>Wie geht es weiter?</h4>
+            <h4>What happens next?</h4>
             <ol>
-                <li>Unser Team wird deine Bewerbung prüfen</li>
-                <li>Du erhältst eine Discord-Direktnachricht mit der Entscheidung</li>
-                <li>Bei Annahme bekommst du die <strong>Beta Tester</strong> Rolle</li>
+                <li>Our team will review your application</li>
+                <li>You will receive a Discord direct message with the decision</li>
+                <li>If accepted, you will receive the <strong>Beta Tester</strong> role</li>
             </ol>
             
-            <p><strong>Durchschnittliche Bearbeitungszeit:</strong> 24-48 Stunden</p>
+            <p><strong>Average processing time:</strong> 24-48 hours</p>
         </div>';
 
-        // Sende Bestätigungs-DM an den User
+        // Send confirmation DM to the user
         $dm_payload = json_encode([
             "embeds" => [[
-                "title" => "📨 Beta Bewerbung erhalten",
-                "description" => "Vielen Dank für deine Bewerbung als Beta-Tester!",
+                "title" => "📨 Beta Application Received",
+                "description" => "Thank you for your application as a beta tester!",
                 "color" => 8153674,
                 "thumbnail" => [
                     "url" => "https://i.imgur.com/J6w8XyJ.png"
                 ],
                 "fields" => [
                     [
-                        "name" => "Bewerbungsdetails",
+                        "name" => "Application Details",
                         "value" => substr($reason, 0, 1000) . (strlen($reason) > 1000 ? "..." : ""),
                         "inline" => false
                     ],
                     [
-                        "name" => "Nächste Schritte",
-                        "value" => "Unser Team wird deine Bewerbung in Kürze prüfen. Du erhältst eine weitere DM, sobald eine Entscheidung getroffen wurde.",
+                        "name" => "Next Steps",
+                        "value" => "Our team will review your application shortly. You will receive another DM once a decision has been made.",
                         "inline" => false
                     ]
                 ],
                 "footer" => [
-                    "text" => "Wir schätzen dein Interesse, uns zu helfen!"
+                    "text" => "We appreciate your interest in helping us!"
                 ]
             ]]
         ]);
 
-        // Erstelle DM Channel mit User
+        // Create DM channel with user
         $dm_ch = curl_init("https://discord.com/api/users/@me/channels");
         curl_setopt($dm_ch, CURLOPT_HTTPHEADER, [
             "Authorization: Bot ".BOT_TOKEN,
@@ -524,7 +544,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $dm_channel = json_decode(curl_exec($dm_ch), true);
         curl_close($dm_ch);
 
-        // Sende DM
+        // Send DM
         if (isset($dm_channel['id'])) {
             $send_dm = curl_init("https://discord.com/api/channels/".$dm_channel['id']."/messages");
             curl_setopt($send_dm, CURLOPT_HTTPHEADER, [
@@ -538,28 +558,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 } else {
-    // Formular anzeigen
-    echo '<h1 class="page-title">Beta Tester Bewerbung</h1>
+    // Display form
+    echo '<h1 class="page-title">Beta Tester Application</h1>
     
     <div class="form-description">
-        <p>Erzähle uns, warum du an unserem Beta-Testing-Programm teilnehmen möchtest:</p>
+        <p>Tell us why you want to participate in our beta testing program:</p>
     </div>
     
     <form method="POST" action="index.php">
         <div class="form-group">
-            <textarea name="reason" required placeholder="Ich möchte am Beta-Programm teilnehmen, weil..."></textarea>
+            <textarea name="reason" required placeholder="I want to participate in the beta program because..."></textarea>
             <div class="form-hint">
-                Sei ausführlich - erzähle uns von deinen Erfahrungen, warum du interessiert bist und wie du uns dabei helfen kannst, unser Produkt zu verbessern.
+                Be detailed - tell us about your experience, why you are interested, and how you can help us improve our product.
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Bewerbung einreichen</button>
+        <button type="submit" class="btn btn-primary">Submit Application</button>
     </form>';
 }
 
 echo '        </div>
         
         <div class="footer">
-            <p>Zurück zur <a href="../../../index.html">Hauptseite</a> | <a href="/dc.html" target="_blank">Discord Server</a></p>
+            <p>Return to <a href="../../../index.html">Main Page</a> | <a href="/dc.html" target="_blank">Discord Server</a></p>
         </div>
     </div>
 </body>
