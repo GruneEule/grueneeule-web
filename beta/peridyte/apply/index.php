@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "text" => "User ID: $userId • " . date("Y-m-d H:i:s")
             ]
         ]],
-        "content" => "<@&ADMIN_ROLE_ID>" // Ping für Admin-Rolle
+        "content" => "<@&1356197148886306896>" // Ping für Admin-Rolle
     ]);
 
     $ch = curl_init(WEBHOOK_URL);
