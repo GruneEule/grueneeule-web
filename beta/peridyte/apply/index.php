@@ -17,8 +17,8 @@ echo '<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beta Tester Bewerbung - GrüneEule</title>
-    <link rel="icon" href="../../../gruneeule.png" type="image/png">
-    <link rel="shortcut icon" href="../../../gruneeule.png" type="image/png">
+    <link rel="icon" href="/dcbots-icons/peridyte-full.png" type="image/png">
+    <link rel="shortcut icon" href="/dcbots-icons/peridyte-full.png" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -423,7 +423,7 @@ echo '<!DOCTYPE html>
     <header>
         <div class="header-container">
             <a href="../../../index.html" class="logo" aria-label="GrüneEule Home">
-                <img src="../../../gruneeule.png" alt="GrüneEule Logo" class="logo-img">
+                <img src="/dcbots-icons/peridyte-full.png" alt="GrüneEule Logo" class="logo-img">
                 Grüne<span>Eule</span> <span>(Services)</span>
             </a>
         </div>
