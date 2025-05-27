@@ -26,35 +26,35 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/x-www-form-urle
 $response = json_decode(curl_exec($ch), true);
 curl_close($ch);
 
-$access_token = $response['access_token'];
+if (isset($response['access_token'])) {
+    $access_token = $response['access_token'];
 
-// Nutzerdaten holen
-$ch = curl_init('https://discord.com/api/users/@me');
-curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $access_token]);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$user = json_decode(curl_exec($ch), true);
-curl_close($ch);
+    // Nutzerdaten holen
+    $ch = curl_init('https://discord.com/api/users/@me');
+    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: Bearer ' . $access_token]);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $user = json_decode(curl_exec($ch), true);
+    curl_close($ch);
 
-$_SESSION['user'] = $user;
+    $_SESSION['user'] = $user;
 
-// Optional: automatisch dem Server beitreten lassen
-$ch = curl_init("https://discord.com/api/guilds/" . GUILD_ID . "/members/" . $user['id']);
-curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-curl_setopt($ch, CURLOPT_HTTPHEADER, [
-    "Authorization: Bot " . BOT_TOKEN,
-    "Content-Type: application/json"
-]);
-curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
-    "access_token" => $access_token
-]));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_exec($ch);
-curl_close($ch);
+    // Automatisch dem Server beitreten lassen
+    $ch = curl_init("https://discord.com/api/guilds/" . GUILD_ID . "/members/" . $user['id']);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "Authorization: Bot " . BOT_TOKEN,
+        "Content-Type: application/json"
+    ]);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode([
+        "access_token" => $access_token
+    ]));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_exec($ch);
+    curl_close($ch);
 
-header("Location: index.php");
-exit;
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+    header("Location: index.php");
+    exit;
+} else {
+    die("Fehler bei der Authentifizierung");
+}
 ?>
