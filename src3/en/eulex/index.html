@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EuleX – The Slim Open-Source Search Engine | GrüneEule</title>
+    <link rel="icon" href="all.png" type="image/png">
+    <link rel="shortcut icon" href="all.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4aa556;
+            --primary-light: #adce6b;
+            --primary-dark: #317d2e;
+            --accent-orange: #4dffea;
+            --accent-purple: #5b9bef;
+            --accent-purple-light: #74b5ff;
+            --accent-purple-dark: #424ed6;
+            --bg-dark: #0f1217;
+            --bg-light: #f5f5f5;
+            --text-light: #ffffff;
+            --text-dark: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-bottom: 3px solid var(--accent-purple);
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-purple);
+            box-shadow: 0 0 10px rgba(126, 91, 239, 0.6);
+        }
+
+        .logo span {
+            color: var(--accent-orange);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            background-color: var(--accent-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(126, 91, 239, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("https://source.unsplash.com/random/1920x1080/?owl,night") center/cover;
+            position: relative;
+            overflow: hidden;
+            padding: 100px 20px 80px;
+        }
+
+        .hero-logo {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            border-radius: 50%;
+            border: 3px solid var(--accent-orange);
+            box-shadow: 0 0 25px rgba(255, 145, 77, 0.7);
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-in-out;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(74, 111, 165, 0.4);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(74, 111, 165, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(90deg, var(--accent-purple-dark), var(--accent-purple));
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(126, 91, 239, 0.4);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(126, 91, 239, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .btn-orange {
+            background: linear-gradient(90deg, var(--accent-orange), #ff7a3d);
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(255, 145, 77, 0.4);
+        }
+
+        .btn-orange:hover {
+            box-shadow: 0 6px 20px rgba(255, 145, 77, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* Features Section */
+        .section {
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--primary-light);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-top: 3px solid var(--accent-orange);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+            color: var(--accent-orange);
+        }
+
+        .feature-card-content {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .feature-card-content ul {
+            margin-top: 12px;
+            margin-left: 18px;
+        }
+
+        .feature-card-content li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* How It Works Section */
+        .steps-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .step {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 80px;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-orange), #ff7a3d);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 145, 77, 0.4);
+        }
+
+        .step-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent-orange);
+        }
+
+        /* Demo Section */
+        .demo-section {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 60px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .demo-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .demo-section p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--primary-dark), #0a0a0a);
+            padding: 40px 0 20px;
+            border-top: 3px solid var(--accent-purple);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--accent-purple-light);
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-purple-light);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(126, 91, 239, 0.5);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 99;
+            cursor: pointer;
+            border: none;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            background: var(--accent-purple-light);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 0;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav a {
+                padding: 5px 8px;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 90px 15px 60px;
+                min-height: 70vh;
+            }
+
+            .hero-logo {
+                width: 120px;
+                height: 120px;
+                top: 90px;
+            }
+
+            .hero h1 {
+                margin-bottom: 15px;
+            }
+
+            .btn-container {
+                gap: 10px;
+            }
+
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+
+            .section {
+                padding: 50px 0;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .step {
+                padding-left: 70px;
+            }
+
+            .step-number {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .step {
+                padding-left: 60px;
+            }
+
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <div class="container nav-container">
+        <a href="#" class="logo" aria-label="GrüneEule Home">
+            <img src="all.png" alt="GrüneEule Logo" class="logo-img">
+            Grüne<span>Eule</span> <span>(EuleX)</span>
+        </a>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="../index.html">GrüneEule - Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="https://github.com/Jumpstone/EuleX" target="_blank">GitHub</a></li>
+                <li><a href="https://eulex.grueneeule.de" target="_blank">EuleX Go</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <img src="all.png" alt="EuleX Logo" class="hero-logo">
+        <div class="container hero-content">
+            <h1>EuleX</h1>
+            <p>The minimalist, data-saving and ad-free search engine</p>
+            <div class="btn-container">
+                <a href="https://eulex.grueneeule.de" class="btn btn-orange" target="_blank">EuleX Go</a>
+                <a href="https://github.com/Jumpstone/EuleX" class="btn btn-secondary" target="_blank">GitHub Repository</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">Why EuleX?</h2>
+            <div class="features-grid">
+                <article class="feature-card">
+                    <h3>Privacy first</h3>
+                    <div class="feature-card-content">
+                        <p>EuleX respects your privacy:</p>
+                        <ul>
+                            <li>No tracking cookies</li>
+                            <li>No personal data collection</li>
+                            <li>No advertising</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="feature-card">
+                    <h3>Open Source</h3>
+                    <div class="feature-card-content">
+                        <p>Transparency and customizability:</p>
+                        <ul>
+                            <li>Fully open source code</li>
+                            <li>Self-hosting possible</li>
+                            <li>CC BY-NC 4.0 license</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="feature-card">
+                    <h3>Powerful</h3>
+                    <div class="feature-card-content">
+                        <p>All the benefits of Google without the drawbacks:</p>
+                        <ul>
+                            <li>Google search results</li>
+                            <li>Image search included</li>
+                            <li>Quick answers</li>
+                        </ul>
+                    </div>
+                </article>
+                <article class="feature-card">
+                    <h3>Simple</h3>
+                    <div class="feature-card-content">
+                        <p>Simple. Clear. For everyone.</p>
+                        <ul>
+                            <li>No overloaded menus</li>
+                            <li>Made for children too</li>
+                            <li>Simple, large buttons</li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="how-it-works" class="section">
+        <div class="container">
+            <h2 class="section-title">How EuleX Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Submit your query</h3>
+                        <p>Enter your search term on the EuleX website. Your request is forwarded directly to the Google Custom Search API without being cached.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Receive results</h3>
+                        <p>EuleX processes the raw data from Google and removes all tracking elements and advertisements before displaying the results.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Browse safely</h3>
+                        <p>You can open search results without EuleX tracking your click behavior or storing personal data.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="demo-section">
+        <div class="container">
+            <div class="demo-content">
+                <h2>Try EuleX now</h2>
+                <p>Experience a new way of web search - fast, simple and privacy-friendly</p>
+                <a href="https://eulex.grueneeule.de" class="btn btn-orange" target="_blank">EuleX Go</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>EuleX</h3>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="https://github.com/Jumpstone/EuleX" target="_blank">GitHub Repository</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>About GrüneEule</h3>
+                <ul>
+                    <li><a href="../index.html" target="_blank">Homepage</a></li>
+                    <li><a href="../../dc.html" target="_blank">Discord Server</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="imprint.html">Imprint</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-use.html">Terms of Use</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 EuleX by GrüneEule.</p>
+        </div>
+    </div>
+</footer>
+
+<button class="scroll-top" aria-label="Scroll to top">↑</button>
+
+<script>
+    // Scroll to top button
+    const scrollTopBtn = document.querySelector('.scroll-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.classList.add('active');
+        } else {
+            scrollTopBtn.classList.remove('active');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Hide header on scroll down
+    let lastScroll = 0;
+    const header = document.getElementById('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll <= 0) {
+            header.classList.remove('header-hidden');
+            return;
+        }
+
+        if (currentScroll > lastScroll && !header.classList.contains('header-hidden')) {
+            header.classList.add('header-hidden');
+        } else if (currentScroll < lastScroll && header.classList.contains('header-hidden')) {
+            header.classList.remove('header-hidden');
+        }
+
+        lastScroll = currentScroll;
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

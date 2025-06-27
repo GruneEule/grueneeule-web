@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GrüneEule Discord Bots - Powerful bots for server management, entertainment and weather information">
+    <title>GrüneEule - Discord Bots</title>
+    <link rel="icon" href=gruneeule.png" type="image/png">
+    <link rel="shortcut icon" href="../gruneeule.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2e8b57;
+            --primary-light: #3cb371;
+            --primary-dark: #1e5631;
+            --accent-orange: #ff7f50;
+            --accent-purple: #8a2be2;
+            --discord-blue: #5865F2;
+            --discord-blue-light: #7289DA;
+            --discord-blue-dark: #4E5D94;
+            --bg-dark: #121212;
+            --text-light: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--discord-blue-dark), var(--discord-blue));
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-bottom: 3px solid var(--primary);
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 10px rgba(46, 139, 87, 0.6);
+        }
+
+        .logo span {
+            color: var(--accent-orange);
+        }
+
+        .logo span:last-child {
+            color: var(--primary-light);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url("/api/placeholder/1200/800") center/cover;
+            position: relative;
+            overflow: hidden;
+            padding: 100px 20px 60px;
+            border-bottom: 3px solid var(--primary);
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-in-out;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--discord-blue-light), var(--primary-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            font-size: 0.95rem;
+            border: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--discord-blue), var(--discord-blue-dark));
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.6);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: var(--text-light);
+            box-shadow: 0 4px 15px rgba(46, 139, 87, 0.4);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 6px 20px rgba(46, 139, 87, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* Bots Section */
+        .section {
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: var(--discord-blue-light);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, var(--accent-orange), var(--primary));
+            border-radius: 2px;
+        }
+
+        .bots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: 25px;
+        }
+
+        .bot-card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-top: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            align-items: center;
+            text-align: center;
+        }
+
+        .bot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .bot-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .eagle-card {
+            border-top-color: var(--primary);
+        }
+
+        .eagle-card .bot-icon {
+            border-color: var(--primary);
+        }
+
+        .evil-card {
+            border-top-color: var(--accent-orange);
+        }
+
+        .evil-card .bot-icon {
+            border-color: var(--accent-orange);
+        }
+
+        .storm-card {
+            border-top-color: var(--discord-blue);
+        }
+
+        .storm-card .bot-icon {
+            border-color: var(--discord-blue);
+        }
+
+        .bot-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .eagle-card h3 {
+            color: var(--primary-light);
+        }
+
+        .evil-card h3 {
+            color: var(--accent-orange);
+        }
+
+        .storm-card h3 {
+            color: var(--discord-blue-light);
+        }
+
+        .bot-card-content {
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .bot-card-content ul {
+            margin-top: 15px;
+            margin-left: 20px;
+            text-align: left;
+        }
+
+        .bot-card-content li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--discord-blue);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card h3 {
+            color: var(--discord-blue-light);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to right, var(--discord-blue-dark), #0a0a0a);
+            padding: 40px 0 20px;
+            border-top: 3px solid var(--primary);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            color: var(--primary-light);
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--discord-blue);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary-light);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-bottom p {
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: var(--discord-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.5);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 99;
+            cursor: pointer;
+            border: none;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            background: var(--discord-blue-light);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Border effects for sections */
+        .border-effect {
+            position: relative;
+        }
+
+        .border-effect::before,
+        .border-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--discord-blue-light), var(--discord-blue-dark));
+            opacity: 0.1;
+        }
+
+        .border-effect::before {
+            left: 0;
+        }
+
+        .border-effect::after {
+            right: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 12px 0;
+            }
+
+            .logo {
+                font-size: 1.1rem;
+            }
+
+            nav ul {
+                gap: 10px;
+            }
+
+            nav a {
+                padding: 5px 8px;
+                font-size: 0.9rem;
+            }
+
+            .hero {
+                padding: 90px 15px 60px;
+            }
+
+            .bot-icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+<header id="header">
+    <div class="container nav-container">
+        <a href="index.html" class="logo" aria-label="GrüneEule Home">
+            <img src="../gruneeule.png" alt="GrüneEule Logo" class="logo-img">
+            Grüne<span>Eule</span> <span>(Bots)</span>
+        </a>
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="team.html">Team</a></li>
+                <li><a href="index.html#about">About Me</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="/dc.html" target="_blank" rel="noopener noreferrer">Discord Server</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Our Discord Bots</h1>
+            <p>Discover our powerful Discord bots for server management, entertainment, and more. Each bot is specially designed for different needs.</p>
+            <div class="btn-container">
+                <a href="#bots" class="btn btn-primary">Bot Overview</a>
+                <a href="/dc.html" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Support Server</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="bots" class="section border-effect">
+        <div class="container">
+            <h2 class="section-title">Our Bot Collection</h2>
+            <div class="bots-grid">
+                <article class="bot-card eagle-card">
+                    <img src="../dcbots-icons/peridyte-full.png" alt="Peridyte" class="bot-icon" loading="lazy">
+                    <h3>Peridyte</h3>
+                    <div class="bot-card-content">
+                        <p>The ultimate management bot for your Discord server with extensive features:</p>
+                        <ul>
+                            <li>Advanced ticket system</li>
+                            <li>Comprehensive moderation tools</li>
+                            <li>Automatic join roles</li>
+                            <li>Giveaway system</li>
+                            <li>Temporary voice channels</li>
+                            <li>Logging system</li>
+                        </ul>
+                    </div>
+                    <a href="Peridyte/index.html" class="btn btn-primary" target="_blank">More Info</a>
+                </article>
+
+                <article class="bot-card evil-card">
+                    <img src="../dcbots-icons/evilowl.png" alt="EvilOwl" class="bot-icon" loading="lazy">
+                    <h3>EvilOwl</h3>
+                    <div class="bot-card-content">
+                        <p>The entertainment bot for your server with biting humor:</p>
+                        <ul>
+                            <li>Over 500 provocative phrases</li>
+                            <li>Easy activation with /evil</li>
+                            <li>Responds to pings</li>
+                            <li>Configurable response probability</li>
+                            <li>Blacklist for specific users</li>
+                        </ul>
+                    </div>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1356698522686324818&permissions=274877910080&scope=bot%20applications.commands" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Invite Bot</a>
+                </article>
+
+                <article class="bot-card storm-card">
+                    <img src="../dcbots-icons/stormowl.png" alt="StormOwl" class="bot-icon" loading="lazy">
+                    <h3>StormOwl</h3>
+                    <div class="bot-card-content">
+                        <p>The weather bot for current information and forecasts:</p>
+                        <ul>
+                            <li>Current weather data worldwide</li>
+                            <li>7-day forecast</li>
+                            <li>Hourly forecast</li>
+                            <li>Weather warnings</li>
+                            <li>Multilingual support</li>
+                        </ul>
+                    </div>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1357402315987882135&permissions=274877910080&scope=bot%20applications.commands" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Invite Bot</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">Why Our Bots?</h2>
+            <div class="features-grid">
+                <article class="feature-card">
+                    <h3>Easy to Use</h3>
+                    <p>All our bots are intuitively operated with slash commands and clear instructions.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>24/7 Online</h3>
+                    <p>Our bots run on highly available servers and are there for you around the clock.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Regular Updates</h3>
+                    <p>We constantly expand features and fix any issues quickly.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Personal Support</h3>
+                    <p>Our team is happy to help you with questions or problems on our Discord server.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>GrüneEule</h3>
+                <ul>
+                    <li><a href="index.html#projects">Our Projects</a></li>
+                    <li><a href="index.html#about">About Me</a></li>
+                    <li><a href="/dc.html" target="_blank" rel="noopener noreferrer">Discord Server</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Projects</h3>
+                <ul>
+                    <li><a href="bots.html">DiscordBots</a></li>
+                    <li><a href="owlgorithm.html">Owlgorithm</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="/dc.html" target="_blank" rel="noopener noreferrer">Join Discord Server</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Other Projects</h3>
+                <ul>
+                    <li><a href="https://dmh-network.de" target="_blank" rel="noopener noreferrer">DMH Network</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Admin</h3>
+                <ul>
+                    <li><a href="https://pt.hmt-network.de" target="_blank" rel="noopener noreferrer">Panel</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 GrüneEule Bots. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<button class="scroll-top" aria-label="Scroll to top">↑</button>
+
+<script>
+    // Scroll to top button
+    const scrollTopBtn = document.querySelector('.scroll-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+            scrollTopBtn.classList.add('active');
+        } else {
+            scrollTopBtn.classList.remove('active');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+
+    // Hide header on scroll down
+    let lastScroll = 0;
+    const header = document.getElementById('header');
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll <= 0) {
+            header.classList.remove('header-hidden');
+            return;
+        }
+
+        if (currentScroll > lastScroll && !header.classList.contains('header-hidden')) {
+            header.classList.add('header-hidden');
+        } else if (currentScroll < lastScroll && header.classList.contains('header-hidden')) {
+            header.classList.remove('header-hidden');
+        }
+
+        lastScroll = currentScroll;
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            if (targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
