@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐘 Elefanten Clicker</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div class="game-container">
+    <div class="main-area">
+        <div class="stats">
+            <div class="elephant-count" id="elephantCount">0</div>
+            <div class="elephants-per-second" id="elephantsPerSecond">0 Elefanten pro Sekunde</div>
+            <div class="elephants-per-second">Gesamt geklickt: <span id="totalClicks">0</span></div>
+        </div>
+        <button class="elephant-button" id="elephantButton">🐘</button>
+    </div>
+
+    <div class="sidebar">
+        <div class="sidebar-section">
+            <div class="sidebar-title">🎮 Spielstand</div>
+            <div class="controls">
+                <button class="control-btn" id="saveBtn">Speichern</button>
+                <button class="control-btn" id="resetBtn">Reset</button>
+            </div>
+            <div class="import-export">
+                <button class="control-btn" id="exportBtn">Exportieren</button>
+                <input type="text" class="import-input" id="importInput" placeholder="Spielstand einfügen...">
+                <button class="control-btn" id="importBtn">Importieren</button>
+            </div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-title">🏭 Upgrades</div>
+            <div id="upgradesContainer"></div>
+        </div>
+
+        <div class="sidebar-section">
+            <div class="sidebar-title">🏆 Erfolge</div>
+            <div class="achievements" id="achievementsContainer"></div>
+        </div>
+    </div>
+</div>
+
+<script src="cookie.js"></script>
+</body>
+</html>

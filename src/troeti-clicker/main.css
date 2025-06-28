@@ -1,0 +1,286 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #326e2c 0%, #00429d 100%);
+    min-height: 100vh;
+    color: white;
+    overflow-x: hidden;
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    min-height: 100vh;
+    gap: 20px;
+    padding: 20px;
+}
+
+.main-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.stats {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.elephant-count {
+    font-size: 4rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, #e6ff00, #fffc4a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.elephants-per-second {
+    font-size: 1.5rem;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.elephant-button {
+    width: 300px;
+    height: 300px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #ffe16b, #ee6124);
+    cursor: pointer;
+    font-size: 8rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.elephant-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.elephant-button:active {
+    transform: scale(0.95);
+}
+
+.elephant-button::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.elephant-button:hover::before {
+    opacity: 1;
+    transform: rotate(45deg) translate(100%, 100%);
+}
+
+.click-effect {
+    position: absolute;
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 2rem;
+    pointer-events: none;
+    animation: floatUp 1s ease-out forwards;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) scale(1.2);
+        opacity: 0;
+    }
+}
+
+.sidebar {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    max-height: 100vh;
+}
+
+.sidebar-section {
+    margin-bottom: 30px;
+}
+
+.sidebar-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #ffd700;
+}
+
+.upgrade-item {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.upgrade-item:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #ffd700;
+    transform: translateY(-2px);
+}
+
+.upgrade-item.affordable {
+    border-color: #4ade80;
+    box-shadow: 0 0 20px rgba(74, 222, 128, 0.3);
+}
+
+.upgrade-item.unaffordable {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.upgrade-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.upgrade-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.upgrade-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 8px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+.upgrade-description {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 8px;
+}
+
+.upgrade-cost {
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.control-btn {
+    background: linear-gradient(45deg, #c5ea66, #4ba295);
+    border: none;
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.import-export {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.import-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.9rem;
+}
+
+.import-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.achievements {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.achievement {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-left: 4px solid #ffd700;
+}
+
+.achievement.unlocked {
+    border-left-color: #4ade80;
+    background: rgba(74, 222, 128, 0.1);
+}
+
+.achievement-name {
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.achievement-desc {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .game-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .elephant-button {
+        width: 250px;
+        height: 250px;
+        font-size: 6rem;
+    }
+
+    .elephant-count {
+        font-size: 3rem;
+    }
+}
