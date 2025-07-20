@@ -30,6 +30,6 @@ if (ini_get("session.use_cookies")) {
 }
 
 // Sicher weiterleiten
-header("Location: https://grueneeule.de/en/peridyte/");
+header("Location: https://grueneeule.de/beta");
 exit;
 ?>
