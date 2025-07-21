@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über uns | GrüneEule</title>
+    <link rel="icon" href="/assets/img/gruneeule.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="17180f80-2ebb-43a4-927a-6fada720513d" data-blockingmode="auto" type="text/javascript"></script>
+</head>
+<body>
+<div class="bg-animation"></div>
+<div id="header-container"></div>
+<main>
+    <section class="hero">
+        <div class="container">
+            <img src="/assets/img/gruneeule.png" alt="GrüneEule Logo" class="hero-logo">
+            <h1>Über uns</h1>
+            <div class="btn-container">
+                <a href="#about" class="cta-button">Mehr erfahren</a>
+                <a href="team" class="cta-button btn-secondary">Unser Team</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section fade-in">
+        <div class="container">
+            <h2 class="section-title">Unsere Geschichte</h2>
+            <div class="about-content" style="max-width: 800px; margin: 0 auto; text-align: left;">
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+                    GrüneEule wurde 2025 mit der Vision gegründet, Discord Bots für kleine Communities zu entwickeln.
+                    Drei Monate später merkte ich aber, dass Discord Bots nicht das richtige für uns ist.
+                </p>
+
+                <h3 style="color: var(--main-color); margin: 2rem 0 1rem;">Unsere Mission</h3>
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+                    Nun streben wir danach, <a href="/ge-studios/mc">GrüneEule Studios MC</a> aufzubauen.
+                    Außerdem versuchen wir unsere Discord Community aufzubauen.
+                </p>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="team" class="cta-button btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span>Unser Team kennenlernen</span>
+                        <span style="font-size: 1.2rem;">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects fade-in" style="background: var(--bg-primary);">
+        <div class="container">
+            <h2 class="section-title">JumpStone</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Gründer</h3>
+                    <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+                        Ich (JumpStone) bin der Gründer von GrüneEule. Am 31. März 2025 habe ich den offiziellen Discord Server gegründet. Noch am selben Tag habe ich den Peridyte (damals Eagle-Owl) Bot erstellt. (Wird nicht weiter entwickelt.)
+                    </p>
+                    <a href="https://jumpow.de " class="cta-button">Mehr über mich</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+</main>
+
+<button class="scroll-top" aria-label="Nach oben scrollen">↑</button>
+
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/load-footer.js"></script>
+<script src="/assets/js/load-header.js"></script>
+<script>
+    // Scroll animation trigger
+    document.addEventListener('DOMContentLoaded', () => {
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => observer.observe(el));
+    });
+</script>
+</body>
+</html>
