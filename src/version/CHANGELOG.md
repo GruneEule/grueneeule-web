@@ -1,3 +1,6 @@
+## Version 2.4.0 - 22. July 2025
+- News module added
+
 ## Version 2.3.0 - 22. July 2025
 - Plausible added
 
