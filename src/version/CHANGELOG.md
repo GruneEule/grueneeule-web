@@ -1,5 +1,5 @@
 ## Version 2.3.0 - 22. July 2025
-- Motamo Added
+- Plausible added
 
 ## Version 2.2.0 - 21. July 2025
 - New Text
