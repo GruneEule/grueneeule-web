@@ -1,3 +1,6 @@
+## Version 2.4.1 - 22. July 2025
+- [assets/data/news/1.md](/assets/data/news/1.md) corrected
+
 ## Version 2.4.0 - 22. July 2025
 - News module added
 
