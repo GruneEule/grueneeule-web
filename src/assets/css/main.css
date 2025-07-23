@@ -3,6 +3,7 @@
     --main-dark: #1e5631;
     --accent-orange: #ff7f50;
     --accent-purple: #8a2be2;
+    --accent-green: #63da15;
     --discord-blue: #5865F2;
     --bg-primary: #0f0f0f;
     --bg-secondary: #1a1a1a;
@@ -320,6 +321,10 @@ main {
     border-top: 3px solid var(--accent-orange);
 }
 
+.wee-card {
+    border-top: 3px solid var(--accent-green);
+}
+
 .project-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
@@ -328,6 +333,10 @@ main {
 
 .discord-card h3 {
     color: var(--discord-blue);
+}
+
+.wee-card h3 {
+    color: var(--accent-green);
 }
 
 .eulex-card h3 {

@@ -1,0 +1,20 @@
+{
+  "sections": [
+    {
+      "title": "Offiziell",
+      "icon": "info",
+      "pages": [
+        {
+          "title": "tWfEE Main Page",
+          "description": "Unsere Hauptseite für WEE",
+          "url": "/wee"
+        },
+        {
+          "title": "tWfEE Wiki",
+          "description": "Das Wiki für WEE",
+          "url": "/wee/wiki"
+        }
+      ]
+    }
+  ]
+}
