@@ -834,3 +834,74 @@ h4:hover .heading-anchor {
         margin-bottom: 2rem;
     }
 }
+
+/* Projekt-Erklärungsbereich */
+.project-explanation {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 3rem 0;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.project-explanation h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-size: 2rem;
+}
+
+.explanation-content {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.explanation-text {
+    flex: 1;
+    color: #e0e0e0;
+}
+
+.explanation-text p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.explanation-text ul {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.explanation-text li {
+    margin-bottom: 0.5rem;
+}
+
+.explanation-image {
+    flex: 1;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.explanation-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.explanation-image img:hover {
+    transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+    .explanation-content {
+        flex-direction: column;
+    }
+
+    .explanation-image {
+        order: -1;
+        width: 100%;
+        margin-bottom: 1.5rem;
+    }
+}
