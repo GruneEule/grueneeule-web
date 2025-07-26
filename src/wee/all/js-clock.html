@@ -45,11 +45,10 @@
             top: 50%;
             left: 50%;
             transform-origin: 0% 50%;
-            transition: all 0.05s ease-in-out;
+            /* transition: all 0.05s ease-in-out; */ /* Auskommentiert für flüssige Bewegung */
             border-radius: 4px;
             filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
             background: rgba(255, 255, 255, 0.5);
-            /* Leicht transparent */
         }
 
         .hand.hour {
@@ -140,21 +139,29 @@
 
     function updateClock() {
         const now = new Date();
-        const seconds = now.getSeconds();
-        const minutes = now.getMinutes();
         const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const milliseconds = now.getMilliseconds();
 
-        const secDeg = seconds * 6;
-        const minDeg = minutes * 6 + seconds * 0.1;
-        const hourDeg = ((hours % 12) / 12) * 360 + (minutes / 60) * 30;
+        // Winkel berechnen
+        const secondDegrees = (seconds + milliseconds / 1000) * 6; // 6° pro Sekunde
+        const minuteDegrees = (minutes + seconds / 60) * 6;       // 6° pro Minute
+        const hourDegrees = (hours % 12 + minutes / 60) * 30;     // 30° pro Stunde
 
-        secondHand.style.transform = `rotate(${secDeg}deg)`;
-        minuteHand.style.transform = `rotate(${minDeg}deg)`;
-        hourHand.style.transform = `rotate(${hourDeg}deg)`;
+        // Rotation um -90° korrigieren, damit 0° oben ist
+        hourHand.style.transform = `rotate(${hourDegrees - 90}deg)`;
+        minuteHand.style.transform = `rotate(${minuteDegrees - 90}deg)`;
+        secondHand.style.transform = `rotate(${secondDegrees - 90}deg)`;
 
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const formattedDate = now.toLocaleDateString('de-DE', options);
-        dateDisplay.textContent = formattedDate;
+        // Datum anzeigen
+        const options = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        dateDisplay.textContent = now.toLocaleDateString('de-DE', options);
     }
 
     function createNumbers() {
@@ -179,20 +186,29 @@
 
     function createTicks() {
         for (let i = 0; i < 60; i++) {
+            if (i % 5 === 0) continue; // Zahlenpositionen überspringen
+
             const tick = document.createElement('div');
             tick.classList.add('tick');
             const angle = i * 6;
-            tick.style.transform = `rotate(${angle}deg) translate(-50%, -190%)`;
+            tick.style.transform = `rotate(${angle}deg) translate(-50%, -3000%)`;
             tick.style.animationDelay = `${(i % 12) * 0.1}s`;
             clock.appendChild(tick);
         }
     }
 
-    
+    // Initialisierung
     createNumbers();
     createTicks();
     updateClock();
-    setInterval(updateClock, 1000);
+
+    // Animation
+    function animateClock() {
+        updateClock();
+        requestAnimationFrame(animateClock);
+    }
+
+    animateClock();
 </script>
 </body>
 </html>
