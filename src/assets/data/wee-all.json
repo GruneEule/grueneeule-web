@@ -15,6 +15,17 @@
           "url": "/wee/wiki"
         }
       ]
+    },
+    {
+      "title": "JumpStone",
+      "icon": "community",
+      "pages": [
+        {
+          "title": "The Clock",
+          "description": "Eine einfache Uhr als Bildschirmschoner.",
+          "url": "/wee/all/js-clock.html"
+        }
+      ]
     }
   ]
 }
