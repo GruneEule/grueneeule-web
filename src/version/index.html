@@ -2,272 +2,50 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GrüneEule Changelog</title>
-    <link rel="icon" href="/assets/img/gruneeule.png" type="image/png">
-    <link rel="stylesheet" href="/assets/css/main.css">
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="17180f80-2ebb-43a4-927a-6fada720513d" data-blockingmode="auto" type="text/javascript"></script>
-    <script defer data-domain="grueneeule.de" src="https://plausible.io/js/script.js"></script>
-    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+    <title>Version Log</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #121212; color: #eee; margin: 20px; }
+        h1 { text-align: center; }
+        .commit { border-bottom: 1px solid #333; padding: 10px 0; }
+        .commit a { color: #4caf50; text-decoration: none; }
+        .commit a:hover { text-decoration: underline; }
+        .timestamp { color: #888; font-size: 0.9em; }
+    </style>
 </head>
 <body>
-<div class="bg-animation"></div>
-<div id="header-container"></div>
-
-<main>
-    <section class="hero">
-        <div class="container">
-            <img src="/assets/img/gruneeule.png" alt="GrüneEule Logo" class="hero-logo">
-            <h1>GrüneEule Changelog</h1>
-            <div class="btn-container">
-                <a href="#changelog" class="cta-button">Zu den Updates</a>
-                <a href="https://grueneeule.de/l/dc" class="cta-button btn-secondary" target="_blank" rel="noopener noreferrer">Discord beitreten</a>
-            </div>
-        </div>
-    </section>
-
-    <section id="changelog" class="changelog-section">
-        <div class="container">
-            <h2 class="section-title">Version Updates</h2>
-            <div class="changelog-container" id="changelog-content">
-                <div class="loading">Lade Changelog...</div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<div id="footer-container"></div>
-
-<button class="scroll-top" aria-label="Nach oben scrollen">↑</button>
-
-<script src="/assets/js/ui.js"></script>
-<script src="/assets/js/load-footer.js"></script>
-<script src="/assets/js/load-header.js"></script>
+<h1>Version Log</h1>
+<div id="log"></div>
 
 <script>
-    // Function to parse markdown content with support for section dividers and links
-    function parseMarkdown(markdown) {
-        // Split into sections by version headers or dividers
-        const sections = markdown.split(/(?=^##+\s)|(?=^---\s*$)/m);
-        let html = '';
-        let currentVersion = '';
+    async function loadLog() {
+        try {
+            const res = await fetch('/api/version_log.json'); // gleiche Location wie HTML
+            const data = await res.json();
 
-        // Helper function to process text and convert markdown links to HTML
-        function processText(text) {
-            // Convert markdown links [text](url) to <a> tags
-            return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
-        }
+            const container = document.getElementById('log');
+            container.innerHTML = '';
 
-        sections.forEach(section => {
-            if (!section.trim()) return;
-
-            // Check if it's a divider
-            if (section.trim() === '---') {
-                html += `<hr class="changelog-divider">`;
-                return;
-            }
-
-            // Check if it's a version section (starts with ## or ###)
-            if (section.match(/^##+\s/)) {
-                const lines = section.split('\n');
-                const versionLine = lines[0];
-
-                // Extract version and date
-                const versionMatch = versionLine.match(/^##+\s+(.*?)\s*-\s*(\d{1,2}\.\s*\w+\s*\d{4})/i);
-                if (versionMatch) {
-                    currentVersion = processText(versionMatch[1].trim());
-                    const date = versionMatch[2].trim();
-
-                    html += `<div class="changelog-version">`;
-                    html += `<h3 class="version-title">${currentVersion}</h3>`;
-                    html += `<span class="version-date">${date}</span>`;
-                    html += `<ul class="version-notes">`;
-
-                    // Process changelog items
-                    for (let i = 1; i < lines.length; i++) {
-                        const line = lines[i].trim();
-                        if (line.startsWith('- ') || line.startsWith('* ')) {
-                            const item = processText(line.substring(2).trim());
-                            html += `<li>${item}</li>`;
-                        }
-                    }
-
-                    html += `</ul></div>`;
-                } else {
-                    // Handle case where there's no date
-                    currentVersion = processText(versionLine.replace(/^##+\s+/, '').trim());
-                    html += `<div class="changelog-version">`;
-                    html += `<h3 class="version-title">${currentVersion}</h3>`;
-                    html += `<ul class="version-notes">`;
-
-                    // Process changelog items
-                    for (let i = 1; i < lines.length; i++) {
-                        const line = lines[i].trim();
-                        if (line.startsWith('- ') || line.startsWith('* ')) {
-                            const item = processText(line.substring(2).trim());
-                            html += `<li>${item}</li>`;
-                        }
-                    }
-
-                    html += `</ul></div>`;
-                }
-            } else {
-                // Handle content that's not a version header or divider
-                const lines = section.split('\n');
-                if (currentVersion) {
-                    html += `<ul class="version-notes">`;
-                    for (let i = 0; i < lines.length; i++) {
-                        const line = lines[i].trim();
-                        if (line.startsWith('- ') || line.startsWith('* ')) {
-                            const item = processText(line.substring(2).trim());
-                            html += `<li>${item}</li>`;
-                        }
-                    }
-                    html += `</ul>`;
-                }
-            }
-        });
-
-        return html || '<div class="error">Keine gültigen Changelog-Daten gefunden</div>';
-    }
-
-    // Load CHANGELOG.md
-    function loadChangelog() {
-        const changelogContainer = document.getElementById('changelog-content');
-
-        fetch('CHANGELOG.md')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Changelog konnte nicht geladen werden');
-                }
-                return response.text();
-            })
-            .then(markdown => {
-                const html = parseMarkdown(markdown);
-                changelogContainer.innerHTML = html;
-
-                // Add fade-in animation to each version
-                document.querySelectorAll('.changelog-version').forEach((version, index) => {
-                    version.style.animationDelay = `${index * 0.1}s`;
-                    version.classList.add('fade-in');
-                });
-            })
-            .catch(error => {
-                console.error('Fehler beim Laden des Changelogs:', error);
-                changelogContainer.innerHTML = `<div class="error">Fehler beim Laden des Changelogs: ${error.message}</div>`;
+            data.reverse().forEach(entry => {
+                const div = document.createElement('div');
+                div.className = 'commit';
+                div.innerHTML = `
+                <strong>${entry.author}</strong> <span class="timestamp">(${new Date(entry.timestamp).toLocaleString()})</span><br>
+                ${entry.message.replace(/\n/g, '<br>')}<br>
+                <a href="${entry.url}" target="_blank">Commit ansehen</a>
+            `;
+                container.appendChild(div);
             });
+        } catch(e) {
+            document.getElementById('log').innerHTML = '<p>Fehler beim Laden des Logs</p>';
+            console.error(e);
+        }
     }
 
-    // Load changelog when page loads
-    document.addEventListener('DOMContentLoaded', loadChangelog);
+    // Log sofort laden
+    loadLog();
+
+    // Optional: alle 30 Sekunden aktualisieren
+    setInterval(loadLog, 30000);
 </script>
-
-<style>
-    .changelog-section {
-        padding: 60px 0;
-        position: relative;
-    }
-
-    .changelog-container {
-        max-width: 800px;
-        margin: 0 auto;
-        background: rgba(30, 31, 34, 0.8);
-        backdrop-filter: blur(10px);
-        border-radius: 12px;
-        padding: 30px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .changelog-version {
-        margin-bottom: 30px;
-        padding-bottom: 20px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        opacity: 0;
-        animation: fadeIn 0.5s ease forwards;
-    }
-
-    .changelog-version:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
-
-    .version-title {
-        color: #57F287;
-        font-size: 1.8rem;
-        margin-bottom: 5px;
-    }
-
-    .version-date {
-        color: #FEE75C;
-        font-size: 0.9rem;
-        display: block;
-        margin-bottom: 15px;
-    }
-
-    .version-notes {
-        list-style-type: none;
-        padding-left: 20px;
-    }
-
-    .version-notes li {
-        padding: 8px 0;
-        position: relative;
-        padding-left: 25px;
-        font-size: 1.05rem;
-    }
-
-    .version-notes li:before {
-        content: "•";
-        color: #EB459E;
-        font-size: 1.5rem;
-        position: absolute;
-        left: 0;
-        top: 2px;
-    }
-
-    .changelog-divider {
-        height: 1px;
-        background: linear-gradient(90deg, transparent, #EB459E, transparent);
-        margin: 30px 0;
-        border: none;
-    }
-
-    .loading, .error {
-        text-align: center;
-        padding: 20px;
-        font-size: 1.2rem;
-    }
-
-    .loading {
-        color: #FEE75C;
-    }
-
-    .error {
-        color: #ED4245;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @media (max-width: 768px) {
-        .changelog-container {
-            padding: 20px;
-        }
-
-        .version-title {
-            font-size: 1.5rem;
-        }
-    }
-</style>
 </body>
 </html>
