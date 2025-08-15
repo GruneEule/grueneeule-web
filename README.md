@@ -32,5 +32,5 @@ Du möchtest GrüneEule web mitgestalten oder eigene Ideen einbringen? Super! F�
 
 ## Zugang zur GrüneEule web Seite
 
-Alle Funktionen findest du gebündelt auf der Hauptseite:
+Alle Funktionen findest du gebündelt auf der Website:
 🌐 [grueneeule.de](https://grueneeule.de)
