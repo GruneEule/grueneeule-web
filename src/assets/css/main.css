@@ -18,6 +18,30 @@
     --gradient-2: linear-gradient(135deg, #1a1a1a, #2a2a2a);
     --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     --shadow-glow: 0 0 20px rgba(46, 139, 87, 0.2);
+    --header-bg-rgb: 15, 15, 15;
+}
+
+:root.light {
+    --main-color: #2e8b57;
+    --main-dark: #1e5631;
+    --accent-orange: #ff9a4d;
+    --accent-purple: #9b30ff;
+    --accent-green: #63da15;
+    --discord-blue: #5865F2;
+    --usbv-grey: #a0a0a0;
+    --bg-primary: #fefcf9;
+    --bg-secondary: #f4f3f2;
+    --bg-card: #ffffff;
+    --text-primary: #1f1f1f;
+    --text-secondary: #4a4a4a;
+    --text-muted: #7a7a7a;
+    --border-color: #e0dfde;
+    --gradient-1: linear-gradient(135deg, var(--main-color), var(--main-dark));
+    --usbv-gradient: linear-gradient(135deg, #d0d0d0, #a0a0a0, #707070);
+    --gradient-2: linear-gradient(135deg, #fefcf9, #f4f3f2);
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    --shadow-glow: 0 0 15px rgba(46, 139, 87, 0.08);
+    --header-bg-rgb: 254, 252, 249;
 }
 
 * {
@@ -68,11 +92,17 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(15, 15, 15, 0.95);
+    background: rgba(var(--header-bg-rgb), 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
     padding: 1rem 0;
+    transition: background 0.3s ease;
+}
+
+header.scrolled {
+    background: rgba(var(--header-bg-rgb), 0.98) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 nav {
@@ -725,4 +755,32 @@ footer {
     .news-detail-image {
         max-height: 300px;
     }
+}
+
+/* Stile für den Theme-Toggle-Button */
+.theme-toggle-container {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    z-index: 999;
+}
+
+.theme-toggle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
 }
