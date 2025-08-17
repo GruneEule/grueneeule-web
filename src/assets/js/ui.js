@@ -7,6 +7,14 @@ window.addEventListener('scroll', () => {
     } else {
         scrollTopBtn.classList.remove('active');
     }
+
+    // Header scroll behavior
+    const header = document.querySelector('header');
+    if (window.scrollY > 10) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
 });
 
 scrollTopBtn.addEventListener('click', () => {
@@ -62,12 +70,27 @@ document.querySelectorAll('.news-card').forEach(card => {
     newsObserver.observe(card);
 });
 
-// Header background on scroll
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(15, 15, 15, 0.98)';
-    } else {
-        header.style.background = 'rgba(15, 15, 15, 0.95)';
-    }
-});
+// =============================
+// Theme Toggle (Dark / Light)
+// =============================
+const themeToggle = document.getElementById('theme-toggle');
+const root = document.documentElement;
+
+// gespeicherte Einstellung laden
+if (localStorage.getItem('theme') === 'light') {
+    root.classList.add('light');
+    if (themeToggle) themeToggle.textContent = "☀️";
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        root.classList.toggle('light');
+        if (root.classList.contains('light')) {
+            localStorage.setItem('theme', 'light');
+            themeToggle.textContent = "☀️";
+        } else {
+            localStorage.setItem('theme', 'dark');
+            themeToggle.textContent = "🌙";
+        }
+    });
+}
