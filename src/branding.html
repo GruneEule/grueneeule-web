@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrüneEule - Brand Assets</title>
+    <link rel="icon" href="/assets/img/v2/GE-Symbol-Square-rounded_White_on_Green.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="17180f80-2ebb-43a4-927a-6fada720513d" data-blockingmode="auto" type="text/javascript"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WHP81LBDC8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-WHP81LBDC8');
+    </script>
+    <style>
+        /* Override main.css conflicts - Keep logo images square/original shape */
+        .logo-img {
+            max-width: 200px !important;
+            max-height: 150px !important;
+            width: auto !important;
+            height: auto !important;
+            object-fit: contain;
+            border-radius: 0 !important; /* Override any border-radius from main.css */
+        }
+
+        /* Make sure header logo stays round but brand page logos stay original */
+        .logo-card .logo-img {
+            border: none !important;
+            border-radius: 0 !important;
+        }
+
+        /* Ensure logo display container doesn't add unwanted styles */
+        .logo-display {
+            border-radius: 10px !important; /* Only the container, not the image */
+            height: 180px !important; /* Increase container height */
+        }
+
+        :root {
+            --main-color: #2e8b57;
+            --main-dark: #1e5631;
+            --accent-orange: #ff7f50;
+            --accent-purple: #8a2be2;
+            --accent-green: #63da15;
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-card: #242424;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-muted: #808080;
+            --border-color: #333333;
+            --gradient-1: linear-gradient(135deg, var(--main-color), var(--main-dark));
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 20px rgba(46, 139, 87, 0.2);
+            --header-bg-rgb: 15, 15, 15;
+        }
+
+        :root.light {
+            --main-color: #2e8b57;
+            --main-dark: #1e5631;
+            --accent-orange: #ff9a4d;
+            --accent-purple: #9b30ff;
+            --accent-green: #63da15;
+            --bg-primary: #fefcf9;
+            --bg-secondary: #f4f3f2;
+            --bg-card: #ffffff;
+            --text-primary: #1f1f1f;
+            --text-secondary: #4a4a4a;
+            --text-muted: #7a7a7a;
+            --border-color: #e0dfde;
+            --gradient-1: linear-gradient(135deg, var(--main-color), var(--main-dark));
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            --shadow-glow: 0 0 15px rgba(46, 139, 87, 0.08);
+            --header-bg-rgb: 254, 252, 249;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                    radial-gradient(circle at 20% 80%, var(--main-color) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, var(--main-dark) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(var(--header-bg-rgb), 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: background 0.3s ease;
+        }
+
+        header.scrolled {
+            background: rgba(var(--header-bg-rgb), 0.98) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent-purple);
+        }
+
+        .logo span {
+            color: var(--accent-orange);
+        }
+
+        .logo span:last-child {
+            color: var(--accent-purple);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--main-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 4rem;
+            text-align: center;
+            position: relative;
+            margin-top: 80px;
+            background: var(--bg-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 3rem 0 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            color: var(--main-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: var(--main-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(138, 43, 226, 0.5);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 99;
+            cursor: pointer;
+            border: none;
+        }
+
+        .scroll-top.active {
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            background: var(--accent-purple);
+            transform: translateY(-3px);
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--main-color), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle-container {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 999;
+        }
+
+        .theme-toggle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--bg-card);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-purple));
+            margin: 0.5rem 0 0;
+            border-radius: 2px;
+        }
+
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .logo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(46, 139, 87, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .logo-card:hover::before {
+            left: 100%;
+        }
+
+        .logo-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--main-color);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .logo-display {
+            width: 100%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .logo-display.checkered {
+            background-image:
+                    linear-gradient(45deg, #ccc 25%, transparent 25%),
+                    linear-gradient(-45deg, #ccc 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, #ccc 75%),
+                    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        }
+
+        .logo-display.dark-bg {
+            background: #1a1a1a;
+        }
+
+        .logo-display.light-bg {
+            background: #f0f0f0;
+        }
+
+        .logo-display.green-bg {
+            background: var(--main-color);
+        }
+
+        .logo-img {
+            max-width: 120px;
+            max-height: 120px;
+            object-fit: contain;
+        }
+
+        .logo-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .logo-type {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-btn {
+            padding: 0.6rem 1.2rem;
+            background: var(--gradient-1);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(46, 139, 87, 0.4);
+        }
+
+        /* Usage Guidelines */
+        .guidelines {
+            background: var(--bg-secondary);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 3rem;
+        }
+
+        .guidelines h3 {
+            color: var(--main-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .guidelines ul {
+            list-style-position: inside;
+            color: var(--text-secondary);
+        }
+
+        .guidelines li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Download All Section */
+        .download-all {
+            text-align: center;
+            padding: 3rem 0;
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            margin: 3rem 0;
+        }
+
+        .download-all-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-orange));
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+        }
+
+        .download-all-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+        }
+
+        /* Color Section Styles */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .color-card {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .color-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .color-preview {
+            width: 100%;
+            height: 120px;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .color-name {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .color-hex {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-family: monospace;
+        }
+
+        .color-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .logo-grid, .color-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+<div class="bg-animation"></div>
+<div id="header-container"></div>
+
+<section class="hero">
+    <div class="container">
+        <img src="/assets/img/v2/GE-Symbol-Square-rounded_White_on_Green.png" alt="GrüneEule Logo" class="hero-logo">
+        <h1>GrüneEule</h1>
+        <p>Branding</p>
+        <div class="btn-container">
+            <a href="#usage" class="cta-button">Verwendungsrichtlinien</a>
+            <a href="#download-all" class="cta-button btn-secondary" target="_blank" rel="noopener noreferrer">Alles Herunterladen</a>
+        </div>
+    </div>
+</section>
+
+
+<main>
+    <div class="container">
+        <!-- Usage Guidelines -->
+        <section id="usage" class="guidelines fade-in">
+            <h3>Verwendungsrichtlinien</h3>
+            <ul>
+                <li>Du darfst unsere Logos für redaktionelle Zwecke oder um die Marke <strong>GrüneEule</strong> darzustellen nutzen.</li>
+                <li>Bitte nimm immer die Original-Dateien, die wir dir bereitstellen.</li>
+                <li>Ändere nichts an den Farben, Proportionen oder anderen Designelementen.</li>
+                <li>Lass dem Logo genug Platz, damit es klar erkennbar bleibt.</li>
+                <li>Für kommerzielle Zwecke brauchst du vorher unsere Erlaubnis.</li>
+            </ul>
+        </section>
+
+        <!-- Color Section -->
+        <section class="section fade-in">
+            <h2 class="section-title">Farbpalette</h2>
+            <div class="color-grid">
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: #2e8b57;">
+                        Grün
+                    </div>
+                    <div class="color-name">Grün</div>
+                    <div class="color-hex">#2e8b57</div>
+                    <div class="color-description">Primäre Markenfarbe, repräsentiert Natur und Nachhaltigkeit</div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: #1e5631;">
+                        Dunkles Grün
+                    </div>
+                    <div class="color-name">Dunkles Grün</div>
+                    <div class="color-hex">#1e5631</div>
+                    <div class="color-description">Akzentfarbe für Tiefe und Kontrast</div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-preview" style="background-color: #ff7f50; color: #000;">
+                        Orange
+                    </div>
+                    <div class="color-name">Orange</div>
+                    <div class="color-hex">#ff7f50</div>
+                    <div class="color-description">Akzentfarbe für Energie und Hervorhebungen</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Complete Logo Sets (AIO - All In One) -->
+        <section class="section fade-in">
+            <h2 class="section-title">Komplette Logo-Sets (All-in-One)</h2>
+            <div class="logo-grid">
+                <div class="logo-card">
+                    <div class="logo-display checkered">
+                        <img src="/assets/img/v2/GE-AIO-Black.png" alt="GrüneEule AIO Black" class="logo-img">
+                    </div>
+                    <div class="logo-name">AIO - Schwarz</div>
+                    <div class="logo-type">Symbol + Text | PNG</div>
+                    <a href="/assets/img/v2/GE-AIO-Black.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display light-bg">
+                        <img src="/assets/img/v2/GE-AIO-Green.png" alt="GrüneEule AIO Green" class="logo-img">
+                    </div>
+                    <div class="logo-name">AIO - Grün</div>
+                    <div class="logo-type">Symbol + Text | PNG</div>
+                    <a href="/assets/img/v2/GE-AIO-Green.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display light-bg">
+                        <img src="/assets/img/v2/GE-AIO-Orange.png" alt="GrüneEule AIO Orange" class="logo-img">
+                    </div>
+                    <div class="logo-name">AIO - Orange</div>
+                    <div class="logo-type">Symbol + Text | PNG</div>
+                    <a href="/assets/img/v2/GE-AIO-Orange.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display dark-bg">
+                        <img src="/assets/img/v2/GE-AIO-White.png" alt="GrüneEule AIO White" class="logo-img">
+                    </div>
+                    <div class="logo-name">AIO - Weiß</div>
+                    <div class="logo-type">Symbol + Text | PNG</div>
+                    <a href="/assets/img/v2/GE-AIO-White.png" class="download-btn" download>Download</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Text Only Logos (Lettering) -->
+        <section class="section fade-in">
+            <h2 class="section-title">Schriftzug-Logos</h2>
+            <div class="logo-grid">
+                <div class="logo-card">
+                    <div class="logo-display checkered">
+                        <img src="/assets/img/v2/GE-Lettering-Black.png" alt="GrüneEule Lettering Black" class="logo-img">
+                    </div>
+                    <div class="logo-name">Schriftzug - Schwarz</div>
+                    <div class="logo-type">Nur Text | PNG</div>
+                    <a href="/assets/img/v2/GE-Lettering-Black.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display light-bg">
+                        <img src="/assets/img/v2/GE-Lettering-Green.png" alt="GrüneEule Lettering Green" class="logo-img">
+                    </div>
+                    <div class="logo-name">Schriftzug - Grün</div>
+                    <div class="logo-type">Nur Text | PNG</div>
+                    <a href="/assets/img/v2/GE-Lettering-Green.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display light-bg">
+                        <img src="/assets/img/v2/GE-Lettering-Orange.png" alt="GrüneEule Lettering Orange" class="logo-img">
+                    </div>
+                    <div class="logo-name">Schriftzug - Orange</div>
+                    <div class="logo-type">Nur Text | PNG</div>
+                    <a href="/assets/img/v2/GE-Lettering-Orange.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display dark-bg">
+                        <img src="/assets/img/v2/GE-Lettering-White.png" alt="GrüneEule Lettering White" class="logo-img">
+                    </div>
+                    <div class="logo-name">Schriftzug - Weiß</div>
+                    <div class="logo-type">Nur Text | PNG</div>
+                    <a href="/assets/img/v2/GE-Lettering-White.png" class="download-btn" download>Download</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Symbol Only Logos -->
+        <section class="section fade-in">
+            <h2 class="section-title">Symbol-Logos</h2>
+            <div class="logo-grid">
+                <div class="logo-card">
+                    <div class="logo-display checkered">
+                        <img src="/assets/img/v2/GE-Symbol-Black.png" alt="GrüneEule Symbol Black" class="logo-img">
+                    </div>
+                    <div class="logo-name">Symbol - Schwarz</div>
+                    <div class="logo-type">Nur Symbol | PNG</div>
+                    <a href="/assets/img/v2/GE-Symbol-Black.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display light-bg">
+                        <img src="/assets/img/v2/GE-Symbol-Green.png" alt="GrüneEule Symbol Green" class="logo-img">
+                    </div>
+                    <div class="logo-name">Symbol - Grün</div>
+                    <div class="logo-type">Nur Symbol | PNG</div>
+                    <a href="/assets/img/v2/GE-Symbol-Green.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display light-bg">
+                        <img src="/assets/img/v2/GE-Symbol-Orange.png" alt="GrüneEule Symbol Orange" class="logo-img">
+                    </div>
+                    <div class="logo-name">Symbol - Orange</div>
+                    <div class="logo-type">Nur Symbol | PNG</div>
+                    <a href="/assets/img/v2/GE-Symbol-Orange.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display dark-bg">
+                        <img src="/assets/img/v2/GE-Symbol-White.png" alt="GrüneEule Symbol White" class="logo-img">
+                    </div>
+                    <div class="logo-name">Symbol - Weiß</div>
+                    <div class="logo-type">Nur Symbol | PNG</div>
+                    <a href="/assets/img/v2/GE-Symbol-White.png" class="download-btn" download>Download</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Themed Symbol Variants -->
+        <section class="section fade-in">
+            <h2 class="section-title">Spezielle Symbol-Varianten</h2>
+            <div class="logo-grid">
+                <div class="logo-card">
+                    <div class="logo-display checkered">
+                        <img src="/assets/img/v2/GE-Symbol-Round_White_on_Green.png" alt="GrüneEule Symbol Round White on Green" class="logo-img">
+                    </div>
+                    <div class="logo-name">Rund - Weiß auf Grün</div>
+                    <div class="logo-type">Runder Hintergrund | PNG</div>
+                    <a href="/assets/img/v2/GE-Symbol-Round_White_on_Green.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display checkered">
+                        <img src="/assets/img/v2/GE-Symbol-Round_Orange_on_Green.png" alt="GrüneEule Symbol Round Orange on Green" class="logo-img">
+                    </div>
+                    <div class="logo-name">Rund - Orange auf Grün</div>
+                    <div class="logo-type">Runder Hintergrund | PNG</div>
+                    <a href="/assets/img/v2/GE-Symbol-Round_Orange_on_Green.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display checkered">
+                        <img src="/assets/img/v2/GE-Symbol-Square-rounded_White_on_Green.png" alt="GrüneEule Symbol Square Rounded White on Green" class="logo-img">
+                    </div>
+                    <div class="logo-name">Abgerundet - Weiß auf Grün</div>
+                    <div class="logo-type">Abgerundeter Hintergrund | PNG</div>
+                    <a href="/assets/img/v2/GE-Symbol-Square-rounded_White_on_Green.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display checkered">
+                        <img src="/assets/img/v2/GE-Symbol-Square-rounded_Orange_on_Green.png" alt="GrüneEule Symbol Square Rounded Orange on Green" class="logo-img">
+                    </div>
+                    <div class="logo-name">Abgerundet - Orange auf Grün</div>
+                    <div class="logo-type">Abgerundeter Hintergrund | PNG</div>
+                    <a href="/assets/img/v2/GE-Symbol-Square-rounded_Orange_on_Green.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display checkered">
+                        <img src="/assets/img/v2/GE-Symbol-Square_White_on_Green.png" alt="GrüneEule Symbol Square White on Green" class="logo-img">
+                    </div>
+                    <div class="logo-name">Quadrat - Weiß auf Grün</div>
+                    <div class="logo-type">Quadratischer Hintergrund | PNG</div>
+                    <a href="/assets/img/v2/GE-Symbol-Square_White_on_Green.png" class="download-btn" download>Download</a>
+                </div>
+
+                <div class="logo-card">
+                    <div class="logo-display checkered">
+                        <img src="/assets/img/v2/GE-Symbol-Square_Orange_on_Green.png" alt="GrüneEule Symbol Square Orange on Green" class="logo-img">
+                    </div>
+                    <div class="logo-name">Quadrat - Orange auf Grün</div>
+                    <div class="logo-type">Quadratischer Hintergrund | PNG</div>
+                    <a href="/assets/img/v2/GE-Symbol-Square_Orange_on_Green.png" class="download-btn" download>Download</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Download All Section -->
+        <section id="download-all" class="download-all fade-in">
+            <h2 style="margin-bottom: 1rem;">Alle Assets herunterladen</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem;">
+                Laden Sie alle Logo-Varianten in einem praktischen Paket herunter
+            </p>
+            <a href="/assets/zip/branding/GE-branding-01.zip" class="download-all-btn" download="GE-branding-01.zip">
+                Alle Logos herunterladen (.zip)
+            </a>
+        </section>
+    </div>
+</main>
+
+<div id="footer-container"></div>
+<button class="scroll-top" aria-label="Nach oben scrollen">↑</button>
+
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/load-header.js"></script>
+<script src="/assets/js/load-footer.js"></script>
+
+<script>
+    // Fade-in Animation
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const fadeElements = document.querySelectorAll('.fade-in');
+        fadeElements.forEach(el => observer.observe(el));
+    });
+
+    // Individual Download Tracking (optional)
+    document.querySelectorAll('.download-btn').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const logoName = this.closest('.logo-card').querySelector('.logo-name').textContent;
+            console.log(`Logo heruntergeladen: ${logoName}`);
+            // Optional: Analytics tracking could be added here
+        });
+    });
+</script>
+</body>
+</html>

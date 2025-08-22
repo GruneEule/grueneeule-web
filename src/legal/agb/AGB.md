@@ -10,8 +10,13 @@ Diese AGB gelten für die Nutzung der Websites und Dienste von **GrüneEule** ([
 - Nutzung der angebotenen Funktionen erfolgt freiwillig und auf eigenes Risiko.
 
 ### OwLinx
-- Ermöglicht das Erstellen, Teilen und Verwalten von gekürzten URLs.
+- Ermöglicht das Erstellen, Teilen von gekürzten URLs.
 - Der Anbieter kann Funktionen jederzeit ändern, erweitern oder einschränken.
+
+### Do Log it
+- Ermöglicht das Teilen von Logs, Errors oder Code.
+- Der Anbieter kann Funktionen jederzeit ändern, erweitern oder einschränken.
+
 
 ---
 
@@ -25,6 +30,12 @@ Diese AGB gelten für die Nutzung der Websites und Dienste von **GrüneEule** ([
 - Keine NSFW-, pornografischen oder für Minderjährige ungeeigneten Inhalte verlinken.
 - Keine Nutzung für Spam, Phishing oder andere schädliche Zwecke.
 - Verstöße können zur sofortigen Löschung des Links oder zur Sperrung des Zugangs führen.
+
+### Speziell für Do Log it
+- Keine NSFW-, pornografischen oder für Minderjährige ungeeigneten Inhalte teilen.
+- Keine Nutzung für Spam, Phishing oder andere schädliche Zwecke.
+- Verstöße können zur sofortigen Löschung des Codes oder zur Sperrung des Zugangs führen.
+
 
 ---
 

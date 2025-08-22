@@ -5,6 +5,8 @@
     --accent-purple: #8a2be2;
     --accent-green: #63da15;
     --discord-blue: #5865F2;
+    --owlinx-blue: #348792;
+    --dlg-red: #a22017;
     --usbv-grey: #3d3d3d;
     --bg-primary: #0f0f0f;
     --bg-secondary: #1a1a1a;
@@ -212,11 +214,10 @@ main {
 }
 
 .hero-logo {
-    width: 150px;
-    height: 150px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
-    border: 3px solid var(--accent-purple);
-    box-shadow: 0 0 25px rgba(138, 43, 226, 0.7);
+    box-shadow: 0 0 25px var(--main-dark);
     margin-bottom: 2rem;
 }
 
@@ -357,6 +358,15 @@ main {
     border-top: 3px solid var(--accent-green);
 }
 
+.owlinx-card {
+    border-top: 3px solid var(--owlinx-blue);
+}
+
+.dlg-card {
+    border-top: 3px solid var(--dlg-red);
+}
+
+
 .project-card h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
@@ -370,6 +380,16 @@ main {
 .wee-card h3 {
     color: var(--accent-green);
 }
+
+
+.owlinx-card h3 {
+    color: var(--owlinx-blue);
+}
+
+.dlg-card h3 {
+    color: var(--dlg-red);
+}
+
 
 .eulex-card h3 {
     color: var(--accent-orange);
@@ -784,4 +804,58 @@ footer {
 
 .theme-toggle:hover {
     transform: scale(1.1);
+}
+
+.logo-schriftzug {
+    height: 40px; /* Passen Sie die Höhe nach Bedarf an */
+    width: auto; /* Behält das Seitenverhältnis bei */
+    object-fit: contain;
+}
+
+/* CSS für den Schriftzug im Footer OHNE Kasten */
+.full-width-footer-logo {
+    width: 100%;
+    padding: 1.5rem 0; /* Etwas weniger Padding */
+    margin-top: 2rem;
+    /* Kein Hintergrund und kein Rahmen */
+    background: transparent !important;
+    border: none !important;
+}
+
+.footer-logo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 2rem;
+}
+
+.footer-logo-img {
+    height: 100px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    /* Optional: Leichter Schatten für bessere Sichtbarkeit */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+    .logo-schriftzug {
+        height: 35px;
+    }
+    .footer-logo-img {
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-schriftzug {
+        height: 30px;
+    }
+    .footer-logo-img {
+        height: 35px;
+    }
+    .full-width-footer-logo {
+        padding: 1rem 0; /* Noch weniger Padding auf Mobilgeräten */
+    }
 }
