@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     projectsGrid.innerHTML = '<div class="loading-spinner">Lade Projekte...</div>';
 
     // Lade die Projektdaten
-    fetch('/assets/data/projects.json')
+    fetch('https://grueneeule.de/assets/data/projects.json')
         .then(response => {
             console.log('HTTP Response erhalten:', response.status, response.statusText);
 
