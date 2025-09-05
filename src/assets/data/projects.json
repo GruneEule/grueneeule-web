@@ -28,7 +28,7 @@
       ],
       "primaryButton": {
         "text": "Mehr",
-        "url": "/wee",
+        "url": "https://grueneeule.de/wee",
         "class": "btn-discord"
       },
       "secondaryButton": {
