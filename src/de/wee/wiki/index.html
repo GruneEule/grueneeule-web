@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki | tWfEE</title>
+    <link rel="icon" href="/assets/img/wee.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/wee.css">
+    <link rel="stylesheet" href="/assets/css/docs.css">
+</head>
+<body>
+<div class="bg-animation"></div>
+<div id="header-container-wee"></div>
+<main>
+    <li class="language-item">
+        <div class="language-switch-container">
+            <button class="language-switch-btn" id="languageSwitch">
+                <span class="language-flag">🇩🇪</span>
+                <span class="language-code">DE</span>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <a href="#" data-lang="de" class="language-option">
+                    <span class="language-flag">🇩🇪</span>
+                    <span>Deutsch</span>
+                </a>
+                <a href="#" data-lang="en" class="language-option">
+                    <span class="language-flag">🇬🇧</span>
+                    <span>English</span>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <div class="docs-container">
+        <aside class="docs-sidebar">
+            <div class="sidebar-header">
+                <h2>Dokumentation</h2>
+                <div class="search-box">
+                    <input type="text" placeholder="Dokumentation durchsuchen...">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 001.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 00-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 005.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <a href="https://github.com/GruneEule/grueneeule-web/edit/development/src/wee/wiki/WIKI.md" class="btn btn-small">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path fill-rule="evenodd" d="M12.006 2a10 10 0 00-3.16 19.489c.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48A10 10 0 0012.006 2z" clip-rule="evenodd" />
+                    </svg>
+                    Edit on GitHub
+                </a>
+            </div>
+        </aside>
+
+        <article class="docs-content" id="docs-content">
+            <!-- Inhalt wird aus /WIKI.md geladen -->
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <p>Dokumentation wird geladen...</p>
+            </div>
+        </article>
+
+        <div class="docs-toc">
+            <div class="toc-header">
+                <h4>Auf dieser Seite</h4>
+            </div>
+            <nav id="table-of-contents">
+                <!-- Inhaltsverzeichnis wird dynamisch generiert -->
+            </nav>
+        </div>
+    </div>
+    <div id="footer-container"></div>
+</main>
+
+<button class="scroll-top" aria-label="Nach oben scrollen">↑</button>
+
+<script src="/assets/js/ui-wee.js"></script>
+<script src="/assets/js/load-footer.js"></script>
+<script src="/assets/js/load-header.js"></script>
+<script src="/assets/js/markdown-it.min.js"></script>
+<script src="/assets/js/language.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // WIKI.md vom lokalen Server laden
+        fetch('WIKI.md')
+            .then(response => {
+                if (!response.ok) throw new Error('Datei nicht gefunden');
+                return response.text();
+            })
+            .then(markdown => {
+                // Markdown-Parser initialisieren
+                const md = window.markdownit({
+                    html: true,
+                    linkify: true,
+                    typographer: true
+                });
+
+                // Markdown in HTML umwandeln
+                const result = md.render(markdown);
+
+                // Inhalt einfügen
+                document.getElementById('docs-content').innerHTML = result;
+
+                // Inhaltsverzeichnis generieren
+                generateTOC();
+                addAnchorLinks();
+            })
+            .catch(error => {
+                console.error('Fehler beim Laden der Dokumentation:', error);
+                document.getElementById('docs-content').innerHTML = `
+                <div class="error-content">
+                    <h2>Fehler beim Laden</h2>
+                    <p>Die Dokumentation konnte nicht geladen werden. Bitte versuchen Sie es später erneut.</p>
+                    <p>${error.message}</p>
+                </div>
+            `;
+            });
+        // Inhaltsverzeichnis generieren
+        function generateTOC() {
+            const content = document.getElementById('docs-content');
+            const headings = content.querySelectorAll('h2, h3');
+            const toc = document.getElementById('table-of-contents');
+
+            if (headings.length > 0) {
+                let tocHTML = '<ul>';
+                let currentLevel = 2;
+
+                headings.forEach(heading => {
+                    const level = parseInt(heading.tagName.substring(1));
+                    const id = heading.id || heading.textContent.toLowerCase().replace(/[^\wäöüß]+/g, '-');
+                    heading.id = id;
+
+                    if (level > currentLevel) {
+                        tocHTML += '<ul>';
+                    } else if (level < currentLevel) {
+                        tocHTML += '</ul></li>';
+                    } else if (currentLevel !== 2) {
+                        tocHTML += '</li>';
+                    }
+
+                    tocHTML += `<li><a href="#${id}">${heading.textContent}</a>`;
+                    currentLevel = level;
+                });
+
+                tocHTML += '</li></ul>';
+                toc.innerHTML = tocHTML;
+            }
+        }
+
+        // Ankerlinks zu Überschriften hinzufügen
+        function addAnchorLinks() {
+            const headings = document.querySelectorAll('h2, h3, h4');
+
+            headings.forEach(heading => {
+                if (!heading.id) {
+                    heading.id = heading.textContent.toLowerCase().replace(/[^\wäöüß]+/g, '-');
+                }
+
+                const anchor = document.createElement('a');
+                anchor.className = 'heading-anchor';
+                anchor.href = `#${heading.id}`;
+                anchor.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>';
+
+                heading.insertBefore(anchor, heading.firstChild);
+            });
+        }
+    });
+</script>
+</body>
+</html>

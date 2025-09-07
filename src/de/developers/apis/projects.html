@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects API - GrüneEule Entwickler</title>
+    <link rel="icon" href="/assets/img/v2/GE-Symbol-Square-rounded_Orange_on_Green.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/developers.css">
+</head>
+<body>
+<div class="bg-animation"></div>
+<div id="header-dev-container"></div>
+
+<main>
+    <li class="language-item">
+        <div class="language-switch-container">
+            <button class="language-switch-btn" id="languageSwitch">
+                <span class="language-flag">🇩🇪</span>
+                <span class="language-code">DE</span>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <a href="#" data-lang="de" class="language-option">
+                    <span class="language-flag">🇩🇪</span>
+                    <span>Deutsch</span>
+                </a>
+                <a href="#" data-lang="en" class="language-option">
+                    <span class="language-flag">🇬🇧</span>
+                    <span>English</span>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle">☀️</button>
+    </div>
+
+    <section class="api-hero">
+        <div class="container">
+            <h1>Projects API Dokumentation</h1>
+            <p>Erfahre, wie du die Projects API von GrüneEule integrierst</p>
+        </div>
+    </section>
+
+    <div class="docs-container">
+        <div class="docs-content">
+            <div class="docs-sidebar">
+                <h3>Inhaltsverzeichnis</h3>
+                <ul class="docs-nav">
+                    <li><a href="#overview" class="active">Übersicht</a></li>
+                    <li><a href="#authentication">Authentifizierung</a></li>
+                    <li><a href="#endpoints">Endpunkte</a></li>
+                    <li><a href="#response">Antwortformat</a></li>
+                    <li><a href="#examples">Code-Beispiele</a></li>
+                    <li><a href="#errors">Fehlerbehandlung</a></li>
+                    <li><a href="#rate-limiting">Rate Limiting</a></li>
+                </ul>
+            </div>
+
+            <div class="docs-main">
+                <section id="overview" class="docs-section">
+                    <h2>Übersicht</h2>
+                    <p>Die Projects API ermöglicht den Zugriff auf alle Projekte von GrüneEule. Mit dieser API kannst du Projektinformationen abrufen und in deiner eigenen Anwendung anzeigen.</p>
+
+                    <div class="endpoint">
+                        <span class="endpoint-method method-get">GET</span>
+                        <span class="endpoint-url">https://grueneeule.de/api/projects.json</span>
+                    </div>
+
+                    <p>Die API liefert ein Objekt mit einem Array von Projekten im JSON-Format. Jedes Projekt enthält detaillierte Informationen wie Titel, Beschreibung, Funktionen und Button-Links.</p>
+                </section>
+
+                <section id="authentication" class="docs-section">
+                    <h2>Authentifizierung</h2>
+                    <p>Für den Zugriff auf die Projects API ist derzeit keine Authentifizierung erforderlich. Alle Endpunkte sind öffentlich zugänglich.</p>
+                </section>
+
+                <section id="endpoints" class="docs-section">
+                    <h2>Endpunkte</h2>
+
+                    <h3>Alle Projekte abrufen</h3>
+                    <div class="endpoint">
+                        <span class="endpoint-method method-get">GET</span>
+                        <span class="endpoint-url">https://grueneeule.de/api/projects.json</span>
+                    </div>
+
+                    <p>Gibt ein Objekt mit einem Array aller verfügbaren Projekte zurück.</p>
+
+                    <div class="endpoint-example">
+                        <pre>GET /api/projects.json</pre>
+                    </div>
+                </section>
+
+                <section id="response" class="docs-section">
+                    <h2>Antwortformat</h2>
+                    <p>Die API gibt ein Objekt mit einem "projects"-Array zurück. Jedes Projekt-Objekt hat folgende Eigenschaften:</p>
+
+                    <table class="response-table">
+                        <thead>
+                        <tr>
+                            <th>Feld</th>
+                            <th>Typ</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>String</td>
+                            <td>Eindeutige ID des Projekts</td>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>String</td>
+                            <td>Titel des Projekts</td>
+                        </tr>
+                        <tr>
+                            <td>description</td>
+                            <td>String</td>
+                            <td>Beschreibung des Projekts</td>
+                        </tr>
+                        <tr>
+                            <td>features</td>
+                            <td>Array</td>
+                            <td>Liste der Funktionen/Features des Projekts</td>
+                        </tr>
+                        <tr>
+                            <td>primaryButton</td>
+                            <td>Object</td>
+                            <td>Objekt mit Informationen zum primären Button</td>
+                        </tr>
+                        <tr>
+                            <td>secondaryButton</td>
+                            <td>Object</td>
+                            <td>Objekt mit Informationen zum sekundären Button (kann null sein)</td>
+                        </tr>
+                        <tr>
+                            <td>cardClass</td>
+                            <td>String</td>
+                            <td>CSS-Klasse für das Styling der Projektkarte</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Button-Objekt</h4>
+                    <table class="response-table object-table">
+                        <thead>
+                        <tr>
+                            <th>Feld</th>
+                            <th>Typ</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>text</td>
+                            <td>String</td>
+                            <td>Text des Buttons</td>
+                        </tr>
+                        <tr>
+                            <td>url</td>
+                            <td>String</td>
+                            <td>URL, zu der der Button führt</td>
+                        </tr>
+                        <tr>
+                            <td>class</td>
+                            <td>String</td>
+                            <td>CSS-Klasse für das Styling des Buttons</td>
+                        </tr>
+                        <tr>
+                            <td>starCount</td>
+                            <td>Boolean</td>
+                            <td>Optional: Gibt an, ob die GitHub-Stern-Anzahl angezeigt werden soll</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Beispielantwort</h3>
+                    <div class="code-block">
+                        <code>{
+                            "projects": [
+                            {
+                            "id": "discord",
+                            "title": "Discord Community",
+                            "description": "Joine unseren Discord Server!",
+                            "features": [
+                            "Community",
+                            "Hilfe für Coding und mehr",
+                            "Minecraft Stuff",
+                            "Und vieles mehr!"
+                            ],
+                            "primaryButton": {
+                            "text": "Joinen",
+                            "url": "https://grueneeule.de/l/dc",
+                            "class": "btn-discord"
+                            },
+                            "secondaryButton": null,
+                            "cardClass": "discord-card"
+                            },
+                            {
+                            "id": "wee",
+                            "title": "This Website. For Everyone. Everywhere.",
+                            "description": "Entdecke eine zentrale Plattform für kreative Projekte, smarte Tools und nützliche Inhalte – offen für alle, jederzeit verfügbar:",
+                            "features": [
+                            "Offener Zugang – für alle, weltweit",
+                            "Open Source"
+                            ],
+                            "primaryButton": {
+                            "text": "Mehr",
+                            "url": "https://grueneeule.de/wee",
+                            "class": "btn-discord"
+                            },
+                            "secondaryButton": {
+                            "text": "Star on GitHub",
+                            "url": "https://github.com/GruneEule/grueneeule-web",
+                            "class": "github-button",
+                            "starCount": true
+                            },
+                            "cardClass": "wee-card"
+                            }
+                            ]
+                            }</code>
+                    </div>
+                </section>
+
+                <section id="examples" class="docs-section">
+                    <h2>Code-Beispiele</h2>
+
+                    <h3>JavaScript (Fetch API)</h3>
+                    <div class="code-block">
+                        <code>fetch('https://grueneeule.de/api/projects.json')
+                            .then(response => response.json())
+                            .then(data => {
+                            const projects = data.projects;
+                            console.log('Projekte geladen:', projects);
+                            // Verarbeite die Projektdaten hier
+                            })
+                            .catch(error => {
+                            console.error('Fehler beim Laden der Projekte:', error);
+                            });</code>
+                    </div>
+
+                    <h3>Python</h3>
+                    <div class="code-block">
+                        <code>import requests
+                            import json
+
+                            response = requests.get('https://grueneeule.de/api/projects.json')
+                            if response.status_code == 200:
+                            data = response.json()
+                            projects = data['projects']
+                            print('Projekte geladen:', projects)
+                            else:
+                            print('Fehler beim Abrufen der Projekte:', response.status_code)</code>
+                    </div>
+
+                    <h3>PHP</h3>
+                    <div class="code-block">
+                        <code>$url = 'https://grueneeule.de/api/projects.json';
+                            $json = file_get_contents($url);
+                            $data = json_decode($json, true);
+
+                            if ($data && isset($data['projects'])) {
+                            $projects = $data['projects'];
+                            echo 'Projekte geladen:';
+                            print_r($projects);
+                            } else {
+                            echo 'Fehler beim Laden der Projekte';
+                            }</code>
+                    </div>
+
+                    <h3>Beispiel: Projekte in HTML anzeigen</h3>
+                    <div class="code-block">
+                        <code>// Nach dem Abrufen der Projektdaten
+                            function renderProjects(projects) {
+                            const container = document.getElementById('projects-container');
+
+                            projects.forEach(project => {
+                            const card = document.createElement('div');
+                            card.className = `project-card ${project.cardClass}`;
+
+                            let featuresHtml = '';
+                            if (project.features && project.features.length) {
+                            featuresHtml = '&lt;ul&gt;';
+                            project.features.forEach(feature => {
+                            featuresHtml += `&lt;li&gt;${feature}&lt;/li&gt;`;
+                            });
+                            featuresHtml += '&lt;/ul&gt;';
+                            }
+
+                            let buttonsHtml = '';
+                            if (project.primaryButton) {
+                            buttonsHtml += `&lt;a href="${project.primaryButton.url}" class="cta-button ${project.primaryButton.class}"&gt;${project.primaryButton.text}&lt;/a&gt;`;
+                            }
+                            if (project.secondaryButton) {
+                            buttonsHtml += `&lt;a href="${project.secondaryButton.url}" class="cta-button ${project.secondaryButton.class}"&gt;${project.secondaryButton.text}&lt;/a&gt;`;
+                            }
+
+                            card.innerHTML = `
+                            &lt;h3&gt;${project.title}&lt;/h3&gt;
+                            &lt;p&gt;${project.description}&lt;/p&gt;
+                            ${featuresHtml}
+                            &lt;div class="btn-container"&gt;${buttonsHtml}&lt;/div&gt;
+                            `;
+
+                            container.appendChild(card);
+                            });
+                            }</code>
+                    </div>
+                </section>
+
+                <section id="errors" class="docs-section">
+                    <h2>Fehlerbehandlung</h2>
+                    <p>Die API gibt standardmäßig HTTP-Statuscodes zurück, um den Erfolg oder Misserfolg einer Anfrage anzuzeigen.</p>
+
+                    <table class="response-table">
+                        <thead>
+                        <tr>
+                            <th>Statuscode</th>
+                            <th>Bedeutung</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>200</td>
+                            <td>OK - Die Anfrage war erfolgreich</td>
+                        </tr>
+                        <tr>
+                            <td>404</td>
+                            <td>Nicht gefunden - Der angeforderte Endpunkt existiert nicht</td>
+                        </tr>
+                        <tr>
+                            <td>500</td>
+                            <td>Interner Serverfehler - Ein Problem auf dem Server</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="rate-limiting" class="docs-section">
+                    <h2>Rate Limiting</h2>
+                    <p>Für die Projects API gelten derzeit keine Rate Limits. Du kannst die API so oft abfragen, wie du möchtest. Sollten sich diese Limits in Zukunft ändern, werden wir dies hier dokumentieren.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+</main>
+
+<button class="scroll-top" aria-label="Nach oben scrollen">↑</button>
+
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/load-header.js"></script>
+<script src="/assets/js/load-footer.js"></script>
+<script src="/assets/js/language.js"></script>
+<script>
+    // Einfache Navigation für die Dokumentation
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.docs-nav a');
+        const sections = document.querySelectorAll('.docs-section');
+
+        // Aktiven Link setzen basierend auf dem sichtbaren Abschnitt
+        function setActiveNav() {
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Event-Listener für Navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Aktiven Link beim Scrollen setzen
+        window.addEventListener('scroll', setActiveNav);
+        setActiveNav(); // Initial aufrufen
+    });
+</script>
+</body>
+</html>

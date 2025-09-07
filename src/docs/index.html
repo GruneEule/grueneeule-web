@@ -1,72 +1,52 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no, viewport-fit=cover">
-    <meta name="description" content="Documentation for the Peridyte Discord bot">
-    <meta name="theme-color" content="#0099FF">
-    <title>Peridyte | Documentation</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Language Redirect</title>
+    <script>
+        // Mapping: Sprachpräfix -> Ziel-URL
+        const targets = {
+            'de': '/de/docs/',   // Deutsch
+            'en': '/en/docs/',   // Englisch
+        };
 
-    <!-- Themes -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
+        // Standardziel, falls keine passende Sprache gefunden wurde
+        const defaultTarget = '/en';
 
-    <!-- Custom styles -->
-    <link rel="stylesheet" href="_styles/global.css">
-    <link rel="stylesheet" href="_styles/sidebar.css">
-    <link rel="stylesheet" href="_styles/blockquote.css">
+        function getPreferredLang() {
+            // navigator.languages ist ein Array der präferierten Sprachen
+            const langs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
+            for (const l of langs) {
+                if (!l) continue;
+                // z.B. "de-DE" -> "de"
+                const prefix = l.split('-')[0].toLowerCase();
+                if (prefix) return prefix;
+            }
+            return null;
+        }
+
+        (function() {
+            const lang = getPreferredLang();
+            const target = (lang && targets[lang]) ? targets[lang] : defaultTarget;
+
+            // Optional: inkognito eine kleine Info anzeigen bevor umgeleitet wird (nützlich beim Testen)
+            // document.body.textContent = `Weiterleitung nach ${target} (Sprache: ${lang || 'unbekannt'})...`;
+
+            // Direkt weiterleiten (ersetze current history entry)
+            window.location.replace(target);
+            // Alternative: window.location.href = target; (legt neues History-Element an)
+        })();
+    </script>
 </head>
 <body>
-<div id="app"></div>
-
-<script>
-    function helperTpl(className, content) {
-        return `<p class="${className}">${content.slice(5).trim()}</p>`;
-    }
-
-    window.$docsify = {
-        name: "Peridyte Documentation",
-        logo: "_media/logo_name.png",
-        loadSidebar: true,
-        coverpage: false,
-        subMaxLevel: 2,
-        auto2top: true,
-        executeScript: true,
-        search: null, // Suchfunktion komplett deaktiviert
-        pagination: {
-            previousText: "Previous",
-            nextText: "Next",
-            crossChapter: true,
-            crossChapterText: true
-        },
-        markdown: {
-            renderer: {
-                paragraph(text) {
-                    if (/^d&gt;/.test(text)) return helperTpl("warn danger", text);
-                    if (/^w&gt;/.test(text)) return helperTpl("warn", text);
-                    if (/^s&gt;/.test(text)) return helperTpl("success", text);
-                    if (/^i&gt;/.test(text)) return helperTpl("tip", text);
-                    return `<p>${text}</p>`;
-                },
-                image(href, title, text) {
-                    let config = title.split("|");
-                    let imgTag = `<img src="${href}" data-origin="${href}" alt="${text}" ${config.join(" ")}>`;
-                    if (config.includes("center")) {
-                        return `<p align="center">${imgTag}<br><em>${marked.parseInline(text)}</em></p>`;
-                    }
-                    return imgTag;
-                }
-            }
-        }
-    };
-</script>
-
-<!-- Core -->
-<script src="https://cdn.jsdelivr.net/npm/docsify@4"></script>
-<script src="https://cdn.jsdelivr.net/npm/docsify-themeable@0"></script>
-<script src="//unpkg.com/docsify-pagination/dist/docsify-pagination.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/docsify-wikilink@1"></script>
-<script src="https://cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
+<!-- Falls JS deaktiviert ist, zeigt eine Auswahl -->
+<noscript>
+    <p>Javascript ist deaktiviert. Bitte manuell die richtige Seite wählen:</p>
+    <ul>
+        <li><a href="/de/about/">Deutsch</a></li>
+        <li><a href="/en/docs/">English</a></li>
+    </ul>
+</noscript>
 </body>
 </html>

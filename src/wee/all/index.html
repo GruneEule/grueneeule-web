@@ -1,44 +1,52 @@
-<!DOCTYPE html>
-<html lang="de">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alle Seiten | tWfEE</title>
-    <link rel="icon" href="/assets/img/wee.png" type="image/png">
-    <link rel="stylesheet" href="/assets/css/wee.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Language Redirect</title>
+    <script>
+        // Mapping: Sprachpräfix -> Ziel-URL
+        const targets = {
+            'de': '/de/wee/all',   // Deutsch
+            'en': '/en/wee/all',   // Englisch
+        };
+
+        // Standardziel, falls keine passende Sprache gefunden wurde
+        const defaultTarget = '/en';
+
+        function getPreferredLang() {
+            // navigator.languages ist ein Array der präferierten Sprachen
+            const langs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
+            for (const l of langs) {
+                if (!l) continue;
+                // z.B. "de-DE" -> "de"
+                const prefix = l.split('-')[0].toLowerCase();
+                if (prefix) return prefix;
+            }
+            return null;
+        }
+
+        (function() {
+            const lang = getPreferredLang();
+            const target = (lang && targets[lang]) ? targets[lang] : defaultTarget;
+
+            // Optional: inkognito eine kleine Info anzeigen bevor umgeleitet wird (nützlich beim Testen)
+            // document.body.textContent = `Weiterleitung nach ${target} (Sprache: ${lang || 'unbekannt'})...`;
+
+            // Direkt weiterleiten (ersetze current history entry)
+            window.location.replace(target);
+            // Alternative: window.location.href = target; (legt neues History-Element an)
+        })();
+    </script>
 </head>
 <body>
-<div class="bg-animation"></div>
-<div id="header-container-wee"></div>
-<main>
-    <div class="wee-container">
-        <div class="wee-header">
-            <div class="logo-container">
-                <img src="/assets/img/wee.png" alt="WEE Logo" class="wee-logo">
-            </div>
-            <h1>Entdecke die GrüneEule Welt</h1>
-            <p>Alle unsere Projekte und Seiten auf einen Blick</p>
-        </div>
-
-        <input type="text" id="searchInput" placeholder="🔍 Suche nach Seiten..." class="search-bar" />
-
-        <div class="pages-grid"></div>
-
-        <div class="wee-cta">
-            <h2>Deins fehlt?</h2>
-            <p>Du willst dein eigenes Tool oder Game etc. in unsere Seite bringen?</p>
-            <p>Lies im Wiki wie du deins hinzufügen kannst!</p>
-            <a href="/wee/wiki" class="btn btn-secondary">Wiki</a>
-        </div>
-    </div>
-    <div id="footer-container"></div>
-</main>
-
-<button class="scroll-top" aria-label="Nach oben scrollen">↑</button>
-
-<script src="/assets/js/wee-all.js"></script>
-<script src="/assets/js/ui-wee.js"></script>
-<script src="/assets/js/load-footer.js"></script>
-<script src="/assets/js/load-header.js"></script>
+<!-- Falls JS deaktiviert ist, zeigt eine Auswahl -->
+<noscript>
+    <p>Javascript ist deaktiviert. Bitte manuell die richtige Seite wählen:</p>
+    <ul>
+        <li><a href="/de/wee/all">Deutsch</a></li>
+        <li><a href="/en/wee/all">English</a></li>
+    </ul>
+</noscript>
 </body>
 </html>

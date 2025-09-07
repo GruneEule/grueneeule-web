@@ -1,42 +1,52 @@
-<!DOCTYPE html>
-<html lang="de">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGB | GrüneEule</title>
-    <link rel="icon" href="/assets/img/gruneeule.png" type="image/png">
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Language Redirect</title>
+    <script>
+        // Mapping: Sprachpräfix -> Ziel-URL
+        const targets = {
+            'de': '/de/legal/agb/',   // Deutsch
+            'en': '/en/legal/agb/',   // Englisch
+        };
+
+        // Standardziel, falls keine passende Sprache gefunden wurde
+        const defaultTarget = '/en';
+
+        function getPreferredLang() {
+            // navigator.languages ist ein Array der präferierten Sprachen
+            const langs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
+            for (const l of langs) {
+                if (!l) continue;
+                // z.B. "de-DE" -> "de"
+                const prefix = l.split('-')[0].toLowerCase();
+                if (prefix) return prefix;
+            }
+            return null;
+        }
+
+        (function() {
+            const lang = getPreferredLang();
+            const target = (lang && targets[lang]) ? targets[lang] : defaultTarget;
+
+            // Optional: inkognito eine kleine Info anzeigen bevor umgeleitet wird (nützlich beim Testen)
+            // document.body.textContent = `Weiterleitung nach ${target} (Sprache: ${lang || 'unbekannt'})...`;
+
+            // Direkt weiterleiten (ersetze current history entry)
+            window.location.replace(target);
+            // Alternative: window.location.href = target; (legt neues History-Element an)
+        })();
+    </script>
 </head>
 <body>
-<div class="bg-animation"></div>
-<div id="header-container"></div>
-<main>
-    <section class="hero">
-        <div class="container">
-            <img src="/assets/img/v2/GE-Symbol-Square-rounded_White_on_Green.png" alt="GrüneEule Logo" class="hero-logo">
-            <h1>Allgemeine Geschäftsbedingungen (AGB) – GrüneEule & OwLink</h1>
-            <div id="datenschutzerklärung" class="datenschutzerklärung-content">Wird geladen…</div>
-        </div>
-    </section>
-    <div id="footer-container"></div>
-</main>
-
-<button class="scroll-top" aria-label="Nach oben scrollen">↑</button>
-
-<script src="/assets/js/ui.js"></script>
-<script src="/assets/js/load-footer.js"></script>
-<script src="/assets/js/load-header.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
-    fetch('AGB.md')
-        .then(res => res.text())
-        .then(md => {
-            document.getElementById('datenschutzerklärung').innerHTML = marked.parse(md);
-        })
-        .catch(err => {
-            document.getElementById('datenschutzerklärung').innerText = 'Fehler beim Laden der Datenschutzerklärung.';
-            console.error('Fehler beim Laden der Datei:', err);
-        });
-</script>
+<!-- Falls JS deaktiviert ist, zeigt eine Auswahl -->
+<noscript>
+    <p>Javascript ist deaktiviert. Bitte manuell die richtige Seite wählen:</p>
+    <ul>
+        <li><a href="/de/legal/agb/">Deutsch</a></li>
+        <li><a href="/en/legal/agb/">English</a></li>
+    </ul>
+</noscript>
 </body>
 </html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Pages | tWfEE</title>
+    <link rel="icon" href="/assets/img/wee.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/wee.css">
+</head>
+<body>
+<div class="bg-animation"></div>
+<div id="header-container-wee"></div>
+<main>
+    <li class="language-item">
+        <div class="language-switch-container">
+            <button class="language-switch-btn" id="languageSwitch">
+                <span class="language-flag">🇬🇧</span>
+                <span class="language-code">EN</span>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <a href="#" data-lang="de" class="language-option">
+                    <span class="language-flag">🇩🇪</span>
+                    <span>Deutsch</span>
+                </a>
+                <a href="#" data-lang="en" class="language-option">
+                    <span class="language-flag">🇬🇧</span>
+                    <span>English</span>
+                </a>
+            </div>
+        </div>
+    </li>
+    <div class="wee-container">
+        <div class="wee-header">
+            <div class="logo-container">
+                <img src="/assets/img/wee.png" alt="WEE Logo" class="wee-logo">
+            </div>
+            <h1>Discover the GrüneEule World</h1>
+            <p>All our projects and pages at a glance</p>
+        </div>
+
+        <input type="text" id="searchInput" placeholder="🔍 Search for pages..." class="search-bar" />
+
+        <div class="pages-grid"></div>
+
+        <div class="wee-cta">
+            <h2>Yours is missing?</h2>
+            <p>Want to add your own tool or game etc. to our site?</p>
+            <p>Read the wiki on how to add yours!</p>
+            <a href="/wee/wiki" class="btn btn-secondary">Wiki</a>
+        </div>
+    </div>
+    <div id="footer-container"></div>
+</main>
+
+<button class="scroll-top" aria-label="Scroll to top">↑</button>
+
+<script src="/assets/js/wee-all.js"></script>
+<script src="/assets/js/ui-wee.js"></script>
+<script src="/assets/js/load-footer.js"></script>
+<script src="/assets/js/load-header.js"></script>
+<script src="/assets/js/language.js"></script>
+</body>
+</html>

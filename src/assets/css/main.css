@@ -1064,3 +1064,126 @@ footer {
         gap: 0.5rem;
     }
 }
+
+/* Language Switch Styles */
+/* Neues Styling für die Language-Switch-Position */
+.language-item {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1001;
+    list-style: none;
+}
+
+.language-switch-container {
+    position: relative;
+}
+
+.language-switch-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.language-switch-btn:hover {
+    background: var(--bg-secondary);
+    border-color: var(--main-color);
+}
+
+.language-flag {
+    font-size: 16px;
+}
+
+.language-code {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 0;
+    min-width: 140px;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.language-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.language-option:hover {
+    background: var(--bg-secondary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .language-item {
+        top: 15px;
+        right: 15px;
+    }
+
+    .language-switch-btn {
+        padding: 6px 10px;
+    }
+
+    .language-code {
+        display: none;
+    }
+
+    .language-dropdown {
+        right: -20px;
+    }
+}
+
+.language-dropdown {
+    display: none;
+    position: absolute;
+    background: black;
+    border: 1px solid #2e8b57;
+    border-radius: 6px;
+    margin-top: 4px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.language-dropdown.show {
+    display: block;
+}
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: white;
+}
+.language-option:hover {
+    background: #393939;
+}

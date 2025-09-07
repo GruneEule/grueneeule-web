@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About us | GrüneEule</title>
+    <link rel="icon" href="/assets/img/gruneeule.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<div class="bg-animation"></div>
+<div id="header-en-container"></div>
+<main>
+    <li class="language-item">
+        <div class="language-switch-container">
+            <button class="language-switch-btn" id="languageSwitch">
+                <span class="language-flag">🇬🇧</span>
+                <span class="language-code">EN</span>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <a href="#" data-lang="de" class="language-option">
+                    <span class="language-flag">🇩🇪</span>
+                    <span>Deutsch</span>
+                </a>
+                <a href="#" data-lang="en" class="language-option">
+                    <span class="language-flag">🇬🇧</span>
+                    <span>English</span>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <section class="hero">
+        <div class="container">
+            <img src="/assets/img/v2/GE-Symbol-Square-rounded_White_on_Green.png" alt="GrüneEule Logo" class="hero-logo">
+            <h1>About us</h1>
+            <div class="btn-container">
+                <a href="#about" class="cta-button">Learn more</a>
+                <a href="team" class="cta-button btn-secondary">Our Team</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section fade-in">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="about-content" style="max-width: 800px; margin: 0 auto; text-align: left;">
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+                    GrüneEule was founded in 2025 with the vision to develop Discord bots for small communities.
+                    Three months later, however, I realized that Discord bots weren't the right thing for us.
+                </p>
+
+                <h3 style="color: var(--main-color); margin: 2rem 0 1rem;">Our Mission</h3>
+                <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+                    Now we strive to build up <a href="/ge-studios/mc">GrüneEule Studios MC</a>.
+                    We are also trying to build our Discord community.
+                </p>
+
+                <div style="text-align: center; margin-top: 3rem;">
+                    <a href="team" class="cta-button btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span>Get to know our team</span>
+                        <span style="font-size: 1.2rem;">→</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects fade-in" style="background: var(--bg-primary);">
+        <div class="container">
+            <h2 class="section-title">JumpStone</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Founder</h3>
+                    <p style="margin-bottom: 1.5rem; font-size: 1.1rem;">
+                        I (JumpStone) am the founder of GrüneEule. On March 31, 2025, I founded the official Discord server. On the same day, I created the Peridyte (then Eagle-Owl) bot. (No longer under development.)
+                    </p>
+                    <a href="https://jumpow.de " class="cta-button">More about me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-en-container"></div>
+</main>
+
+<button class="scroll-top" aria-label="Scroll to top">↑</button>
+
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/load-footer.js"></script>
+<script src="/assets/js/load-header.js"></script>
+<script src="/assets/js/language.js"></script>
+<script>
+    // Scroll animation trigger
+    document.addEventListener('DOMContentLoaded', () => {
+        const fadeElements = document.querySelectorAll('.fade-in');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => observer.observe(el));
+    });
+</script>
+</body>
+</html>

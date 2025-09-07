@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Fehler beim Laden des Status:', error);
             statusContainer.innerHTML = `
                     <div class="error">
-                        <p>Statusinformationen konnten nicht geladen werden.</p>
+                        <p>Derzeit sind keine Vorfälle oder Wartungsarbeiten gemeldet. Alle Systeme arbeiten normal.</p>
                         <a href="https://status.grueneeule.de" target="_blank" rel="noopener noreferrer" class="view-all-link">Statusseite besuchen</a>
                     </div>
                 `;

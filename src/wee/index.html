@@ -1,95 +1,52 @@
-<!DOCTYPE html>
-<html lang="de">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tWfEE</title>
-    <link rel="icon" href="/assets/img/wee.png" type="image/png">
-    <link rel="stylesheet" href="/assets/css/wee.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Language Redirect</title>
+    <script>
+        // Mapping: Sprachpräfix -> Ziel-URL
+        const targets = {
+            'de': '/de/wee/',   // Deutsch
+            'en': '/en/wee/',   // Englisch
+        };
+
+        // Standardziel, falls keine passende Sprache gefunden wurde
+        const defaultTarget = '/en';
+
+        function getPreferredLang() {
+            // navigator.languages ist ein Array der präferierten Sprachen
+            const langs = navigator.languages || [navigator.language || navigator.userLanguage || ''];
+            for (const l of langs) {
+                if (!l) continue;
+                // z.B. "de-DE" -> "de"
+                const prefix = l.split('-')[0].toLowerCase();
+                if (prefix) return prefix;
+            }
+            return null;
+        }
+
+        (function() {
+            const lang = getPreferredLang();
+            const target = (lang && targets[lang]) ? targets[lang] : defaultTarget;
+
+            // Optional: inkognito eine kleine Info anzeigen bevor umgeleitet wird (nützlich beim Testen)
+            // document.body.textContent = `Weiterleitung nach ${target} (Sprache: ${lang || 'unbekannt'})...`;
+
+            // Direkt weiterleiten (ersetze current history entry)
+            window.location.replace(target);
+            // Alternative: window.location.href = target; (legt neues History-Element an)
+        })();
+    </script>
 </head>
 <body>
-<div class="bg-animation"></div>
-<div id="header-container-wee"></div>
-<main>
-    <div class="wee-container">
-        <div class="wee-header">
-            <div class="logo-container">
-                <img src="/assets/img/wee.png" alt="WEE Logo" class="wee-logo">
-            </div>
-            <h1>This Website. For Everyone. Everywhere.</h1>
-            <p>by GrüneEule</p>
-            <div class="open-source-badge">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path fill-rule="evenodd" d="M12.006 2a10 10 0 00-3.16 19.489c.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.268 2.75 1.026A9.564 9.564 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.026 2.747-1.026.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48A10 10 0 0012.006 2z" clip-rule="evenodd" />
-                </svg>
-                Open Source
-            </div>
-            <a href="all" class="btn">Alle Seiten</a>
-        </div>
-
-        <!-- Neuer Projekt-Erklärungsbereich -->
-        <div class="project-explanation">
-            <h2>Was ist tWfEE?</h2>
-            <div class="explanation-content">
-                <div class="explanation-text">
-                    <p>tWfEE (This Website. For Everyone. Everywhere.) ist eine Community-getriebene Seite, die freien Zugang zu nützlichen Tools, kreativen Projekten und Games bietet.</p>
-                    <p>Das Ziel ist es, eine inklusive Online-Umgebung zu schaffen, die:</p>
-                    <ul>
-                        <li><strong>Frei zugänglich</strong> ist - ohne Paywalls oder Barrieren</li>
-                        <li><strong>Community-orientiert</strong> funktioniert - jeder kann beitragen</li>
-                        <li><strong>Open Source</strong> bleibt - Transparenz und Zusammenarbeit</li>
-                        <li><strong>Vielfältige Inhalte</strong> bietet - von Tools bis zu Spielen</li>
-                    </ul>
-                    <p>Das Projekt entstand aus der Idee, dass das Internet ein Ort des freien Wissensaustauschs und der Kreativität sein sollte - für alle, überall.</p>
-                </div>
-                <div class="explanation-image">
-                    <img src="/assets/img/wee.png" alt="WEE Logo">
-                </div>
-            </div>
-        </div>
-
-        <div class="wee-features">
-            <div class="feature-card">
-                <h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 14H7v-4h4v4zm0-6H7V7h4v4zm6 6h-4v-4h4v4zm0-6h-4V7h4v4z" />
-                    </svg>
-                    Tools
-                </h3>
-                <ul>
-                    <li>Innovative Web-Tools für den Alltag</li>
-                    <li>Produktivitäts-Booster</li>
-                </ul>
-            </div>
-
-            <div class="feature-card">
-                <h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-3.5-9c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5-1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5-1.5.67-1.5 1.5zm1.5 4.5c-.73 0-2.19.36-2.24 1.08.5.71 1.32 1.17 2.24 1.17s1.74-.46 2.24-1.17c-.05-.72-1.51-1.08-2.24-1.08z" />
-                    </svg>
-                    Games
-                </h3>
-                <ul>
-                    <li>Games von euch entwickelt</li>
-                    <li>Spaß für alle Altersgruppen</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="wee-cta">
-            <h2>Bereit mitzumachen?</h2>
-            <p>Diese Seite lebt von der Community. Jeder ist willkommen!</p>
-            <a href="wiki" class="btn">Wiki</a>
-            <a href="https://github.com/GruneEule/grueneeule-web" class="btn btn-secondary">GitHub</a>
-        </div>
-    </div>
-    <div id="footer-container"></div>
-</main>
-
-<button class="scroll-top" aria-label="Nach oben scrollen">↑</button>
-
-<script src="/assets/js/ui-wee.js"></script>
-<script src="/assets/js/load-footer.js"></script>
-<script src="/assets/js/load-header.js"></script>
+<!-- Falls JS deaktiviert ist, zeigt eine Auswahl -->
+<noscript>
+    <p>Javascript ist deaktiviert. Bitte manuell die richtige Seite wählen:</p>
+    <ul>
+        <li><a href="/de/wee/">Deutsch</a></li>
+        <li><a href="/en/wee/">English</a></li>
+    </ul>
+</noscript>
 </body>
 </html>

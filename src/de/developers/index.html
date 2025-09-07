@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Hub - GrüneEule</title>
+    <link rel="icon" href="/assets/img/v2/GE-Symbol-Square-rounded_Orange_on_Green.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/developers.css">
+</head>
+<body>
+<div class="bg-animation"></div>
+<div id="header-dev-container"></div>
+
+<main>
+    <li class="language-item">
+        <div class="language-switch-container">
+            <button class="language-switch-btn" id="languageSwitch">
+                <span class="language-flag">🇩🇪</span>
+                <span class="language-code">DE</span>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <a href="#" data-lang="de" class="language-option">
+                    <span class="language-flag">🇩🇪</span>
+                    <span>Deutsch</span>
+                </a>
+                <a href="#" data-lang="en" class="language-option">
+                    <span class="language-flag">🇬🇧</span>
+                    <span>English</span>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle">☀️</button>
+    </div>
+
+    <section class="dev-hero">
+        <div class="container">
+            <h1>GrüneEule Developer Hub</h1>
+            <p>Entdecke unsere APIs, Tools und Ressourcen für Entwickler. Alles, was du brauchst, um mit GrüneEule zu integrieren.</p>
+            <div class="dev-hero-buttons">
+                <a href="/de/developers/apis" class="cta-button">APIs entdecken</a>
+                <a href="#documentation" class="cta-button btn-secondary">Dokumentation</a>
+                <a href="https://grueneeule.de/l/github" target="_blank" class="cta-button">GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="dev-section">
+        <div class="container">
+            <h2 class="section-title">Willkommen im Developer Hub</h2>
+            <p class="text-center" style="margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Hier findest du alle Ressourcen, die du als Entwickler benötigst, um mit GrüneEule zu arbeiten.
+                Von APIs über Dokumentation bis hin zu Code-Beispielen - alles an einem Ort.
+            </p>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Öffentliche APIs</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Authentifizierung benötigt</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Rate Limits</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="documentation" class="dev-section">
+        <div class="container">
+            <h2 class="section-title">Dokumentation & Ressourcen</h2>
+            <p class="text-center" style="margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Umfassende Dokumentation, Tutorials und Ressourcen helfen dir beim Einstieg und bei der Integration unserer Dienste.
+            </p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">📖</div>
+                    <h3>APIs</h3>
+                    <p>Alle APIs von GrüneEule.</p>
+                    <a href="/de/developers/apis/" class="api-docs-link">Mehr</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="dev-section">
+        <div class="container">
+            <h2 class="section-title">Schnellzugriff</h2>
+            <p class="text-center" style="margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Wichtige Links und Ressourcen für einen schnellen Einstieg.
+            </p>
+
+            <div class="quick-links">
+                <a href="https://grueneeule.de/l/github" class="quick-link-card">
+                    <div class="quick-link-icon">🐙</div>
+                    <div class="quick-link-content">
+                        <h4>GitHub</h4>
+                        <p>Alle Open-Source-Projekte von GrüneEule</p>
+                    </div>
+                </a>
+
+                <a href="https://grueneeule.de/dc" class="quick-link-card">
+                    <div class="quick-link-icon">💬</div>
+                    <div class="quick-link-content">
+                        <h4>Discord Community</h4>
+                        <p>Hilfe und Unterstützung von anderen Entwicklern</p>
+                    </div>
+                </a>
+
+                <a href="https://status.grueneeule.de" class="quick-link-card">
+                    <div class="quick-link-icon">📈</div>
+                    <div class="quick-link-content">
+                        <h4>Statusübersicht</h4>
+                        <p>Aktuelle Statusinformationen aller Dienste</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+</main>
+
+<button class="scroll-top" aria-label="Nach oben scrollen">↑</button>
+
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/load-header.js"></script>
+<script src="/assets/js/load-footer.js"></script>
+<script src="/assets/js/language.js"></script>
+</body>
+</html>

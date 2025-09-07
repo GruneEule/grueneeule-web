@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News API - GrüneEule Entwickler</title>
+    <link rel="icon" href="/assets/img/v2/GE-Symbol-Square-rounded_Orange_on_Green.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/developers.css">
+</head>
+<body>
+<div class="bg-animation"></div>
+<div id="header-dev-container"></div>
+
+<main>
+    <li class="language-item">
+        <div class="language-switch-container">
+            <button class="language-switch-btn" id="languageSwitch">
+                <span class="language-flag">🇩🇪</span>
+                <span class="language-code">DE</span>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <a href="#" data-lang="de" class="language-option">
+                    <span class="language-flag">🇩🇪</span>
+                    <span>Deutsch</span>
+                </a>
+                <a href="#" data-lang="en" class="language-option">
+                    <span class="language-flag">🇬🇧</span>
+                    <span>English</span>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle">☀️</button>
+    </div>
+
+    <section class="api-hero">
+        <div class="container">
+            <h1>News API Dokumentation</h1>
+            <p>Erfahre, wie du die News API von GrüneEule integrierst</p>
+        </div>
+    </section>
+
+    <div class="docs-container">
+        <div class="docs-content">
+            <div class="docs-sidebar">
+                <h3>Inhaltsverzeichnis</h3>
+                <ul class="docs-nav">
+                    <li><a href="#overview" class="active">Übersicht</a></li>
+                    <li><a href="#authentication">Authentifizierung</a></li>
+                    <li><a href="#endpoints">Endpunkte</a></li>
+                    <li><a href="#response">Antwortformat</a></li>
+                    <li><a href="#examples">Code-Beispiele</a></li>
+                    <li><a href="#errors">Fehlerbehandlung</a></li>
+                    <li><a href="#rate-limiting">Rate Limiting</a></li>
+                </ul>
+            </div>
+
+            <div class="docs-main">
+                <section id="overview" class="docs-section">
+                    <h2>Übersicht</h2>
+                    <p>Die News API ermöglicht den Zugriff auf alle News von GrüneEule. Mit dieser API kannst du News-Artikel abrufen und in deiner eigenen Anwendung anzeigen.</p>
+
+                    <div class="endpoint">
+                        <span class="endpoint-method method-get">GET</span>
+                        <span class="endpoint-url">https://grueneeule.de/api/news.json</span>
+                    </div>
+
+                    <p>Die API liefert eine Liste von News-Artikeln im JSON-Format. Jeder Artikel enthält eine ID, Titel, Datum, eine kurze Beschreibung, ein Bild und einen Pfad zum vollständigen Inhalt.</p>
+                </section>
+
+                <section id="authentication" class="docs-section">
+                    <h2>Authentifizierung</h2>
+                    <p>Für den Zugriff auf die News API ist derzeit keine Authentifizierung erforderlich. Alle Endpunkte sind öffentlich zugänglich.</p>
+                </section>
+
+                <section id="endpoints" class="docs-section">
+                    <h2>Endpunkte</h2>
+
+                    <h3>Alle News abrufen</h3>
+                    <div class="endpoint">
+                        <span class="endpoint-method method-get">GET</span>
+                        <span class="endpoint-url">https://grueneeule.de/api/news.json</span>
+                    </div>
+
+                    <p>Gibt eine Liste aller verfügbaren News-Artikel zurück.</p>
+
+                    <div class="endpoint-example">
+                        <pre>GET /api/news.json</pre>
+                    </div>
+                </section>
+
+                <section id="response" class="docs-section">
+                    <h2>Antwortformat</h2>
+                    <p>Die API gibt ein Array von News-Objekten zurück. Jedes Objekt hat folgende Eigenschaften:</p>
+
+                    <table class="response-table">
+                        <thead>
+                        <tr>
+                            <th>Feld</th>
+                            <th>Typ</th>
+                            <th>Beschreibung</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>Integer</td>
+                            <td>Eindeutige ID des News-Artikels</td>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>String</td>
+                            <td>Titel des News-Artikels</td>
+                        </tr>
+                        <tr>
+                            <td>date</td>
+                            <td>String</td>
+                            <td>Veröffentlichungsdatum im Format YYYY-MM-DD</td>
+                        </tr>
+                        <tr>
+                            <td>content</td>
+                            <td>String</td>
+                            <td>Kurze Zusammenfassung des Inhalts</td>
+                        </tr>
+                        <tr>
+                            <td>image</td>
+                            <td>String</td>
+                            <td>URL zum Titelbild des Artikels</td>
+                        </tr>
+                        <tr>
+                            <td>fullContentPath</td>
+                            <td>String</td>
+                            <td>URL zur Markdown-Datei mit dem vollständigen Inhalt</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Beispielantwort</h3>
+                    <div class="code-block">
+                        <code>[
+                            {
+                            "id": 1,
+                            "title": "News Modul endlich fertig!",
+                            "date": "2025-07-22",
+                            "content": "Wir freuen uns, unser neues News Modul vorzustellen!",
+                            "image": "https://grueneeule.de/assets/img/news/1.png",
+                            "fullContentPath": "https://grueneeule.de/assets/data/news/1.md"
+                            },
+                            {
+                            "id": 2,
+                            "title": "tWfEE RELEASE JETZT ONLINE",
+                            "date": "2025-07-23",
+                            "content": "Die tWfEE Seite wurde veröffentlich!",
+                            "image": "https://grueneeule.de/assets/img/news/2.png",
+                            "fullContentPath": "https://grueneeule.de/assets/data/news/2.md"
+                            }
+                            ]</code>
+                    </div>
+                </section>
+
+                <section id="examples" class="docs-section">
+                    <h2>Code-Beispiele</h2>
+
+                    <h3>JavaScript (Fetch API)</h3>
+                    <div class="code-block">
+                        <code>fetch('https://grueneeule.de/api/news.json')
+                            .then(response => response.json())
+                            .then(news => {
+                            console.log('News geladen:', news);
+                            // Verarbeite die News-Daten hier
+                            })
+                            .catch(error => {
+                            console.error('Fehler beim Laden der News:', error);
+                            });</code>
+                    </div>
+
+                    <h3>Python</h3>
+                    <div class="code-block">
+                        <code>import requests
+                            import json
+
+                            response = requests.get('https://grueneeule.de/api/news.json')
+                            if response.status_code == 200:
+                            news = response.json()
+                            print('News geladen:', news)
+                            else:
+                            print('Fehler beim Abrufen der News:', response.status_code)</code>
+                    </div>
+
+                    <h3>PHP</h3>
+                    <div class="code-block">
+                        <code>$url = 'https://grueneeule.de/api/news.json';
+                            $json = file_get_contents($url);
+                            $news = json_decode($json, true);
+
+                            if ($news) {
+                            echo 'News geladen:';
+                            print_r($news);
+                            } else {
+                            echo 'Fehler beim Laden der News';
+                            }</code>
+                    </div>
+                </section>
+
+                <section id="errors" class="docs-section">
+                    <h2>Fehlerbehandlung</h2>
+                    <p>Die API gibt standardmäßig HTTP-Statuscodes zurück, um den Erfolg oder Misserfolg einer Anfrage anzuzeigen.</p>
+
+                    <table class="response-table">
+                        <thead>
+                        <tr>
+                            <th>Statuscode</th>
+                            <th>Bedeutung</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>200</td>
+                            <td>OK - Die Anfrage war erfolgreich</td>
+                        </tr>
+                        <tr>
+                            <td>404</td>
+                            <td>Nicht gefunden - Der angeforderte Endpunkt existiert nicht</td>
+                        </tr>
+                        <tr>
+                            <td>500</td>
+                            <td>Interner Serverfehler - Ein Problem auf dem Server</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="rate-limiting" class="docs-section">
+                    <h2>Rate Limiting</h2>
+                    <p>Für die News API gelten derzeit keine Rate Limits. Du kannst die API so oft abfragen, wie du möchtest. Sollten sich diese Limits in Zukunft ändern, werden wir dies hier dokumentieren.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+</main>
+
+<button class="scroll-top" aria-label="Nach oben scrollen">↑</button>
+
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/load-header.js"></script>
+<script src="/assets/js/load-footer.js"></script>
+<script src="/assets/js/language.js"></script>
+<script>
+    // Einfache Navigation für die Dokumentation
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.docs-nav a');
+        const sections = document.querySelectorAll('.docs-section');
+
+        // Aktiven Link setzen basierend auf dem sichtbaren Abschnitt
+        function setActiveNav() {
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Event-Listener für Navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Aktiven Link beim Scrollen setzen
+        window.addEventListener('scroll', setActiveNav);
+        setActiveNav(); // Initial aufrufen
+    });
+</script>
+</body>
+</html>

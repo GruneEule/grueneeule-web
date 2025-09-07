@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News API - GrüneEule Developers</title>
+    <link rel="icon" href="/assets/img/v2/GE-Symbol-Square-rounded_Orange_on_Green.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/developers.css">
+</head>
+<body>
+<div class="bg-animation"></div>
+<div id="header-dev-container"></div>
+
+<main>
+    <li class="language-item">
+        <div class="language-switch-container">
+            <button class="language-switch-btn" id="languageSwitch">
+                <span class="language-flag">🇬🇧</span>
+                <span class="language-code">EN</span>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <a href="#" data-lang="de" class="language-option">
+                    <span class="language-flag">🇩🇪</span>
+                    <span>Deutsch</span>
+                </a>
+                <a href="#" data-lang="en" class="language-option">
+                    <span class="language-flag">🇬🇧</span>
+                    <span>English</span>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle">☀️</button>
+    </div>
+
+    <section class="api-hero">
+        <div class="container">
+            <h1>News API Documentation</h1>
+            <p>Learn how to integrate GrüneEule's News API</p>
+        </div>
+    </section>
+
+    <div class="docs-container">
+        <div class="docs-content">
+            <div class="docs-sidebar">
+                <h3>Table of Contents</h3>
+                <ul class="docs-nav">
+                    <li><a href="#overview" class="active">Overview</a></li>
+                    <li><a href="#authentication">Authentication</a></li>
+                    <li><a href="#endpoints">Endpoints</a></li>
+                    <li><a href="#response">Response Format</a></li>
+                    <li><a href="#examples">Code Examples</a></li>
+                    <li><a href="#errors">Error Handling</a></li>
+                    <li><a href="#rate-limiting">Rate Limiting</a></li>
+                </ul>
+            </div>
+
+            <div class="docs-main">
+                <section id="overview" class="docs-section">
+                    <h2>Overview</h2>
+                    <p>The News API provides access to all news from GrüneEule. With this API, you can retrieve news articles and display them in your own application.</p>
+
+                    <div class="endpoint">
+                        <span class="endpoint-method method-get">GET</span>
+                        <span class="endpoint-url">https://grueneeule.de/api/news.json</span>
+                    </div>
+
+                    <p>The API returns a list of news articles in JSON format. Each article contains an ID, title, date, a short description, an image, and a path to the full content.</p>
+                </section>
+
+                <section id="authentication" class="docs-section">
+                    <h2>Authentication</h2>
+                    <p>Currently, no authentication is required to access the News API. All endpoints are publicly accessible.</p>
+                </section>
+
+                <section id="endpoints" class="docs-section">
+                    <h2>Endpoints</h2>
+
+                    <h3>Get All News</h3>
+                    <div class="endpoint">
+                        <span class="endpoint-method method-get">GET</span>
+                        <span class="endpoint-url">https://grueneeule.de/api/news.json</span>
+                    </div>
+
+                    <p>Returns a list of all available news articles.</p>
+
+                    <div class="endpoint-example">
+                        <pre>GET /api/news.json</pre>
+                    </div>
+                </section>
+
+                <section id="response" class="docs-section">
+                    <h2>Response Format</h2>
+                    <p>The API returns an array of news objects. Each object has the following properties:</p>
+
+                    <table class="response-table">
+                        <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>id</td>
+                            <td>Integer</td>
+                            <td>Unique ID of the news article</td>
+                        </tr>
+                        <tr>
+                            <td>title</td>
+                            <td>String</td>
+                            <td>Title of the news article</td>
+                        </tr>
+                        <tr>
+                            <td>date</td>
+                            <td>String</td>
+                            <td>Publication date in YYYY-MM-DD format</td>
+                        </tr>
+                        <tr>
+                            <td>content</td>
+                            <td>String</td>
+                            <td>Short summary of the content</td>
+                        </tr>
+                        <tr>
+                            <td>image</td>
+                            <td>String</td>
+                            <td>URL to the article's cover image</td>
+                        </tr>
+                        <tr>
+                            <td>fullContentPath</td>
+                            <td>String</td>
+                            <td>URL to the Markdown file with the full content</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Example Response</h3>
+                    <div class="code-block">
+                        <code>[
+                            {
+                            "id": 1,
+                            "title": "News Module Finally Ready!",
+                            "date": "2025-07-22",
+                            "content": "We are pleased to introduce our new news module!",
+                            "image": "https://grueneeule.de/assets/img/news/1.png",
+                            "fullContentPath": "https://grueneeule.de/assets/data/news/1.md"
+                            },
+                            {
+                            "id": 2,
+                            "title": "tWfEE RELEASE NOW ONLINE",
+                            "date": "2025-07-23",
+                            "content": "The tWfEE site has been released!",
+                            "image": "https://grueneeule.de/assets/img/news/2.png",
+                            "fullContentPath": "https://grueneeule.de/assets/data/news/2.md"
+                            }
+                            ]</code>
+                    </div>
+                </section>
+
+                <section id="examples" class="docs-section">
+                    <h2>Code Examples</h2>
+
+                    <h3>JavaScript (Fetch API)</h3>
+                    <div class="code-block">
+                        <code>fetch('https://grueneeule.de/api/news.json')
+                            .then(response => response.json())
+                            .then(news => {
+                            console.log('News loaded:', news);
+                            // Process the news data here
+                            })
+                            .catch(error => {
+                            console.error('Error loading news:', error);
+                            });</code>
+                    </div>
+
+                    <h3>Python</h3>
+                    <div class="code-block">
+                        <code>import requests
+                            import json
+
+                            response = requests.get('https://grueneeule.de/api/news.json')
+                            if response.status_code == 200:
+                            news = response.json()
+                            print('News loaded:', news)
+                            else:
+                            print('Error fetching news:', response.status_code)</code>
+                    </div>
+
+                    <h3>PHP</h3>
+                    <div class="code-block">
+                        <code>$url = 'https://grueneeule.de/api/news.json';
+                            $json = file_get_contents($url);
+                            $news = json_decode($json, true);
+
+                            if ($news) {
+                            echo 'News loaded:';
+                            print_r($news);
+                            } else {
+                            echo 'Error loading news';
+                            }</code>
+                    </div>
+                </section>
+
+                <section id="errors" class="docs-section">
+                    <h2>Error Handling</h2>
+                    <p>The API returns standard HTTP status codes to indicate the success or failure of a request.</p>
+
+                    <table class="response-table">
+                        <thead>
+                        <tr>
+                            <th>Status Code</th>
+                            <th>Meaning</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>200</td>
+                            <td>OK - The request was successful</td>
+                        </tr>
+                        <tr>
+                            <td>404</td>
+                            <td>Not Found - The requested endpoint does not exist</td>
+                        </tr>
+                        <tr>
+                            <td>500</td>
+                            <td>Internal Server Error - A problem on the server</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section id="rate-limiting" class="docs-section">
+                    <h2>Rate Limiting</h2>
+                    <p>Currently, there are no rate limits for the News API. You can query the API as often as you like. If these limits change in the future, we will document them here.</p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-container"></div>
+</main>
+
+<button class="scroll-top" aria-label="Scroll to top">↑</button>
+
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/load-header.js"></script>
+<script src="/assets/js/load-footer.js"></script>
+<script src="/assets/js/language.js"></script>
+<script>
+    // Simple navigation for the documentation
+    document.addEventListener('DOMContentLoaded', function() {
+        const navLinks = document.querySelectorAll('.docs-nav a');
+        const sections = document.querySelectorAll('.docs-section');
+
+        // Set active link based on visible section
+        function setActiveNav() {
+            let currentSection = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Event listener for navigation
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Set active link when scrolling
+        window.addEventListener('scroll', setActiveNav);
+        setActiveNav(); // Initial call
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIs - Dev GrüneEule</title>
+    <link rel="icon" href="/assets/img/v2/GE-Symbol-Square-rounded_Orange_on_Green.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/developers.css">
+</head>
+<body>
+<div class="bg-animation"></div>
+<div id="header-dev-container"></div>
+
+<main>
+    <li class="language-item">
+        <div class="language-switch-container">
+            <button class="language-switch-btn" id="languageSwitch">
+                <span class="language-flag">🇬🇧</span>
+                <span class="language-code">EN</span>
+            </button>
+            <div class="language-dropdown" id="languageDropdown">
+                <a href="#" data-lang="de" class="language-option">
+                    <span class="language-flag">🇩🇪</span>
+                    <span>Deutsch</span>
+                </a>
+                <a href="#" data-lang="en" class="language-option">
+                    <span class="language-flag">🇬🇧</span>
+                    <span>English</span>
+                </a>
+            </div>
+        </div>
+    </li>
+
+    <div class="theme-toggle-container">
+        <button id="theme-toggle" class="theme-toggle">☀️</button>
+    </div>
+
+    <section class="api-hero">
+        <div class="container">
+            <h1>GrüneEule APIs</h1>
+            <p>Discover our APIs</p>
+        </div>
+    </section>
+
+    <section class="api-section">
+        <div class="container">
+            <h2 class="section-title">Available APIs</h2>
+            <p class="text-center" style="margin-bottom: 2rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Our APIs provide you with easy access to various functions and data.
+                All APIs are well-documented and easy to integrate.
+            </p>
+
+            <div class="api-grid">
+                <div class="api-card">
+                    <div class="api-icon">📊</div>
+                    <h3>Status API</h3>
+                    <p>Get access to the status of the website and all tools from GrüneEule.</p>
+                    <div class="api-meta">
+                        <span class="api-status status-live">Live</span>
+                    </div>
+                    <a href="/en/developers/apis/status.html" class="api-docs-link">Documentation</a>
+                </div>
+
+                <div class="api-card">
+                    <div class="api-icon">📣</div>
+                    <h3>News API</h3>
+                    <p>Retrieve all news from GrüneEule.</p>
+                    <div class="api-meta">
+                        <span class="api-status status-live">Live</span>
+                        <span>Version 1.0.0</span>
+                    </div>
+                    <a href="/en/developers/apis/news.html" class="api-docs-link">Documentation</a>
+                </div>
+
+                <div class="api-card">
+                    <div class="api-icon">📜</div>
+                    <h3>Project API</h3>
+                    <p>View all projects from GrüneEule and integrate them into your website.</p>
+                    <div class="api-meta">
+                        <span class="api-status status-beta">Beta</span>
+                        <span>Version 0.1.0</span>
+                    </div>
+                    <a href="/en/developers/apis/projects.html" class="api-docs-link">Documentation</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="api-section">
+        <div class="container">
+            <h2 class="section-title">What are our APIs for?</h2>
+
+            <div class="api-features">
+                <ul class="feature-list">
+                    <li><strong>Easy Integration:</strong> Well-documented endpoints with clear examples</li>
+                    <li><strong>Fast Response Times:</strong> Optimized servers with low latency</li>
+                    <li><strong>Generous Limits:</strong> Generous rate limits for all usage levels</li>
+                    <li><strong>Detailed Documentation:</strong> Comprehensive guides and code examples</li>
+                    <li><strong>Reliable Support:</strong> Quick help with questions and problems</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+</main>
+
+<button class="scroll-top" aria-label="Scroll to top">↑</button>
+
+<script src="/assets/js/ui.js"></script>
+<script src="/assets/js/load-header.js"></script>
+<script src="/assets/js/load-footer.js"></script>
+<script src="/assets/js/language.js"></script>
+</body>
+</html>
