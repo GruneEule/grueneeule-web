@@ -82,6 +82,29 @@
         "starCount": true
       },
       "cardClass": "dlg-card"
+    },
+    {
+      "id": "owcolor",
+      "title": "OwColor",
+      "description": "Dein Color tool:",
+      "features": [
+        "Open Source",
+        "Hex Codes",
+        "Farbschemen",
+        "Farben extraktor"
+      ],
+      "primaryButton": {
+        "text": "Start",
+        "url": "https://owcolor.grueneeule.de/",
+        "class": "btn-discord"
+      },
+      "secondaryButton": {
+        "text": "Star on GitHub",
+        "url": "https://github.com/GruneEule/owcolor",
+        "class": "github-button",
+        "starCount": true
+      },
+      "cardClass": "owcolor-card"
     }
   ]
 }

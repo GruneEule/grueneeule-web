@@ -7,6 +7,7 @@
     --discord-blue: #5865F2;
     --owlinx-blue: #348792;
     --dlg-red: #a22017;
+    --owcolor-purple: #6f48b9;
     --usbv-grey: #3d3d3d;
     --bg-primary: #0f0f0f;
     --bg-secondary: #1a1a1a;
@@ -366,6 +367,10 @@ main {
     border-top: 3px solid var(--dlg-red);
 }
 
+.owcolor-card {
+    border-top: 3px solid var(--owcolor-purple);
+}
+
 
 .project-card h3 {
     font-size: 1.5rem;
@@ -389,6 +394,11 @@ main {
 .dlg-card h3 {
     color: var(--dlg-red);
 }
+
+.owcolor-card h3 {
+    color: var(--owcolor-purple);
+}
+
 
 
 .eulex-card h3 {
