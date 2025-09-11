@@ -8,6 +8,7 @@
     --owlinx-blue: #348792;
     --dlg-red: #a22017;
     --owcolor-purple: #6f48b9;
+    --toollab: #2e8b57;
     --usbv-grey: #3d3d3d;
     --bg-primary: #0f0f0f;
     --bg-secondary: #1a1a1a;
@@ -359,8 +360,8 @@ main {
     border-top: 3px solid var(--accent-green);
 }
 
-.owlinx-card {
-    border-top: 3px solid var(--owlinx-blue);
+.toollab-card {
+    border-top: 3px solid var(--toollab);
 }
 
 .dlg-card {
