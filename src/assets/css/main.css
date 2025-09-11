@@ -388,8 +388,8 @@ main {
 }
 
 
-.owlinx-card h3 {
-    color: var(--owlinx-blue);
+.toollab-card h3 {
+    color: var(--toollab);
 }
 
 .dlg-card h3 {
