@@ -8,4 +8,4 @@ Das bedeutet:
 - du musst **den ursprünglichen Urheber ("GrueneEule.de") nennen**,
 - und du musst deine Version **unter derselben Lizenz** veröffentlichen.
 
-📄 Vollständiger Lizenztext: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de
+Vollständiger Lizenztext: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de
